@@ -2,6 +2,8 @@
 
 Public-safe deliverables for an eight-week AI model evaluation programme. The work studies how public/open models can be evaluated against product-specific Physical AI requirements using reproducible scenarios, multi-dimensional rubrics, robustness tests and risk-aware reporting.
 
+This directory is the sole Git root and public submission area. Private references, study notes, audits, setup helpers and scratch artifacts are maintained outside this repository.
+
 ## Constraints
 
 - Public data, public product information and open-source/free-tier tools only.
@@ -9,15 +11,21 @@ Public-safe deliverables for an eight-week AI model evaluation programme. The wo
 - Every future evaluation claim records exact model/version, held-out evaluation-set version and random seed.
 - Product performance figures are treated as company-stated targets unless independently reproduced.
 
-## Deliverable index
+## Submission index
 
 ### Phase A - Landscape and benchmark design
 
-- `phase_a_design/W01_PhysicalAI_Eval_Landscape.md`: five-part Week 1 landscape brief.
-- `phase_a_design/W01_Reading_Annotations.md`: annotations for the six required source categories.
-- `phase_a_design/W01_Source_Links.md`: canonical public reading links and source-provenance notes.
+Formal Week 1 deliverables:
+
+- `phase_a_design/W01_PhysicalAI_Eval_Landscape.md`: five-part landscape brief.
 - `phase_a_design/W01_env_check.ipynb`: executed environment and library smoke test.
 - `weekly/Wk-01-EvalLog.md`: Week 1 evaluation reflection.
+
+Public supporting evidence retained with the submission package:
+
+- `phase_a_design/W01_Reading_Annotations.md`: expanded annotations for the six required source categories.
+
+Personal study guides, canonical-link notes, requirement audits and setup scripts are intentionally excluded from this repository.
 
 ## Reproduce the Week 1 environment check
 
@@ -38,12 +46,9 @@ phase_a_design/      Weeks 1-2: landscape, environment check, benchmark design
 phase_b_evaluation/  Weeks 3-4: model, RAG, robustness and multimodal evaluation
 phase_c_synthesis/   Weeks 5-6: PIC analysis and methodology synthesis
 phase_d_capstone/    Weeks 7-8: dashboard, capstone report and deck
-weekly/              Weekly evaluation logs
-benchmark/           Canonical scenarios, rubrics and result CSVs
-experiments/         Reproducible experiment configs, scripts and outputs
+weekly/              Required weekly evaluation logs only
 ```
 
 ## Model version registry
 
 No pretrained model benchmark has been run in Week 1. Exact model IDs will be added before Week 2 baseline evaluation.
-

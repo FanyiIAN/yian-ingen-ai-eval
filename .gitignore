@@ -9,6 +9,17 @@ private/
 internal/
 *.confidential.pdf
 
+# Auxiliary Markdown and working byproducts
+**/notes/
+**/drafts/
+**/scratch/
+**/*_Study_Guide.md
+**/*_Source_Links.md
+**/*_Requirements_Audit*.md
+**/*_启动清单*.md
+**/*_working_notes.md
+**/*_scratch.md
+
 # Python and Jupyter
 __pycache__/
 *.py[cod]
@@ -31,4 +42,3 @@ tmp/
 .idea/
 .DS_Store
 Thumbs.db
-
