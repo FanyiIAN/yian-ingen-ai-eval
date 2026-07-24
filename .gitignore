@@ -36,9 +36,12 @@ hf-cache/
 models/
 wandb/
 tmp/
+**/experiments/
 
 # Editor and OS files
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+~$*
+*.pptx.inspect.ndjson

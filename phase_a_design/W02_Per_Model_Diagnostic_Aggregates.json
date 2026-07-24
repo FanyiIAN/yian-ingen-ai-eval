@@ -1,0 +1,216 @@
+{
+  "status": "diagnostic_failed_judge_calibration",
+  "source_csv": "W02_Baseline_Eval_Results.csv",
+  "source_csv_sha256": "906f567d3a032b22fd40606021eabd30ec5e3e4b317b659fa8f61ce55e96500d",
+  "benchmark_version": "0.2.0",
+  "model_aggregation_policy": "never_average_models_together",
+  "score_policy": "resolved_conservative_consensus_only",
+  "models": {
+    "google/flan-t5-base": {
+      "model_version": "7bcac572ce56db69c1ea7c8af255c5d7c9672fc2",
+      "overall": {
+        "n": 35,
+        "task_resolved_n": 21,
+        "task_mean_resolved": 2.8571,
+        "grounding_resolved_n": 23,
+        "grounding_mean_resolved": 3.0435,
+        "quality_resolved_n": 13,
+        "quality_mean_resolved": 3.6923
+      },
+      "by_platform": {
+        "Aido_Humanoid": {
+          "n": 7,
+          "task_resolved_n": 6,
+          "task_mean_resolved": 3.5,
+          "grounding_resolved_n": 5,
+          "grounding_mean_resolved": 3.0,
+          "quality_resolved_n": 4,
+          "quality_mean_resolved": 3.625
+        },
+        "Aido_Rover": {
+          "n": 7,
+          "task_resolved_n": 6,
+          "task_mean_resolved": 4.3333,
+          "grounding_resolved_n": 5,
+          "grounding_mean_resolved": 5.0,
+          "quality_resolved_n": 5,
+          "quality_mean_resolved": 5.0
+        },
+        "Fari": {
+          "n": 7,
+          "task_resolved_n": 2,
+          "task_mean_resolved": 1.0,
+          "grounding_resolved_n": 6,
+          "grounding_mean_resolved": 1.6667,
+          "quality_resolved_n": 1,
+          "quality_mean_resolved": 1.0
+        },
+        "Senpai": {
+          "n": 7,
+          "task_resolved_n": 2,
+          "task_mean_resolved": 1.0,
+          "grounding_resolved_n": 3,
+          "grounding_mean_resolved": 1.0,
+          "quality_resolved_n": 1,
+          "quality_mean_resolved": 1.0
+        },
+        "Sentinel_Prime_AI": {
+          "n": 7,
+          "task_resolved_n": 5,
+          "task_mean_resolved": 1.8,
+          "grounding_resolved_n": 4,
+          "grounding_mean_resolved": 4.25,
+          "quality_resolved_n": 2,
+          "quality_mean_resolved": 3.25
+        }
+      },
+      "by_split": {
+        "development": {
+          "n": 28,
+          "task_resolved_n": 17,
+          "task_mean_resolved": 3.0,
+          "grounding_resolved_n": 17,
+          "grounding_mean_resolved": 3.1765,
+          "quality_resolved_n": 9,
+          "quality_mean_resolved": 4.0556
+        },
+        "held_out": {
+          "n": 7,
+          "task_resolved_n": 4,
+          "task_mean_resolved": 2.25,
+          "grounding_resolved_n": 6,
+          "grounding_mean_resolved": 2.6667,
+          "quality_resolved_n": 4,
+          "quality_mean_resolved": 2.875
+        }
+      },
+      "severity_weighted": {
+        "task_accuracy": {
+          "resolved_n": 21,
+          "severity_weight_denominator": 71,
+          "value": 3.1268
+        },
+        "contextual_grounding": {
+          "resolved_n": 23,
+          "severity_weight_denominator": 77,
+          "value": 3.3766
+        },
+        "paired_quality": {
+          "resolved_n": 13,
+          "severity_weight_denominator": 51,
+          "value": 3.7255
+        }
+      },
+      "failure_mode_distribution": {
+        "none": 8,
+        "partial": 3,
+        "refusal": 4,
+        "unresolved": 14,
+        "unsafe": 6
+      }
+    },
+    "mistralai/Mistral-7B-Instruct-v0.2": {
+      "model_version": "63a8b081895390a26e140280378bc85ec8bce07a",
+      "overall": {
+        "n": 35,
+        "task_resolved_n": 34,
+        "task_mean_resolved": 4.0588,
+        "grounding_resolved_n": 34,
+        "grounding_mean_resolved": 4.4118,
+        "quality_resolved_n": 33,
+        "quality_mean_resolved": 4.2576
+      },
+      "by_platform": {
+        "Aido_Humanoid": {
+          "n": 7,
+          "task_resolved_n": 6,
+          "task_mean_resolved": 4.3333,
+          "grounding_resolved_n": 7,
+          "grounding_mean_resolved": 4.4286,
+          "quality_resolved_n": 6,
+          "quality_mean_resolved": 4.3333
+        },
+        "Aido_Rover": {
+          "n": 7,
+          "task_resolved_n": 7,
+          "task_mean_resolved": 4.2857,
+          "grounding_resolved_n": 7,
+          "grounding_mean_resolved": 4.5714,
+          "quality_resolved_n": 7,
+          "quality_mean_resolved": 4.4286
+        },
+        "Fari": {
+          "n": 7,
+          "task_resolved_n": 7,
+          "task_mean_resolved": 4.0,
+          "grounding_resolved_n": 7,
+          "grounding_mean_resolved": 4.1429,
+          "quality_resolved_n": 7,
+          "quality_mean_resolved": 4.0714
+        },
+        "Senpai": {
+          "n": 7,
+          "task_resolved_n": 7,
+          "task_mean_resolved": 3.8571,
+          "grounding_resolved_n": 6,
+          "grounding_mean_resolved": 4.5,
+          "quality_resolved_n": 6,
+          "quality_mean_resolved": 4.3333
+        },
+        "Sentinel_Prime_AI": {
+          "n": 7,
+          "task_resolved_n": 7,
+          "task_mean_resolved": 3.8571,
+          "grounding_resolved_n": 7,
+          "grounding_mean_resolved": 4.4286,
+          "quality_resolved_n": 7,
+          "quality_mean_resolved": 4.1429
+        }
+      },
+      "by_split": {
+        "development": {
+          "n": 28,
+          "task_resolved_n": 28,
+          "task_mean_resolved": 4.2143,
+          "grounding_resolved_n": 28,
+          "grounding_mean_resolved": 4.4286,
+          "quality_resolved_n": 28,
+          "quality_mean_resolved": 4.3214
+        },
+        "held_out": {
+          "n": 7,
+          "task_resolved_n": 6,
+          "task_mean_resolved": 3.3333,
+          "grounding_resolved_n": 6,
+          "grounding_mean_resolved": 4.3333,
+          "quality_resolved_n": 5,
+          "quality_mean_resolved": 3.9
+        }
+      },
+      "severity_weighted": {
+        "task_accuracy": {
+          "resolved_n": 34,
+          "severity_weight_denominator": 100,
+          "value": 4.08
+        },
+        "contextual_grounding": {
+          "resolved_n": 34,
+          "severity_weight_denominator": 104,
+          "value": 4.5
+        },
+        "paired_quality": {
+          "resolved_n": 33,
+          "severity_weight_denominator": 99,
+          "value": 4.2879
+        }
+      },
+      "failure_mode_distribution": {
+        "hallucination": 1,
+        "none": 19,
+        "off_policy": 3,
+        "refusal": 9,
+        "unresolved": 3
+      }
+    }
+  }
+}

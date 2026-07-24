@@ -1,0 +1,74 @@
+run_config_id: w02_two_model_unified_prometheus_diagnostic
+version: 1.0.0
+date: 2026-07-24
+claim_boundary: L0_synthetic_product_context_only
+
+benchmark:
+  path: W02_Scenarios.yaml
+  benchmark_version: 0.2.0
+  scenario_count: 35
+
+candidate_prompt:
+  path: W02_Prompt_Spec_v0.4.0.yaml
+  version: 0.4.0
+  sha256: 0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d
+  semantic_prompt_policy: identical_rendered_text_per_scenario_for_both_models
+  serialization_note: >-
+    Mistral uses its official tokenizer chat template around the recorded semantic
+    prompt. FLAN tokenizes the same recorded semantic prompt directly.
+
+candidate_generation:
+  seed: 42
+  do_sample: false
+  max_input_tokens: 512
+  max_new_tokens: 256
+  candidate_run_id: w02-two-model-unified-full-v1.0.0
+
+candidate_models:
+  - model_id: google/flan-t5-base
+    revision: 7bcac572ce56db69c1ea7c8af255c5d7c9672fc2
+    checkpoint_path_on_gpu_host: /workspace/models/flan_t5_base
+    device: cuda:0
+    precision: float32
+  - model_id: mistralai/Mistral-7B-Instruct-v0.2
+    revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    checkpoint_path_on_gpu_host: /workspace/models/mistral_7b_instruct_v0_2
+    device: cuda:0
+    precision: bfloat16
+
+judge:
+  model_id: prometheus-eval/prometheus-7b-v2.0
+  revision: 66ffb1fc20beebfb60a3964a957d9011723116c5
+  prompt_spec: W02_Prometheus_Judge_Spec_v0.8.3.yaml
+  prompt_spec_version: 0.8.3
+  requirement_metadata: W02_Judge_Requirement_Metadata_v0.4.0.yaml
+  formulations:
+    - criterion_first
+    - evidence_first
+    - failure_first
+  shared_rubric: true
+  seed: 42
+  do_sample: false
+  inference_batch_size: 9
+  judge_run_id: w02-two-model-unified-prometheus-diagnostic-v1.0.0
+  calibration_status: failed_diagnostic_only
+
+compute:
+  provider: RunPod
+  gpu: NVIDIA_A40_48GB
+  python: /tmp/prometheus-venv/bin/python
+  model_storage_root: /workspace/models
+  experiment_storage_root: /workspace/experiments
+
+required_outputs:
+  candidate_rows: W02_Two_Model_Candidate_Rows.jsonl
+  judged_rows: W02_Prometheus_Full_Judged_Rows.jsonl
+  judge_trace: W02_Prometheus_Prompt_Trace.jsonl
+  submission_csv: W02_Baseline_Eval_Results.csv
+  agreement: W02_Baseline_Agreement.json
+  manifest: W02_Baseline_Run_Manifest.json
+
+interpretation:
+  score_status: diagnostic_failed_calibration
+  human_review_required_for_all_rows: true
+  severity_5_human_review_mandatory: true

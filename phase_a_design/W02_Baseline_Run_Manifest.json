@@ -1,0 +1,50 @@
+{
+  "aggregation_policy": {
+    "model_performance": "never_average_models_together",
+    "scores": "resolved_conservative_consensus_only",
+    "status": "diagnostic_failed_judge_calibration"
+  },
+  "artifacts": {
+    "W02_Baseline_Agreement.json": "71d99fa63e8df59ec32e4de3f0101da605d15e6706a85e0dc155b672518096fa",
+    "W02_Baseline_Eval_Results.csv": "906f567d3a032b22fd40606021eabd30ec5e3e4b317b659fa8f61ce55e96500d",
+    "W02_Baseline_Eval_Results_FLAN.csv": "39e111bd7b962c666de3dd808b33fcd9ab9febe966e4b3cf3d93b9097e5024f8",
+    "W02_Baseline_Eval_Results_Mistral.csv": "84ffac0c450d4b2fbd01a319f4f4d60953f4ef66f0564a98dcc7e478c4359e18",
+    "W02_Baseline_Pipeline_Report.md": "5aa90d70c2402061298316e19605d61904399e5384bf9e6dd237b5f307a4ab28",
+    "W02_Per_Model_Diagnostic_Aggregates.csv": "f78da17ad4d963e92b2c17eea975819b34799c8270b43fd9de6d999fe7d1256e",
+    "W02_Per_Model_Diagnostic_Aggregates.json": "7059639c95411ca4af695a627f227705631753dda004d8aa6d9e7ee536006529",
+    "W02_Per_Model_Diagnostic_Aggregates.md": "d649e78bd301761b7c033b2d8df4509c18a6f199437a330c49b334263d21733a"
+  },
+  "finalizer_version": "1.0.0",
+  "generated_utc": "2026-07-24T12:12:37.018533+00:00",
+  "source": {
+    "candidate_prompt_spec": "W02_Prompt_Spec_v0.4.0.yaml",
+    "candidate_prompt_spec_sha256": "0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d",
+    "finalizer_source": "W02_Finalize_Baseline.py",
+    "finalizer_source_sha256": "0bb2ac8ae77fbfb4d828e41e1f06a05117633c527d38b0bc08d46598ab23a3c5",
+    "judged_rows": "W02_Prometheus_Full_Judged_Rows.jsonl",
+    "judged_rows_sha256": "3b296e1892a32ad4ac8f9327f87e9afa0caa5d920ec78670c6dcc98ef2b74f35",
+    "per_model_view_builder": "W02_Build_Per_Model_Views.py",
+    "per_model_view_builder_sha256": "81f36dea404ba19b899377829b0f695873e7ebc808a3adc654f040a295dd4ee0",
+    "reproducibility_source_hashes": {
+      "W02_Baseline_Pipeline.py": "90e19c56eae807ed8f3db73920ea340c5b80a8a740448cb1b90a904273ae7b0a",
+      "W02_Deterministic_Checks.yaml": "843026f9917e5b56a43e459ded9506ba0b6ad23d5da619307960b4b2ed69c270",
+      "W02_Eval_Runner.py": "c194f93260c6fd629818d16a163a8cd1bd08fdd9369e6a2168223a88289f3ffa",
+      "W02_Judge_Requirement_Metadata_v0.4.0.yaml": "089cfcf43347f5e361acfee4954bfe545f0e9de7f705eded0a43e925d663b41e",
+      "W02_Mistral_Eval_Runner.py": "3241ffec5387836d38673adf1320f3a75cf87e5ff83c8a35efa1e951dc5adc30",
+      "W02_Product_Regulations.yaml": "9865c671ecc9327734a3a09060d83ac2fcd43caedee846123136d069928fe3ad",
+      "W02_Prometheus_Full_Run.py": "79cf16793c91373ff7ae1f57ee48f9746871463001d58e4ccb6b0003ff8b3242",
+      "W02_Prometheus_Judge.py": "882409a119436729c3076f07921c3f0c2c0d98b836ca6a3f39ac3c16641fc9c4",
+      "W02_Prometheus_Judge_Spec_v0.8.3.yaml": "5bedc8930b5f78d33cf95b42d510eec3f8d55a2270990d3845fa52f49bafbbad",
+      "W02_Result_Schema.json": "3f35ffae2a66915319e45da5ab29a89171765018da91aa9a01fbf82f981f955a",
+      "W02_Structured_Judge.py": "fe440cdf07abaac53fc213f7f5c373ecc4c34b38aea172f21cf5d6f87e4cc7e7",
+      "W02_Two_Model_Structured_Full_Run.py": "acc89924829958b2ee2481841101151c17d5e85e93c4034fcf36f63b4aa40865",
+      "W02_Unified_Run_Config_v1.0.0.yaml": "edb1984f4d830a6578e5c8ca440e9a1db2b5518a1d0e4eb1f9c2d84db8d54781",
+      "requirements-runpod-mistral.txt": "570550e37de2b7cf943ca321c7ac2a4f3bfb74500c0e9cbf05d954a3b8e1ff0a",
+      "requirements.txt": "34f4d0147802477d39168c3d8e45f7e5663026529b7cc2674362c482aff5b8f8"
+    },
+    "rubric_yaml": "W02_Rubric.yaml",
+    "rubric_yaml_sha256": "a26a79aa3f9468fa9cbb483b51e299c71a8351b30be9ad7d7fc7ccbb2fc663d3",
+    "scenario_yaml": "W02_Scenarios.yaml",
+    "scenario_yaml_sha256": "acc34b81538598d679487acd9a46a9141634929d2d0c150894c9267df9e2a7e2"
+  }
+}

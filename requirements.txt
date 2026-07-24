@@ -24,5 +24,5 @@ langchain-community==0.4.1
 openai==2.45.0
 ragas==0.4.3
 krippendorff==0.8.2
+jsonschema==4.25.1
 wandb==0.28.0
-

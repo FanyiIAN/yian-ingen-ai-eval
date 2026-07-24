@@ -4,7 +4,7 @@
 **Date:** 2026-07-16  
 **Public-source constraint:** This brief uses only public product material and public research. Product figures are treated as company-stated design targets unless independently validated.
 
-## Page 1/5 - Product ecosystem and evaluation priorities
+## Part 1/5 - Product ecosystem and evaluation priorities
 
 ### 1.1 Evaluation thesis
 
@@ -34,7 +34,7 @@ The current public Sentinel engineering page is unusually useful for evaluation 
 
 ---
 
-## Page 2/5 - PIC 2.0 model-class-to-evaluation map
+## Part 2/5 - PIC 2.0 model-class-to-evaluation map
 
 The mapping below is structural: each proposed benchmark is selected because its input/output structure and failure modes resemble the target capability, not because its name resembles the PIC label.
 
@@ -65,7 +65,7 @@ For the same reason, a provisional `STUM-temporal` scenario must not be mixed wi
 
 ---
 
-## Page 3/5 - Evaluation methodology survey
+## Part 3/5 - Evaluation methodology survey
 
 ### 3.1 Six required reading lenses
 
@@ -109,7 +109,7 @@ Every performance claim must contain **exact model/version + held-out evaluation
 
 ---
 
-## Page 4/5 - Experience bridge map
+## Part 4/5 - Experience bridge map
 
 | Prior experience | Direct transfer to this internship | Specific technique to reuse | Gap to close |
 |---|---|---|---|
@@ -132,28 +132,26 @@ The bridge is strongest in experimental discipline and data pipelines. The large
 
 ---
 
-## Page 5/5 - Week 1 output, open questions and Week 2 handoff
+## Part 5/5 - Week 1 output, open questions and Week 2 handoff
 
 ### 5.1 Completed Week 1 package
 
 - This five-part landscape brief.
-- `W01_Reading_Annotations.md`, with six public-source annotations.
-- `W01_env_check.ipynb`, executed using the dedicated Python 3.11 `inGen` environment without paid API calls or model downloads.
-- `weekly/Wk-01-EvalLog.md`, a 300-500 word reflection.
+- `W01_Reading_Annotations.md`.
+- `W01_env_check.ipynb.
+- `weekly/Wk-01-EvalLog.md`.
 
 ### 5.2 Highest-priority questions for the supervisor meeting
 
-1. What is the authoritative PIC 2.0 glossary and version for **STUM, SEOM and AMDC**?
-2. Should Week 2 follow the programme capability mapping, the current Sentinel product semantics, or maintain both as separately versioned tracks?
-3. Which exact public model IDs/versions are approved for the first benchmark, and is hosted inference permitted?
-4. Which public product claims are design targets versus empirically validated baselines?
-5. What are the acceptance thresholds for severity-5 failures, and which failures are automatic deployment blockers?
+What is the authoritative PIC 2.0 glossary and version for **STUM**(Spatiotemporal Uncertainty Model/Sentinel Threat Uncertainty Metric)?
+Which exact public model IDs/versions are approved for the benchmark, and is hosted inference permitted?
+
 
 ### 5.3 Recommended Week 2 starting point
 
-Start with a deliberately small, public-only benchmark slice: two products (Fari and Sentinel), four scenarios each, severity classes 1/3/5, deterministic rubric checks where possible, and three judge prompts for genuinely open-ended cases. Freeze the schema first, then reserve at least 20% of cases as held out. Store row-level evidence and record model version, evaluation-set version, prompt version and seed on every result.
+Start with a deliberately small, public-only benchmark slice: two products (maybe Fari and Sentinel), four scenarios each, different severity classes 1/3/5, deterministic rubric checks where possible, and three judge prompts for genuinely open-ended cases. Freeze the schema. Store row-level evidence and record model version, evaluation-set version, prompt version and seed on every result.
 
-For Rover, design but do not overbuild the first masked-input experiment: define clean, 20%, 40% and 60% ablation conditions and the safe fallback expected at each level. The initial Week 2 goal is a trustworthy harness and a defensible scenario taxonomy, not a large leaderboard.
+For Rover, design but do not overbuild the first masked-input experiment: define clean, 20%, 40% and 60% ablation conditions and the safe fallback expected at each level. The initial Week 2 goal is a trustworthy harness and a defensible scenario taxonomy, after everything work well, moves to a large leaderboard.
 
 ### References
 

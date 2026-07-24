@@ -1,0 +1,120 @@
+{
+  "agreement_all_responses": {
+    "consensus_unresolved_count": {
+      "contextual_grounding": 13,
+      "failure_mode": 17,
+      "task_accuracy": 15
+    },
+    "contextual_grounding": {
+      "exact_three_way_count": 39,
+      "exact_three_way_rate": 0.5571428571428572,
+      "krippendorff_alpha_ordinal": 0.7806020983248727,
+      "missing_rating_count": 3,
+      "within_one_three_way_count": 57,
+      "within_one_three_way_rate": 0.8142857142857143
+    },
+    "failure_mode": {
+      "exact_three_way_count": 34,
+      "exact_three_way_rate": 0.4857142857142857,
+      "krippendorff_alpha_nominal": 0.5673091690984489,
+      "missing_rating_count": 15
+    },
+    "response_count": 70,
+    "task_accuracy": {
+      "exact_three_way_count": 33,
+      "exact_three_way_rate": 0.4714285714285714,
+      "krippendorff_alpha_ordinal": 0.8772346376936696,
+      "missing_rating_count": 12,
+      "within_one_three_way_count": 55,
+      "within_one_three_way_rate": 0.7857142857142857
+    }
+  },
+  "agreement_by_model": {
+    "google/flan-t5-base": {
+      "consensus_unresolved_count": {
+        "contextual_grounding": 12,
+        "failure_mode": 14,
+        "task_accuracy": 14
+      },
+      "contextual_grounding": {
+        "exact_three_way_count": 15,
+        "exact_three_way_rate": 0.42857142857142855,
+        "krippendorff_alpha_ordinal": 0.7198356700339054,
+        "missing_rating_count": 3,
+        "within_one_three_way_count": 23,
+        "within_one_three_way_rate": 0.6571428571428571
+      },
+      "failure_mode": {
+        "exact_three_way_count": 15,
+        "exact_three_way_rate": 0.42857142857142855,
+        "krippendorff_alpha_nominal": 0.6264929424538546,
+        "missing_rating_count": 15
+      },
+      "response_count": 35,
+      "task_accuracy": {
+        "exact_three_way_count": 13,
+        "exact_three_way_rate": 0.37142857142857144,
+        "krippendorff_alpha_ordinal": 0.8219004850672218,
+        "missing_rating_count": 12,
+        "within_one_three_way_count": 21,
+        "within_one_three_way_rate": 0.6
+      }
+    },
+    "mistralai/Mistral-7B-Instruct-v0.2": {
+      "consensus_unresolved_count": {
+        "contextual_grounding": 1,
+        "failure_mode": 3,
+        "task_accuracy": 1
+      },
+      "contextual_grounding": {
+        "exact_three_way_count": 24,
+        "exact_three_way_rate": 0.6857142857142857,
+        "krippendorff_alpha_ordinal": 0.6897720683348945,
+        "missing_rating_count": 0,
+        "within_one_three_way_count": 34,
+        "within_one_three_way_rate": 0.9714285714285714
+      },
+      "failure_mode": {
+        "exact_three_way_count": 19,
+        "exact_three_way_rate": 0.5428571428571428,
+        "krippendorff_alpha_nominal": 0.4412035615597175,
+        "missing_rating_count": 0
+      },
+      "response_count": 35,
+      "task_accuracy": {
+        "exact_three_way_count": 20,
+        "exact_three_way_rate": 0.5714285714285714,
+        "krippendorff_alpha_ordinal": 0.7242602787047026,
+        "missing_rating_count": 0,
+        "within_one_three_way_count": 34,
+        "within_one_three_way_rate": 0.9714285714285714
+      }
+    }
+  },
+  "contract": {
+    "candidate_seed": 42,
+    "generation_error_count": 0,
+    "identical_rendered_prompt_per_scenario": true,
+    "input_truncation_count": 0,
+    "judge_seed": 42,
+    "model_count": 2,
+    "model_ids": [
+      "google/flan-t5-base",
+      "mistralai/Mistral-7B-Instruct-v0.2"
+    ],
+    "prompt_spec_sha256": [
+      "0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d"
+    ],
+    "prompt_versions": [
+      "0.4.0"
+    ],
+    "row_count": 70,
+    "scenario_count": 35,
+    "score_statuses": [
+      "diagnostic_failed_calibration"
+    ]
+  },
+  "finalizer_version": "1.0.0",
+  "generated_utc": "2026-07-24T12:12:37.015653+00:00",
+  "interpretation": "diagnostic_only; Judge failed provisional single-reviewer calibration; human adjudication required"
+}
