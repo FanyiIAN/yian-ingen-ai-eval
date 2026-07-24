@@ -1,17 +1,6 @@
 # InGen Physical AI Model Evaluation Internship
 
-Public-safe deliverables for an eight-week AI model evaluation programme. The work studies how public/open models can be evaluated against product-specific Physical AI requirements using reproducible scenarios, multi-dimensional rubrics, robustness tests and risk-aware reporting.
-
-This directory is the sole Git root and public submission area. Private references, study notes, audits, setup helpers and scratch artifacts are maintained outside this repository.
-
-## Constraints
-
-- Public data, public product information and open-source/free-tier tools only.
-- No internal InGen documents, customer data, API keys or proprietary evaluation results.
-- Every future evaluation claim records exact model/version, held-out evaluation-set version and random seed.
-- Product performance figures are treated as company-stated targets unless independently reproduced.
-
-## Submission index
+Public-safe deliverables for an AI model evaluation programme. The work studies how public/open models can be evaluated against product-specific Physical AI requirements using reproducible scenarios, multi-dimensional rubrics, robustness tests and risk-aware reporting.
 
 ### Phase A - Landscape and benchmark design
 
