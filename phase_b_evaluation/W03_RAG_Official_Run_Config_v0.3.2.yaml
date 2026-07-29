@@ -1,0 +1,109 @@
+run_contract_version: 0.3.2
+created_date: 2026-07-27
+pipeline_stage: prompt_only_completeness_calibration_iteration
+random_seed: 42
+evaluation_set: W03_RAG_Official_Eval_Set_v0.3.0.yaml#0.3.0
+knowledge_base: W03_RAG_Official_Knowledge_Base_v0.3.0.yaml#0.3.0
+
+comparison:
+  conditions: [rag]
+  expected_evaluation_items: 12
+  expected_generation_rows: 12
+  parent_run_id: w03-official-rag-v0.3.1-prompt-seed42
+  comparison_target: parent_rag_rows_only
+  fixed_variables:
+    - candidate_model_id_and_revision
+    - tokenizer_revision
+    - question
+    - retrieved_contexts_and_ranks
+    - metadata_filters
+    - decoding_configuration
+    - random_seed
+    - hardware_and_batch_size
+    - uncertainty_boundary_from_v0.3.1
+    - latency_measurement_boundary
+  manipulated_variable: rag_system_prompt_completeness_boundary
+
+retrieval_provenance:
+  inherited_byte_for_byte_from_parent_inputs: true
+  parent_config: W03_RAG_Official_Run_Config_v0.3.1.yaml#0.3.1
+  parent_settings:
+    embedding_model: BAAI/bge-m3
+    embedding_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    chunk_size_tokens: 256
+    chunk_overlap_tokens: 32
+    fetch_k: 12
+    top_k: 4
+    relevance_score_threshold: 0.20
+    metadata_gate: official_public_current_domain_and_platform
+
+generation:
+  framework: huggingface_transformers
+  candidate_model_id: meta-llama/Llama-3.1-8B-Instruct
+  candidate_model_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  tokenizer_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  local_model_directory: /workspace/models/llama_3_1_8b_instruct
+  prompt_version: 0.3.2
+  prompt_change: >-
+    Retain the v0.3.1 epistemic-polarity rule and additionally require every
+    materially distinct part of a compound question to be answered from the
+    retrieved evidence, including all directly applicable retention, consent,
+    processing, deletion, and access-control constraints.
+  max_input_tokens: 8192
+  decoding:
+    do_sample: false
+    temperature: null
+    top_p: null
+    max_new_tokens: 384
+  target_runtime: RunPod_A40_48GB
+  precision: bfloat16
+
+evaluation:
+  primary_dimensions:
+    - faithfulness
+    - answer_relevance
+    - context_coverage
+  judge:
+    provider: local_vllm_litellm
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    model_revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    local_model_directory: /workspace/models/mistral_7b_instruct_v0_2
+    endpoint: http://127.0.0.1:8000/v1
+    network_scope: loopback_only
+    external_api_calls: false
+    independent_from_candidate: true
+    calibration_required: true
+    result_status_until_calibrated: provisional
+  answer_relevance_embedding:
+    provider: local_huggingface
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    local_model_directory: /workspace/models/bge_m3
+    external_api_calls: false
+
+iteration_policy:
+  run_id: w03-official-rag-v0.3.2-completeness-seed42
+  immutable_run_directory: true
+  never_overwrite_previous_outputs: true
+  one_variable_only: rag_system_prompt_completeness_boundary
+  registered_failure:
+    eval_id: W03-OFFICIAL-SENPAI-005
+    parent_observation: >-
+      The v0.3.1 answer covered only raw audio/video non-retention. It omitted
+      under-13 verified parental consent and the relevant processing,
+      deletion, or access-control requirements, reducing qualitative weighted
+      point coverage from approximately 4/5 to 2/5.
+  regression_gates:
+    - do_not_restore_FARI_002_reapproval_inference
+    - do_not_restore_FARI_005_absence_to_negative_claim
+    - restore_SENPAI_005_weighted_point_coverage_to_at_least_4_of_5
+  keep_rule: >-
+    Keep only if the registered SENPAI-005 coverage regression is repaired,
+    neither v0.3.1 epistemic failure returns, and aggregate answer relevance
+    and faithfulness show no material regression; otherwise retain v0.3.1.
+
+claim_boundary: >-
+  Results measure a public-data component-proxy RAG pipeline using a frozen open
+  model. They do not measure deployed InGen product behavior or proprietary PIC
+  runtime performance.
+

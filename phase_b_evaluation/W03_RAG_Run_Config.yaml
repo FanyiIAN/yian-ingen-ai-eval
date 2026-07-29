@@ -1,0 +1,162 @@
+run_contract_version: 0.2.0
+created_date: 2026-07-25
+pipeline_stage: placeholder_end_to_end_smoke
+random_seed: 42
+evaluation_set: W03_RAG_Eval_Set.yaml#0.2.0
+knowledge_base: W03_RAG_Knowledge_Base.yaml#0.2.0
+
+comparison:
+  conditions: [base, rag]
+  expected_evaluation_items: 6
+  expected_generation_rows: 12
+  fixed_variables:
+    - candidate_model_id_and_revision
+    - tokenizer_revision
+    - question
+    - system_instruction_except_context_payload
+    - decoding_configuration
+    - random_seed
+    - hardware_and_batch_size
+    - latency_measurement_boundary
+  manipulated_variable: retrieved_context_available
+  historical_week2_outputs_are_not_base_condition: true
+
+retrieval:
+  architecture: two_step_rag
+  framework: langchain_v1
+  document_loader: versioned_yaml_fixture
+  text_splitter:
+    implementation: langchain_text_splitters.RecursiveCharacterTextSplitter
+    chunk_size_characters: 700
+    chunk_overlap_characters: 100
+    add_start_index: true
+  embedding:
+    integration: langchain_huggingface.HuggingFaceEmbeddings
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    revision_status: frozen_from_hugging_face_repository_head_2026_07_25
+    local_model_directory: /workspace/models/bge_m3
+    normalize_embeddings: true
+    query_prompt: null
+  vector_store:
+    integration: langchain_chroma.Chroma
+    database: chromadb
+    deployment: local_persistent
+    distance_metric: cosine
+    persist_directory_policy: runtime_argument_private_or_runpod_volume
+    public_repository_must_not_contain_database: true
+  retriever:
+    search_type: similarity
+    top_k: 3
+    platform_metadata_filter: true
+  trace_fields:
+    - chunk_id
+    - document_id
+    - document_version
+    - rank
+    - relevance_score
+    - content_sha256
+    - start_index
+
+generation:
+  framework: huggingface_transformers
+  candidate_model_id: meta-llama/Llama-3.1-8B-Instruct
+  candidate_model_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  tokenizer_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  revision_status: frozen_from_hugging_face_repository_head_2026_07_25
+  local_model_directory: /workspace/models/llama_3_1_8b_instruct
+  role_in_week3:
+    - third_model_for_full_35_scenario_benchmark
+    - fixed_generator_for_base_vs_rag_comparison
+  prompt_version: 0.2.0
+  max_input_tokens: 8192
+  decoding:
+    do_sample: false
+    temperature: null
+    top_p: null
+    max_new_tokens: 384
+  target_runtime: RunPod_A40_48GB
+  precision: bfloat16
+
+extended_benchmark:
+  scenario_bank: ../phase_a_design/W02_Scenarios.yaml#0.2.0
+  scenario_count: 35
+  candidate_prompt_spec: ../phase_a_design/W02_Prompt_Spec_v0.4.0.yaml#0.4.0
+  semantic_prompt_policy: same_recorded_prompt_as_week2_models
+  serialization: official_llama_chat_template_around_semantic_prompt
+  output_status: completed_35_rows_diagnostic_judge_requires_human_review
+  leaderboard_rule: >-
+    Compare FLAN-T5-base, Mistral-7B-Instruct-v0.2, and
+    Llama-3.1-8B-Instruct per model; do not average models together.
+
+evaluation:
+  ragas:
+    api_generation: collections_v0.4
+    paper: Es_et_al_EACL_2024
+    structured_outputs_required: true
+    metrics:
+      answer_relevance:
+        implementation: ragas.metrics.collections.AnswerRelevancy
+        applies_to: [base, rag]
+      faithfulness_to_retrieved_context:
+        implementation: ragas.metrics.collections.Faithfulness
+        applies_to: [rag]
+        base_status: not_applicable_without_retrieved_context
+      context_relevance:
+        implementation: ragas.metrics.collections.ContextRelevance
+        applies_to: [rag]
+        paper_definition: relevant_sentences_divided_by_total_context_sentences
+        current_library_note: >-
+          RAGAS v0.4 uses structured overall context-relevance judgments rather
+          than the paper's original sentence-extraction ratio. Record this as
+          an implementation difference; do not present the values as identical.
+      context_recall:
+        implementation: ragas.metrics.collections.ContextRecall
+        applies_to: [rag]
+      context_precision:
+        implementation: ragas.metrics.collections.ContextPrecision
+        applies_to: [rag]
+  hidden_answer_key:
+    reference_answer: true
+    weighted_required_points: true
+    forbidden_points: true
+    scoring_method: local_independent_llm_judge_plus_human_review
+  judge:
+    provider: local_vllm_litellm
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    model_revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    local_model_directory: /workspace/models/mistral_7b_instruct_v0_2
+    endpoint: http://127.0.0.1:8000/v1
+    network_scope: loopback_only
+    external_api_calls: false
+    independent_from_candidate: true
+    calibration_required: true
+    result_status_until_calibrated: provisional
+  answer_relevance_embedding:
+    provider: local_huggingface
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    local_model_directory: /workspace/models/bge_m3
+    external_api_calls: false
+  retrieval_diagnostics:
+    - document_id_recall_at_k
+    - reciprocal_rank
+    - hit_at_k
+  reporting_rule: >-
+    Report every metric separately with its evaluator model, embedding model,
+    prompt/version, reason, and applicability. Do not call an uncalibrated
+    judge result validated performance.
+
+output_contract:
+  generation_format: jsonl
+  evaluation_format: jsonl
+  include_full_retrieved_chunks: true
+  include_hashes_and_versions: true
+  include_metric_reasons: true
+  include_latency_boundaries: true
+  raw_outputs_location: private_phase_b_or_runpod_volume
+
+claim_boundary: >-
+  The current stage proves that a replaceable LangChain/Chroma/BGE-M3/Llama
+  pipeline can execute over synthetic placeholder data. It is not a model
+  quality benchmark and says nothing about deployed InGen products.

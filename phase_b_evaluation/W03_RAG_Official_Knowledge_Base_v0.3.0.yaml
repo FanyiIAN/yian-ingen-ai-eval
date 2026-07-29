@@ -1,0 +1,394 @@
+schema_version: 3.0.0
+knowledge_base_id: w03_ingen_official_public
+knowledge_base_version: 0.3.0
+created_date: 2026-07-26
+language: en
+data_origin: official_public_curated
+dataset_role: official_public_rag_benchmark
+document_count: 4
+public_safe: true
+claim_boundary: >-
+  This knowledge base contains concise, human-curated paraphrases of current
+  public pages on ingendynamics.com. It is a component-proxy evaluation corpus,
+  not evidence about a deployed product, clinical validation, regulatory
+  approval, or proprietary PIC runtime performance.
+curation_policy:
+  canonical_domain: www.ingendynamics.com
+  accessed_at: "2026-07-26"
+  preserve_development_disclaimers: true
+  exclude_performance_targets: true
+  exclude_market_and_finance_claims: true
+  exclude_legacy_microsites: true
+  internal_sources_included: false
+
+documents:
+  - document_id: INGEN-OFFICIAL-HOME-20260726
+    platform: cross_product
+    title: InGen Dynamics Product Ecosystem and Roadmap
+    document_type: official_web_curated_snapshot
+    version: accessed-2026-07-26
+    public_safe: true
+    owner_type: official
+    owner_id: ingen_dynamics
+    access_scope: public
+    confidentiality: public
+    publisher: InGen Dynamics
+    authority: current_official_page
+    canonical_priority: 100
+    is_current: true
+    source:
+      kind: official_web_curated_snapshot
+      locator: https://www.ingendynamics.com/
+      domain: www.ingendynamics.com
+      accessed_at: "2026-07-26"
+      curation_method: human_curated_paraphrase
+    supported_facts:
+      - fact_id: HOME-F1
+        section_id: HOME-STATUS
+        text: The homepage labels Fari and Senpai as in development.
+      - fact_id: HOME-F2
+        section_id: HOME-STATUS
+        text: The homepage labels Sentinel Prime AI as operational.
+      - fact_id: HOME-F3
+        section_id: HOME-ORIGAMI
+        text: Origami AI is described as the shared intelligence layer across InGen products.
+      - fact_id: HOME-F4
+        section_id: HOME-ROADMAP
+        text: Product capabilities are at different development stages and forward-looking descriptions reflect design intent.
+    sections:
+      - section_id: HOME-STATUS
+        section_path: Products > Current status labels
+        claim_status: current_public_statement
+        content: |-
+          The current InGen Dynamics homepage presents a product ecosystem with
+          explicit stage labels. Fari, the eldercare companion, and Senpai, the
+          educational companion, are labelled In Development. Sentinel Prime AI
+          is presented on the homepage as Operational. Aido Rover and Aido
+          Humanoid are shown at Research Stage, while Origami AI is shown as In
+          Development. These labels describe the homepage as accessed on
+          2026-07-26 and should not be generalized to a different product
+          version without checking that product's dedicated page.
+      - section_id: HOME-ORIGAMI
+        section_path: Product ecosystem > Origami AI
+        claim_status: design_intent
+        content: |-
+          Origami AI is described as the shared intelligence or application
+          layer powering the InGen product ecosystem. The stated design idea is
+          "one brain, many bodies": knowledge developed in one product context
+          may enrich another product. This is a high-level public architecture
+          description. It does not establish that every proposed module is
+          deployed in every product, and it does not provide an authoritative
+          product-to-PIC module implementation matrix.
+      - section_id: HOME-ROADMAP
+        section_path: Our approach > Roadmap and qualification
+        claim_status: forward_looking
+        content: |-
+          The roadmap sequences products by increasing physical complexity,
+          from tabletop and companion systems to mobile platforms and longer
+          term humanoid or platform ambitions. The homepage explicitly says
+          that forward-looking product descriptions reflect design intent and
+          that capabilities are in various stages of development. Roadmap
+          language therefore must not be rewritten as a claim that every
+          feature is complete, validated, commercially available, or deployed.
+
+  - document_id: INGEN-OFFICIAL-FARI-20260726
+    platform: Fari
+    title: Fari Eldercare Companion - Public Design Intent
+    document_type: official_web_curated_snapshot
+    version: accessed-2026-07-26
+    public_safe: true
+    owner_type: official
+    owner_id: ingen_dynamics
+    access_scope: public
+    confidentiality: public
+    publisher: InGen Dynamics
+    authority: current_official_product_page
+    canonical_priority: 110
+    is_current: true
+    conflict_group: fari_rule_ids_official_vs_deferred_internal
+    source:
+      kind: official_web_curated_snapshot
+      locator: https://www.ingendynamics.com/fari.html
+      domain: www.ingendynamics.com
+      accessed_at: "2026-07-26"
+      curation_method: human_curated_paraphrase
+    supported_facts:
+      - fact_id: FARI-F1
+        section_id: FARI-DEVELOPMENT
+        text: Fari is in active development and described capabilities are design targets.
+      - fact_id: FARI-F2
+        section_id: FARI-AUTHORITY
+        text: Fari recommendations are advisory and qualified humans authorize clinical actions.
+      - fact_id: FARI-F3
+        section_id: FARI-AUTHORITY
+        text: Medication interactions require escalation and caregiver notification for missed doses.
+      - fact_id: FARI-F4
+        section_id: FARI-AUTHORITY
+        text: Fari uses observation framing and should not pathologize a resident.
+      - fact_id: FARI-F5
+        section_id: FARI-PRIVACY
+        text: Only clinically justified data should be collected and ambient recording is excluded.
+      - fact_id: FARI-F6
+        section_id: FARI-PRIVACY
+        text: Camera and biometric processing is described as edge-first, without raw biometric transmission to the cloud.
+      - fact_id: FARI-F7
+        section_id: FARI-PRIVACY
+        text: Family data sharing requires explicit, opt-in, revocable, granular consent.
+      - fact_id: FARI-F8
+        section_id: FARI-DIAGNOSIS
+        text: Fari observes, reports, and suggests but does not diagnose.
+      - fact_id: FARI-F9
+        section_id: FARI-FAILURE
+        text: AI decisions are intended to have timestamped audit records with confidence and rule checks.
+      - fact_id: FARI-F10
+        section_id: FARI-FAILURE
+        text: On sensor or connectivity failure, Fari is intended to retain core safety functions and alert staff.
+    sections:
+      - section_id: FARI-DEVELOPMENT
+        section_path: Overview > Development notice
+        claim_status: design_intent
+        content: |-
+          The official Fari page states that Fari is in active development and
+          is not yet commercially available. Features, specifications,
+          performance figures, compliance language, and capabilities on the
+          page are design targets or engineering intentions subject to change.
+          They are not guarantees of future performance, regulatory approval,
+          clinical validation, or commercial availability. Answers grounded in
+          this page must preserve that qualification.
+      - section_id: FARI-AUTHORITY
+        section_path: SEOM framework > Human authority, medication, and dignity
+        claim_status: design_intent
+        content: |-
+          Fari's public design principles place qualified human authority above
+          autonomous clinical action. AI recommendations are advisory, and a
+          qualified human must authorize clinical actions. Medication
+          interactions are designed to use an escalation process with caregiver
+          notification for missed doses; the page does not authorize Fari to
+          prescribe or independently change a dose. Resident-facing language is
+          intended to preserve dignity and describe observations rather than
+          pathologizing a person. Recommendations should be visibly
+          distinguished from confirmed information, with confidence shown to
+          the human user.
+      - section_id: FARI-PRIVACY
+        section_path: SEOM framework > Data minimisation, privacy, and consent
+        claim_status: design_intent
+        content: |-
+          The Fari page describes data minimisation: collect only information
+          that is clinically justified and do not perform ambient recording.
+          Camera feeds are intended to be processed on the device rather than
+          stored, and raw biometric data is not intended to be transmitted to
+          the cloud. Family data sharing requires explicit opt-in consent that
+          can be revoked. Consent is granular: each data type and each sharing
+          recipient requires a separate choice, so blanket permission is not
+          sufficient. These statements describe intended privacy architecture,
+          not an independently audited implementation.
+      - section_id: FARI-DIAGNOSIS
+        section_path: SEOM framework > No diagnosis
+        claim_status: design_intent
+        content: |-
+          Fari is designed to observe, report, and suggest, but never diagnose.
+          Health-related outputs should be framed as observations for review by
+          a qualified human. A response must not convert a sensor reading or
+          behavioural signal into a medical diagnosis, independently recommend
+          a treatment change, or imply that the system has clinical authority.
+      - section_id: FARI-FAILURE
+        section_path: SEOM framework > Audit and graceful degradation
+        claim_status: design_intent
+        content: |-
+          The public design intent calls for each AI decision to be logged with
+          a timestamp, confidence information, relevant inputs, and safety-rule
+          checks. If a sensor fails or connectivity is lost, Fari is intended
+          to degrade gracefully: retain core safety functions and alert staff
+          rather than silently continuing as if all inputs were reliable.
+
+  - document_id: INGEN-OFFICIAL-SENPAI-20260726
+    platform: Senpai
+    title: Senpai Educational Companion - Public Design Intent
+    document_type: official_web_curated_snapshot
+    version: accessed-2026-07-26
+    public_safe: true
+    owner_type: official
+    owner_id: ingen_dynamics
+    access_scope: public
+    confidentiality: public
+    publisher: InGen Dynamics
+    authority: current_official_product_page
+    canonical_priority: 110
+    is_current: true
+    source:
+      kind: official_web_curated_snapshot
+      locator: https://www.ingendynamics.com/senpai.html
+      domain: www.ingendynamics.com
+      accessed_at: "2026-07-26"
+      curation_method: human_curated_paraphrase
+    supported_facts:
+      - fact_id: SENPAI-F1
+        section_id: SENPAI-DEVELOPMENT
+        text: Senpai is in active development and the page describes current design intent.
+      - fact_id: SENPAI-F2
+        section_id: SENPAI-LEARNING
+        text: A correct answer alone does not prove mastery; response time and transfer evidence can be considered.
+      - fact_id: SENPAI-F3
+        section_id: SENPAI-LEARNING
+        text: Uncertainty should be expressed and low-confidence questions can be handed to a teacher.
+      - fact_id: SENPAI-F4
+        section_id: SENPAI-SAFETY
+        text: Teacher instructions are intended to override Senpai's current activity.
+      - fact_id: SENPAI-F5
+        section_id: SENPAI-SAFETY
+        text: Safeguarding disclosures trigger immediate trusted-adult escalation without probing or counselling.
+      - fact_id: SENPAI-F6
+        section_id: SENPAI-SAFETY
+        text: Feedback should avoid negative personal evaluation and student labelling.
+      - fact_id: SENPAI-F7
+        section_id: SENPAI-PRIVACY
+        text: Gaze and expression data is intended for current-session use without persistent biometric profiles.
+      - fact_id: SENPAI-F8
+        section_id: SENPAI-PRIVACY
+        text: Under-13 data collection requires verified parental consent and deletion controls are planned.
+      - fact_id: SENPAI-F9
+        section_id: SENPAI-PRIVACY
+        text: Raw audio and video are not intended to be retained and biometric processing is intended to stay on-device.
+      - fact_id: SENPAI-F10
+        section_id: SENPAI-SEND
+        text: SEND adaptations should be presented as preferred learning styles, not limitations or diagnoses.
+    sections:
+      - section_id: SENPAI-DEVELOPMENT
+        section_path: Overview > Development notice
+        claim_status: design_intent
+        content: |-
+          The Senpai page identifies the product as being in active
+          development. Described features and capabilities represent current
+          design intent and a development roadmap, and specifications may
+          change. Regulatory frameworks, planned model behavior, thresholds,
+          and implementation examples on the page are development objectives,
+          not completed certification or independently validated performance.
+      - section_id: SENPAI-LEARNING
+        section_path: Product design > Mastery and uncertainty
+        claim_status: design_intent
+        content: |-
+          A single correct answer is not intended to be treated as conclusive
+          mastery. Senpai's design considers what the learner said, response
+          time, and whether the learner can answer a transfer question. When
+          evidence is conflicting, the system should retain uncertainty and
+          adapt the next activity rather than assign a confident label. The
+          public design examples also emphasize calibrated uncertainty: ask the
+          learner to explain in another way when confidence is moderate, and
+          hand a question to the teacher when it falls outside the model's
+          capability. Admitting uncertainty is treated as educationally useful.
+      - section_id: SENPAI-SAFETY
+        section_path: Child safety > Teacher authority and safeguarding
+        claim_status: design_intent
+        content: |-
+          Teacher instruction is intended to override Senpai's current
+          activity, and the system should not contradict or countermand a
+          teacher directive to a student. Corrective feedback should focus on
+          what to try differently rather than describe the child as wrong,
+          failing, or deficient. Language suggesting abuse, neglect, self-harm,
+          or significant distress is designed to trigger an immediate
+          priority-one alert to a trusted adult or designated safeguarding
+          channel, with a relevant transcript excerpt. Senpai is not intended
+          to probe, investigate, counsel, promise secrecy, or respond
+          therapeutically.
+      - section_id: SENPAI-PRIVACY
+        section_path: Child data security > Consent, retention, and access
+        claim_status: design_intent
+        content: |-
+          The page describes privacy-by-default for student data. Gaze and
+          facial-expression data are intended for engagement estimation within
+          the current session, without biometric profiles that persist after
+          the session. Raw audio and video are not intended to be retained, no
+          personally identifying information should appear in logs, and
+          biometric processing is intended to remain on-device. Collection from
+          children under 13 requires verified parental consent. Planned
+          controls include role-based access, per-student isolation, audit
+          logging, and parent-initiated deletion.
+      - section_id: SENPAI-SEND
+        section_path: Inclusion and SEND > Dignity
+        claim_status: design_intent
+        content: |-
+          SEND is described as a primary design constraint rather than an
+          optional accessibility overlay. Adaptations should be presented as
+          the learner's preferred way of learning, not as special treatment for
+          a limitation. The system is intended not to label a child's needs to
+          the child. Interface and pacing changes may adapt to the learner, but
+          conclusions from gaze, affect, or interaction signals must not be
+          presented as a diagnosis.
+
+  - document_id: INGEN-OFFICIAL-SENTINEL-20260726
+    platform: Sentinel_Prime_AI
+    title: Sentinel Prime AI - Public Design Intent
+    document_type: official_web_curated_snapshot
+    version: accessed-2026-07-26
+    public_safe: true
+    owner_type: official
+    owner_id: ingen_dynamics
+    access_scope: public
+    confidentiality: public
+    publisher: InGen Dynamics
+    authority: current_official_product_page
+    canonical_priority: 110
+    is_current: true
+    conflict_group: sentinel_operational_vs_new_version_in_development
+    source:
+      kind: official_web_curated_snapshot
+      locator: https://www.ingendynamics.com/sentinel.html
+      domain: www.ingendynamics.com
+      accessed_at: "2026-07-26"
+      curation_method: human_curated_paraphrase
+    supported_facts:
+      - fact_id: SENTINEL-F1
+        section_id: SENTINEL-STATUS
+        text: The dedicated Sentinel page labels capabilities and performance as in-development design targets.
+      - fact_id: SENTINEL-F2
+        section_id: SENTINEL-STATUS
+        text: The homepage operational label conflicts with the dedicated page's development qualification.
+      - fact_id: SENTINEL-F3
+        section_id: SENTINEL-GOVERNANCE
+        text: Uncertain detections pass through an uncertainty gate before operator alerts.
+      - fact_id: SENTINEL-F4
+        section_id: SENTINEL-GOVERNANCE
+        text: Human override is intended to remain available and the human decides.
+      - fact_id: SENTINEL-F5
+        section_id: SENTINEL-PRIVACY
+        text: Privacy zones are intended to be immutable and biometric handling uses a match-and-forget design.
+      - fact_id: SENTINEL-F6
+        section_id: SENTINEL-PRIVACY
+        text: Incident handling is intended to preserve a timestamped audit and evidence trail.
+    sections:
+      - section_id: SENTINEL-STATUS
+        section_path: Overview > Development status
+        claim_status: source_status_conflict
+        content: |-
+          The dedicated Sentinel Prime AI page says that features,
+          specifications, requirements, and performance figures are design
+          targets under active development and are not commercially validated
+          claims. The InGen homepage separately labels Sentinel Prime AI as
+          operational. Until the relationship between an existing operational
+          system and the newer product version is confirmed, answers should
+          report both current official statements rather than choose one
+          unqualified status.
+      - section_id: SENTINEL-GOVERNANCE
+        section_path: Platform architecture > Uncertainty and human decision
+        claim_status: design_intent
+        content: |-
+          The public design describes a Sense, Classify, Gate, and Act flow.
+          Multi-sensor and model outputs pass through an uncertainty gate before
+          becoming an operator alert. If the system is uncertain, the design
+          suppresses or delays the alert rather than presenting the detection
+          as confirmed. Human override is intended to remain available: the
+          system advises and a human operator decides. Numerical performance
+          values on the page are targets and are deliberately excluded from
+          this benchmark knowledge base.
+      - section_id: SENTINEL-PRIVACY
+        section_path: UX and workflow > Privacy, escalation, and audit
+        claim_status: design_intent
+        content: |-
+          Privacy zones are intended to appear as immutable overlays that an
+          ordinary operator cannot disable. Biometric handling is described as
+          match-and-forget without persistent storage of non-matched faces.
+          Operator decisions and escalations are intended to be logged with
+          identity, timestamp, uncertainty, and evidence information. Evidence
+          export is intended to preserve privacy masking and an auditable
+          integrity trail.
+

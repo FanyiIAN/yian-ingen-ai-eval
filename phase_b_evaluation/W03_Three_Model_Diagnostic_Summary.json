@@ -1,0 +1,866 @@
+{
+  "claim_boundary": "L0 synthetic product-context simulation only. Prometheus failed calibration; all score ordering is diagnostic and requires human adjudication.",
+  "comparison_id": "w03_three_model_prometheus_diagnostic_v0.1.0",
+  "contract": {
+    "benchmark_version": "0.2.0",
+    "generation_error_count": 0,
+    "identical_semantic_prompt_per_scenario": true,
+    "input_truncation_count": 0,
+    "model_count": 3,
+    "prompt_spec_sha256": "0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d",
+    "prompt_version": "0.4.0",
+    "row_count": 105,
+    "scenario_count": 35,
+    "seed": 42,
+    "status": "ok"
+  },
+  "generated_utc": "2026-07-26T18:51:35.669738+00:00",
+  "llama_deltas_vs_prior_models": {
+    "google/flan-t5-base": {
+      "output_tokens_per_second": -21.729944332473796,
+      "severity_weighted_grounding": 0.6728815738716731,
+      "severity_weighted_quality": 0.3357342937174872,
+      "severity_weighted_task": 0.8429364063166882
+    },
+    "mistralai/Mistral-7B-Instruct-v0.2": {
+      "output_tokens_per_second": -0.9573871164174967,
+      "severity_weighted_grounding": -0.45049504950495045,
+      "severity_weighted_quality": -0.2266542980828694,
+      "severity_weighted_task": -0.11030303030303035
+    }
+  },
+  "models": {
+    "google/flan-t5-base": {
+      "by_platform": {
+        "Aido_Humanoid": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 3,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 0,
+            "unresolved": 2,
+            "unsafe": 2
+          },
+          "grounding": {
+            "mean": 3.0,
+            "resolved_n": 5,
+            "severity_weight_denominator": 15,
+            "severity_weighted_mean": 3.8,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 59.78207851368117,
+            "mean_ms": 578.2908428571429,
+            "median_ms": 645.1611,
+            "output_tokens": 242
+          },
+          "n": 7,
+          "quality": {
+            "mean": 3.625,
+            "resolved_n": 4,
+            "severity_weight_denominator": 14,
+            "severity_weighted_mean": 4.178571428571429,
+            "total_n": 4
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 1
+          },
+          "task": {
+            "mean": 3.5,
+            "resolved_n": 6,
+            "severity_weight_denominator": 20,
+            "severity_weighted_mean": 3.95,
+            "total_n": 7
+          }
+        },
+        "Aido_Rover": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 5,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 0,
+            "unresolved": 1,
+            "unsafe": 1
+          },
+          "grounding": {
+            "mean": 5.0,
+            "resolved_n": 5,
+            "severity_weight_denominator": 19,
+            "severity_weighted_mean": 5.0,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 47.69424758195268,
+            "mean_ms": 769.7843571428572,
+            "median_ms": 888.5641,
+            "output_tokens": 257
+          },
+          "n": 7,
+          "quality": {
+            "mean": 5.0,
+            "resolved_n": 5,
+            "severity_weight_denominator": 19,
+            "severity_weighted_mean": 5.0,
+            "total_n": 5
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.333333333333333,
+            "resolved_n": 6,
+            "severity_weight_denominator": 20,
+            "severity_weighted_mean": 4.8,
+            "total_n": 7
+          }
+        },
+        "Fari": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 0,
+            "off_policy": 0,
+            "partial": 1,
+            "refusal": 1,
+            "unresolved": 4,
+            "unsafe": 1
+          },
+          "grounding": {
+            "mean": 1.6666666666666667,
+            "resolved_n": 6,
+            "severity_weight_denominator": 20,
+            "severity_weighted_mean": 2.0,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 44.88854175083269,
+            "mean_ms": 190.94914285714285,
+            "median_ms": 164.7074,
+            "output_tokens": 60
+          },
+          "n": 7,
+          "quality": {
+            "mean": 1.0,
+            "resolved_n": 1,
+            "severity_weight_denominator": 5,
+            "severity_weighted_mean": 1.0,
+            "total_n": 1
+          },
+          "severity_5": {
+            "n": 3,
+            "task_le_2_count": 1,
+            "task_resolved_n": 1,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 1.0,
+            "resolved_n": 2,
+            "severity_weight_denominator": 8,
+            "severity_weighted_mean": 1.0,
+            "total_n": 7
+          }
+        },
+        "Senpai": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 0,
+            "off_policy": 0,
+            "partial": 1,
+            "refusal": 1,
+            "unresolved": 4,
+            "unsafe": 1
+          },
+          "grounding": {
+            "mean": 1.0,
+            "resolved_n": 3,
+            "severity_weight_denominator": 9,
+            "severity_weighted_mean": 1.0,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 48.280044794103326,
+            "mean_ms": 233.75525714285715,
+            "median_ms": 168.8105,
+            "output_tokens": 79
+          },
+          "n": 7,
+          "quality": {
+            "mean": 1.0,
+            "resolved_n": 1,
+            "severity_weight_denominator": 5,
+            "severity_weighted_mean": 1.0,
+            "total_n": 1
+          },
+          "severity_5": {
+            "n": 1,
+            "task_le_2_count": 1,
+            "task_resolved_n": 1,
+            "unsafe_count": 1
+          },
+          "task": {
+            "mean": 1.0,
+            "resolved_n": 2,
+            "severity_weight_denominator": 8,
+            "severity_weighted_mean": 1.0,
+            "total_n": 7
+          }
+        },
+        "Sentinel_Prime_AI": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 0,
+            "off_policy": 0,
+            "partial": 1,
+            "refusal": 2,
+            "unresolved": 3,
+            "unsafe": 1
+          },
+          "grounding": {
+            "mean": 4.25,
+            "resolved_n": 4,
+            "severity_weight_denominator": 14,
+            "severity_weighted_mean": 4.214285714285714,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 44.948612757385696,
+            "mean_ms": 689.6764571428572,
+            "median_ms": 689.5072,
+            "output_tokens": 217
+          },
+          "n": 7,
+          "quality": {
+            "mean": 3.25,
+            "resolved_n": 2,
+            "severity_weight_denominator": 8,
+            "severity_weighted_mean": 3.3125,
+            "total_n": 2
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 1,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 1.8,
+            "resolved_n": 5,
+            "severity_weight_denominator": 15,
+            "severity_weighted_mean": 2.066666666666667,
+            "total_n": 7
+          }
+        }
+      },
+      "overall": {
+        "failure_counts": {
+          "hallucination": 0,
+          "none": 8,
+          "off_policy": 0,
+          "partial": 3,
+          "refusal": 4,
+          "unresolved": 14,
+          "unsafe": 6
+        },
+        "grounding": {
+          "mean": 3.0434782608695654,
+          "resolved_n": 23,
+          "severity_weight_denominator": 77,
+          "severity_weighted_mean": 3.3766233766233764,
+          "total_n": 35
+        },
+        "latency": {
+          "aggregate_output_tokens_per_second": 49.60204540038667,
+          "mean_ms": 492.49121142857143,
+          "median_ms": 639.178,
+          "output_tokens": 855
+        },
+        "n": 35,
+        "quality": {
+          "mean": 3.6923076923076925,
+          "resolved_n": 13,
+          "severity_weight_denominator": 51,
+          "severity_weighted_mean": 3.7254901960784315,
+          "total_n": 13
+        },
+        "severity_5": {
+          "n": 10,
+          "task_le_2_count": 2,
+          "task_resolved_n": 7,
+          "unsafe_count": 2
+        },
+        "task": {
+          "mean": 2.857142857142857,
+          "resolved_n": 21,
+          "severity_weight_denominator": 71,
+          "severity_weighted_mean": 3.1267605633802815,
+          "total_n": 35
+        }
+      },
+      "revision": "7bcac572ce56db69c1ea7c8af255c5d7c9672fc2"
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+      "by_platform": {
+        "Aido_Humanoid": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 6,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 1,
+            "unresolved": 0,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.285714285714286,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.380952380952381,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.34153124268328,
+            "mean_ms": 1913.4262857142858,
+            "median_ms": 2041.366,
+            "output_tokens": 393
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.428571428571429,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.476190476190476,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.571428571428571,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.571428571428571,
+            "total_n": 7
+          }
+        },
+        "Aido_Rover": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 7,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 0,
+            "unresolved": 0,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 3.857142857142857,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.238095238095238,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.140022603804876,
+            "mean_ms": 1549.1702857142857,
+            "median_ms": 1677.322,
+            "output_tokens": 316
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.357142857142857,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.5476190476190474,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.857142857142857,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.857142857142857,
+            "total_n": 7
+          }
+        },
+        "Fari": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 3,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 1,
+            "unresolved": 2,
+            "unsafe": 1
+          },
+          "grounding": {
+            "mean": 4.0,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 3.8260869565217392,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 24.55764794512127,
+            "mean_ms": 2646.8332857142855,
+            "median_ms": 2151.007,
+            "output_tokens": 455
+          },
+          "n": 7,
+          "quality": {
+            "mean": 3.5714285714285716,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 3.4347826086956523,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 3,
+            "task_le_2_count": 1,
+            "task_resolved_n": 3,
+            "unsafe_count": 1
+          },
+          "task": {
+            "mean": 3.142857142857143,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 3.0434782608695654,
+            "total_n": 7
+          }
+        },
+        "Senpai": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 2,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 0,
+            "unresolved": 5,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 3.6,
+            "resolved_n": 5,
+            "severity_weight_denominator": 15,
+            "severity_weighted_mean": 3.7333333333333334,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.233269235611758,
+            "mean_ms": 1480.7004285714286,
+            "median_ms": 1174.565,
+            "output_tokens": 303
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.0,
+            "resolved_n": 4,
+            "severity_weight_denominator": 12,
+            "severity_weighted_mean": 4.083333333333333,
+            "total_n": 4
+          },
+          "severity_5": {
+            "n": 1,
+            "task_le_2_count": 0,
+            "task_resolved_n": 1,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 3.6,
+            "resolved_n": 5,
+            "severity_weight_denominator": 13,
+            "severity_weighted_mean": 3.6923076923076925,
+            "total_n": 7
+          }
+        },
+        "Sentinel_Prime_AI": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 3,
+            "off_policy": 0,
+            "partial": 1,
+            "refusal": 2,
+            "unresolved": 1,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 3.7142857142857144,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.0,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.18645320250727,
+            "mean_ms": 1507.5487142857144,
+            "median_ms": 1372.633,
+            "output_tokens": 308
+          },
+          "n": 7,
+          "quality": {
+            "mean": 3.642857142857143,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 3.8333333333333335,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 3.5714285714285716,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 3.6666666666666665,
+            "total_n": 7
+          }
+        }
+      },
+      "overall": {
+        "failure_counts": {
+          "hallucination": 0,
+          "none": 21,
+          "off_policy": 0,
+          "partial": 1,
+          "refusal": 4,
+          "unresolved": 8,
+          "unsafe": 1
+        },
+        "grounding": {
+          "mean": 3.909090909090909,
+          "resolved_n": 33,
+          "severity_weight_denominator": 101,
+          "severity_weighted_mean": 4.0495049504950495,
+          "total_n": 35
+        },
+        "latency": {
+          "aggregate_output_tokens_per_second": 27.872101067912876,
+          "mean_ms": 1819.5357999999999,
+          "median_ms": 1775.478,
+          "output_tokens": 1775
+        },
+        "n": 35,
+        "quality": {
+          "mean": 4.0,
+          "resolved_n": 32,
+          "severity_weight_denominator": 98,
+          "severity_weighted_mean": 4.061224489795919,
+          "total_n": 32
+        },
+        "severity_5": {
+          "n": 10,
+          "task_le_2_count": 1,
+          "task_resolved_n": 10,
+          "unsafe_count": 1
+        },
+        "task": {
+          "mean": 3.9696969696969697,
+          "resolved_n": 33,
+          "severity_weight_denominator": 99,
+          "severity_weighted_mean": 3.9696969696969697,
+          "total_n": 35
+        }
+      },
+      "revision": "0e9e39f249a16976918f6564b8830bc894c89659"
+    },
+    "mistralai/Mistral-7B-Instruct-v0.2": {
+      "by_platform": {
+        "Aido_Humanoid": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 2,
+            "off_policy": 2,
+            "partial": 0,
+            "refusal": 2,
+            "unresolved": 1,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.428571428571429,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.619047619047619,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.87026923474154,
+            "mean_ms": 2764.3349285714285,
+            "median_ms": 2434.0231,
+            "output_tokens": 578
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.333333333333333,
+            "resolved_n": 6,
+            "severity_weight_denominator": 16,
+            "severity_weighted_mean": 4.5,
+            "total_n": 6
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 1,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.333333333333333,
+            "resolved_n": 6,
+            "severity_weight_denominator": 16,
+            "severity_weighted_mean": 4.5,
+            "total_n": 7
+          }
+        },
+        "Aido_Rover": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 5,
+            "off_policy": 1,
+            "partial": 0,
+            "refusal": 1,
+            "unresolved": 0,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.571428571428571,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.571428571428571,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 29.189892598521862,
+            "mean_ms": 1830.3791714285715,
+            "median_ms": 1842.0036,
+            "output_tokens": 374
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.428571428571429,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.380952380952381,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.285714285714286,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.190476190476191,
+            "total_n": 7
+          }
+        },
+        "Fari": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 4,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 1,
+            "unresolved": 2,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.142857142857143,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 4.391304347826087,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 26.569807542341106,
+            "mean_ms": 2984.053014285714,
+            "median_ms": 2439.1705,
+            "output_tokens": 555
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.071428571428571,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 4.195652173913044,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 3,
+            "task_le_2_count": 0,
+            "task_resolved_n": 3,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 4.0,
+            "resolved_n": 7,
+            "severity_weight_denominator": 23,
+            "severity_weighted_mean": 4.0,
+            "total_n": 7
+          }
+        },
+        "Senpai": {
+          "failure_counts": {
+            "hallucination": 1,
+            "none": 3,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 3,
+            "unresolved": 0,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.5,
+            "resolved_n": 6,
+            "severity_weight_denominator": 18,
+            "severity_weighted_mean": 4.5,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 30.461388709111198,
+            "mean_ms": 3203.1182000000003,
+            "median_ms": 3085.7339,
+            "output_tokens": 683
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.333333333333333,
+            "resolved_n": 6,
+            "severity_weight_denominator": 18,
+            "severity_weighted_mean": 4.333333333333333,
+            "total_n": 6
+          },
+          "severity_5": {
+            "n": 1,
+            "task_le_2_count": 0,
+            "task_resolved_n": 1,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 3.857142857142857,
+            "resolved_n": 7,
+            "severity_weight_denominator": 19,
+            "severity_weighted_mean": 4.052631578947368,
+            "total_n": 7
+          }
+        },
+        "Sentinel_Prime_AI": {
+          "failure_counts": {
+            "hallucination": 0,
+            "none": 5,
+            "off_policy": 0,
+            "partial": 0,
+            "refusal": 2,
+            "unresolved": 0,
+            "unsafe": 0
+          },
+          "grounding": {
+            "mean": 4.428571428571429,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.428571428571429,
+            "total_n": 7
+          },
+          "latency": {
+            "aggregate_output_tokens_per_second": 27.781470861304275,
+            "mean_ms": 1928.3150571428573,
+            "median_ms": 1756.1412,
+            "output_tokens": 375
+          },
+          "n": 7,
+          "quality": {
+            "mean": 4.142857142857143,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 4.095238095238095,
+            "total_n": 7
+          },
+          "severity_5": {
+            "n": 2,
+            "task_le_2_count": 0,
+            "task_resolved_n": 2,
+            "unsafe_count": 0
+          },
+          "task": {
+            "mean": 3.857142857142857,
+            "resolved_n": 7,
+            "severity_weight_denominator": 21,
+            "severity_weighted_mean": 3.761904761904762,
+            "total_n": 7
+          }
+        }
+      },
+      "overall": {
+        "failure_counts": {
+          "hallucination": 1,
+          "none": 19,
+          "off_policy": 3,
+          "partial": 0,
+          "refusal": 9,
+          "unresolved": 3,
+          "unsafe": 0
+        },
+        "grounding": {
+          "mean": 4.411764705882353,
+          "resolved_n": 34,
+          "severity_weight_denominator": 104,
+          "severity_weighted_mean": 4.5,
+          "total_n": 35
+        },
+        "latency": {
+          "aggregate_output_tokens_per_second": 28.829488184330373,
+          "mean_ms": 2542.040074285714,
+          "median_ms": 2253.2874,
+          "output_tokens": 2565
+        },
+        "n": 35,
+        "quality": {
+          "mean": 4.257575757575758,
+          "resolved_n": 33,
+          "severity_weight_denominator": 99,
+          "severity_weighted_mean": 4.287878787878788,
+          "total_n": 33
+        },
+        "severity_5": {
+          "n": 10,
+          "task_le_2_count": 0,
+          "task_resolved_n": 9,
+          "unsafe_count": 0
+        },
+        "task": {
+          "mean": 4.0588235294117645,
+          "resolved_n": 34,
+          "severity_weight_denominator": 100,
+          "severity_weighted_mean": 4.08,
+          "total_n": 35
+        }
+      },
+      "revision": "63a8b081895390a26e140280378bc85ec8bce07a"
+    }
+  },
+  "runner_version": "0.1.0",
+  "source_sha256": {
+    "llama_judged_rows": "697a05b6ad9ed5979192c7440ca4b5d6ec175faca431a274f6aa41b89ab50dd4",
+    "week2_csv": "906f567d3a032b22fd40606021eabd30ec5e3e4b317b659fa8f61ce55e96500d"
+  },
+  "status": "diagnostic_failed_judge_calibration",
+  "validated_model_quality_claim_allowed": false
+}

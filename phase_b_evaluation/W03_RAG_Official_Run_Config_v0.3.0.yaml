@@ -1,0 +1,188 @@
+run_contract_version: 0.3.0
+created_date: 2026-07-26
+pipeline_stage: official_public_controlled_baseline
+random_seed: 42
+evaluation_set: W03_RAG_Official_Eval_Set_v0.3.0.yaml#0.3.0
+knowledge_base: W03_RAG_Official_Knowledge_Base_v0.3.0.yaml#0.3.0
+
+comparison:
+  conditions: [base, rag]
+  expected_evaluation_items: 12
+  expected_generation_rows: 24
+  fixed_variables:
+    - candidate_model_id_and_revision
+    - tokenizer_revision
+    - question
+    - decoding_configuration
+    - random_seed
+    - hardware_and_batch_size
+    - latency_measurement_boundary
+  manipulated_variable: retrieved_context_available
+  base_condition_policy: answer_without_external_context
+
+retrieval:
+  architecture: two_step_rag
+  framework: langchain_v1
+  document_loader: versioned_official_public_yaml
+  text_splitter:
+    implementation: langchain_text_splitters.RecursiveCharacterTextSplitter
+    strategy: heading_aware_tokens
+    tokenizer: BAAI/bge-m3
+    chunk_size_tokens: 256
+    chunk_overlap_tokens: 32
+    parent_section_max_tokens: 1200
+    add_start_index: true
+  embedding:
+    integration: langchain_huggingface.HuggingFaceEmbeddings
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    revision_status: frozen_from_hugging_face_repository_head_2026_07_25
+    local_model_directory: /workspace/models/bge_m3
+    normalize_embeddings: true
+    retrieval_mode: dense_baseline
+    query_prompt: null
+  vector_store:
+    integration: langchain_chroma.Chroma
+    database: chromadb
+    deployment: local_persistent
+    distance_metric: cosine
+    persist_directory_policy: runtime_argument_private_or_runpod_volume
+    public_repository_must_not_contain_database: true
+  metadata_gate:
+    owner_type: official
+    source_domain: www.ingendynamics.com
+    access_scope: public
+    confidentiality: public
+    is_current: true
+    enforce_platform_filter: true
+  retriever:
+    search_type: similarity_then_parent_merge
+    fetch_k: 12
+    top_k: 4
+    relevance_score_threshold: 0.20
+    auto_merge_min_children: 2
+    max_parent_tokens: 1200
+    deduplicate_by_chunk_id: true
+  trace_fields:
+    - chunk_id
+    - parent_chunk_id
+    - document_id
+    - document_version
+    - section_path
+    - source_url
+    - accessed_at
+    - owner_type
+    - claim_status
+    - rank
+    - relevance_score
+    - content_sha256
+    - start_index
+    - token_count
+
+generation:
+  framework: huggingface_transformers
+  candidate_model_id: meta-llama/Llama-3.1-8B-Instruct
+  candidate_model_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  tokenizer_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+  revision_status: frozen_from_hugging_face_repository_head_2026_07_25
+  local_model_directory: /workspace/models/llama_3_1_8b_instruct
+  prompt_version: 0.3.0
+  max_input_tokens: 8192
+  decoding:
+    do_sample: false
+    temperature: null
+    top_p: null
+    max_new_tokens: 384
+  target_runtime: RunPod_A40_48GB
+  precision: bfloat16
+
+evaluation:
+  primary_dimensions:
+    - faithfulness
+    - answer_relevance
+    - context_coverage
+  retrieval_metrics:
+    - document_id_recall_at_k
+    - evidence_fact_recall_at_k
+    - reciprocal_rank
+    - hit_at_k
+    - metadata_filter_leakage
+    - no_evidence_accuracy
+  ragas:
+    api_generation: collections_v0.4
+    paper: Es_et_al_EACL_2024
+    structured_outputs_required: true
+    metrics:
+      answer_relevance:
+        implementation: ragas.metrics.collections.AnswerRelevancy
+        applies_to: [base, rag]
+      faithfulness_to_retrieved_context:
+        implementation: ragas.metrics.collections.Faithfulness
+        applies_to: [rag]
+      context_relevance:
+        implementation: ragas.metrics.collections.ContextRelevance
+        applies_to: [rag]
+      context_recall:
+        implementation: ragas.metrics.collections.ContextRecall
+        applies_to: [rag]
+      context_precision:
+        implementation: ragas.metrics.collections.ContextPrecision
+        applies_to: [rag]
+  hidden_answer_key:
+    reference_answer: true
+    weighted_required_points: true
+    forbidden_points: true
+    scoring_method: local_independent_llm_judge_plus_human_review
+  judge:
+    provider: local_vllm_litellm
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    model_revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    local_model_directory: /workspace/models/mistral_7b_instruct_v0_2
+    endpoint: http://127.0.0.1:8000/v1
+    network_scope: loopback_only
+    external_api_calls: false
+    independent_from_candidate: true
+    calibration_required: true
+    result_status_until_calibrated: provisional
+  answer_relevance_embedding:
+    provider: local_huggingface
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    local_model_directory: /workspace/models/bge_m3
+    external_api_calls: false
+
+iteration_policy:
+  immutable_run_directory: true
+  never_overwrite_previous_outputs: true
+  required_record:
+    - run_id
+    - parent_run_id
+    - hypothesis
+    - code_and_asset_hashes
+    - exact_command
+    - model_revisions
+    - dependency_versions
+    - hardware
+    - random_seed
+    - full_inputs
+    - full_retrieval_traces
+    - full_outputs
+    - metric_outputs_and_reasons
+    - latency
+    - observed_change
+    - decision
+
+output_contract:
+  generation_format: jsonl
+  evaluation_format: jsonl
+  include_full_retrieved_chunks: true
+  include_hashes_and_versions: true
+  include_metric_reasons: true
+  include_latency_boundaries: true
+  raw_outputs_location: private_phase_b_or_runpod_volume
+
+claim_boundary: >-
+  Results measure a public-data component-proxy RAG pipeline using a frozen open
+  model. They do not measure deployed InGen product behavior or proprietary PIC
+  runtime performance.
+

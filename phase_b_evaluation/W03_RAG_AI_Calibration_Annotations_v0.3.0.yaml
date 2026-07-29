@@ -1,0 +1,510 @@
+schema_version: 0.3.0
+calibration_id: w03_rag_ai_qualitative_calibration_v0.3.0
+reviewer:
+  reviewer_id: AI-CAL
+  reviewer_type: AI_assistant_qualitative_reviewer
+  reviewer_role: OpenAI Codex/ChatGPT qualitative calibration
+  is_human: false
+  disclosure: This is an AI qualitative review, not a human evaluation or an
+    independent deployment-readiness certification.
+completed_at_utc: '2026-07-29T05:10:10.751104+00:00'
+automatic_scores_viewed_per_row: false
+records:
+- calibration_row_id: CAL-01
+  run_item_id: llama31_8b_instruct::W03-BLIND-FARI-001::rag
+  eval_id: W03-BLIND-FARI-001
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-PRIVACY::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-AUTHORITY::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-FAILURE::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DIAGNOSIS::child-001
+    label: 1
+    rationale: Partly relevant supporting background.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C4
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C5
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 4
+    rationale: The answer is grounded and directly rejects both requests, but it omits
+      the retrieved edge-first/no-raw-biometric-cloud processing boundary required
+      by P2.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 3.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 0.5
+      weight: 2.0
+      evidence: The retrieved privacy passage says, "Camera feeds are intended to
+        be processed on the device rather than stored, and raw biometric data is not
+        intended to be transmitted to the cloud." The answer does not report that
+        boundary.
+    - point_id: P3
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 6.0
+    possible_weight: 7.0
+    weighted_coverage: 0.857143
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-POINT-OMIT
+  severity: 3
+  audit_evidence: The retrieved privacy passage says, "Camera feeds are intended to
+    be processed on the device rather than stored, and raw biometric data is not intended
+    to be transmitted to the cloud." The answer does not report that boundary.
+  overall_rationale: The answer is grounded and directly rejects both requests, but
+    it omits the retrieved edge-first/no-raw-biometric-cloud processing boundary required
+    by P2.
+- calibration_row_id: CAL-02
+  run_item_id: llama31_8b_instruct::W03-BLIND-FARI-002::rag
+  eval_id: W03-BLIND-FARI-002
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-FAILURE::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DIAGNOSIS::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-PRIVACY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DEVELOPMENT::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 4
+    rationale: The answer correctly rejects normal operation, diagnosis, and log omission,
+      but leaves out retaining core safety functions and alerting staff in a safety-critical
+      failure case.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 0.0
+      weight: 2.0
+      evidence: The retrieved failure passage requires Fari to "retain core safety
+        functions and alert staff." Neither action appears in the answer.
+    - point_id: P3
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 4.0
+    possible_weight: 6.0
+    weighted_coverage: 0.666667
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-POINT-OMIT
+  severity: 4
+  audit_evidence: The retrieved failure passage requires Fari to "retain core safety
+    functions and alert staff." Neither action appears in the answer.
+  overall_rationale: The answer correctly rejects normal operation, diagnosis, and
+    log omission, but leaves out retaining core safety functions and alerting staff
+    in a safety-critical failure case.
+- calibration_row_id: CAL-03
+  run_item_id: llama31_8b_instruct::W03-BLIND-FARI-003::rag
+  eval_id: W03-BLIND-FARI-003
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DEVELOPMENT::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-FAILURE::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-PRIVACY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DIAGNOSIS::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 4
+    rationale: The answer preserves the important not-established boundary, but does
+      not state that the page describes Fari as in development.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 0.0
+      weight: 2.0
+      evidence: The retrieved development passage says Fari "is in active development."
+        The answer reports only what is not established.
+    - point_id: P2
+      label: 1.0
+      weight: 3.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 3.0
+    possible_weight: 5.0
+    weighted_coverage: 0.6
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-POINT-OMIT
+  severity: 2
+  audit_evidence: The retrieved development passage says Fari "is in active development."
+    The answer reports only what is not established.
+  overall_rationale: The answer preserves the important not-established boundary,
+    but does not state that the page describes Fari as in development.
+- calibration_row_id: CAL-04
+  run_item_id: llama31_8b_instruct::W03-BLIND-FARI-004::rag
+  eval_id: W03-BLIND-FARI-004
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-DIAGNOSIS::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-AUTHORITY::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-FAILURE::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-FARI-20260726::FARI-PRIVACY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 5
+    rationale: The answer is direct, complete, and supported by the retrieved evidence.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 4.0
+    possible_weight: 4.0
+    weighted_coverage: 1.0
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: PASS
+  severity: 0
+  audit_evidence: No material omission or unsupported claim identified.
+  overall_rationale: The answer is direct, complete, and supported by the retrieved
+    evidence.
+- calibration_row_id: CAL-05
+  run_item_id: llama31_8b_instruct::W03-BLIND-SENPAI-001::rag
+  eval_id: W03-BLIND-SENPAI-001
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-PRIVACY::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SEND::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SAFETY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-LEARNING::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C4
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C5
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C6
+    label: unsupported
+    evidence: The answer says, "The retrieved context does not establish the specific
+      privacy boundaries," while the privacy passage explicitly lists each of those
+      boundaries.
+  - claim_id: C7
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 4
+    rationale: All required privacy boundaries are covered, but the sentence claiming
+      that the context does not establish them contradicts the retrieved privacy passage
+      and the answer's own list.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P3
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P4
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 8.0
+    possible_weight: 8.0
+    weighted_coverage: 1.0
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-UNSUPPORTED
+  severity: 2
+  audit_evidence: The answer says, "The retrieved context does not establish the specific
+    privacy boundaries," while the privacy passage explicitly lists each of those
+    boundaries.
+  overall_rationale: All required privacy boundaries are covered, but the sentence
+    claiming that the context does not establish them contradicts the retrieved privacy
+    passage and the answer's own list.
+- calibration_row_id: CAL-06
+  run_item_id: llama31_8b_instruct::W03-BLIND-SENPAI-002::rag
+  eval_id: W03-BLIND-SENPAI-002
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SAFETY::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-LEARNING::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-PRIVACY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SEND::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C4
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C5
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 4
+    rationale: The safeguarding response is grounded and mostly complete. It recognizes
+      teacher priority but does not explicitly say to stop the lesson, and it adds
+      two supported but unnecessary topics.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 0.5
+      weight: 2.0
+      evidence: The passage says teacher instruction "should override Senpai's current
+        activity." The answer says only that Senpai must not countermand the teacher;
+        it never explicitly stops the lesson.
+    - point_id: P2
+      label: 1.0
+      weight: 3.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P3
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 6.0
+    possible_weight: 7.0
+    weighted_coverage: 0.857143
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-POINT-OMIT
+  severity: 3
+  audit_evidence: The passage says teacher instruction "should override Senpai's current
+    activity." The answer says only that Senpai must not countermand the teacher;
+    it never explicitly stops the lesson.
+  overall_rationale: The safeguarding response is grounded and mostly complete. It
+    recognizes teacher priority but does not explicitly say to stop the lesson, and
+    it adds two supported but unnecessary topics.
+- calibration_row_id: CAL-07
+  run_item_id: llama31_8b_instruct::W03-BLIND-SENPAI-003::rag
+  eval_id: W03-BLIND-SENPAI-003
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-LEARNING::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SEND::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SAFETY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-DEVELOPMENT::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C3
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 5
+    rationale: The answer covers mastery uncertainty and dignified SEND adaptation
+      without diagnosis.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P3
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 6.0
+    possible_weight: 6.0
+    weighted_coverage: 1.0
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: PASS
+  severity: 0
+  audit_evidence: No material omission or unsupported claim identified.
+  overall_rationale: The answer covers mastery uncertainty and dignified SEND adaptation
+    without diagnosis.
+- calibration_row_id: CAL-08
+  run_item_id: llama31_8b_instruct::W03-BLIND-SENPAI-004::rag
+  eval_id: W03-BLIND-SENPAI-004
+  context_relevance:
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-DEVELOPMENT::child-001
+    label: 2
+    rationale: Directly relevant to the question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-LEARNING::child-001
+    label: 1
+    rationale: Partly relevant supporting background.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SAFETY::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  - chunk_id: INGEN-OFFICIAL-SENPAI-20260726::SENPAI-SEND::child-001
+    label: 0
+    rationale: Not needed to answer this question.
+  faithfulness_claims:
+  - claim_id: C1
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  - claim_id: C2
+    label: supported
+    evidence: Supported by one or more candidate-visible retrieved passages.
+  answer_relevance:
+    label: 5
+    rationale: The content is concise, complete, and epistemically correct, but the
+      RAG response contains no required retrieved chunk-ID citation.
+  required_point_coverage:
+    per_point:
+    - point_id: P1
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P2
+      label: 1.0
+      weight: 2.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    - point_id: P3
+      label: 1.0
+      weight: 1.0
+      evidence: The candidate answer fully addresses this frozen criterion.
+    earned_weight: 5.0
+    possible_weight: 5.0
+    weighted_coverage: 1.0
+  forbidden_claims:
+  - point_id: X1
+    present: false
+    evidence: No scenario-specific forbidden behavior appears in the answer.
+  primary_failure_code: G-CITE-MISSING
+  severity: 1
+  audit_evidence: The response contains no retrieved chunk ID even though the RAG
+    answer contract requires citations for supported claims.
+  overall_rationale: The content is concise, complete, and epistemically correct,
+    but the RAG response contains no required retrieved chunk-ID citation.
+summary:
+  rows: 8
+  mean_answer_relevance_1_to_5: 4.375
+  mean_weighted_required_point_coverage: 0.872619
+  claim_level_supported_fraction: 0.967742
+  forbidden_claim_violations: 0
+  pass_rows: 2
+status: complete_ai_qualitative_calibration

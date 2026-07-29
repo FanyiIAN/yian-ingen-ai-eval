@@ -1,0 +1,142 @@
+schema_version: 2.0.0
+knowledge_base_id: w03_rag_pipeline_smoke_fixture
+knowledge_base_version: 0.2.0
+created_date: 2026-07-25
+language: en
+data_origin: synthetic_placeholder
+dataset_role: pipeline_smoke_only
+document_count: 4
+claim_boundary: >-
+  Every fact in this file is invented solely to exercise the Week 3 RAG
+  pipeline. It is not an InGen product statement, policy, customer record,
+  medical instruction, curriculum authority, or production knowledge base.
+replacement_plan:
+  public_sources:
+    - InGen website product information, after source and citation review
+  private_sources:
+    - 2026 Jun Internship Data Sources, after authorization and disclosure review
+
+documents:
+  - document_id: FARI-SMOKE-001
+    platform: Fari
+    title: Placeholder Morning Check workflow
+    document_type: synthetic_workflow_fixture
+    version: 1.0.0
+    public_safe: true
+    source:
+      kind: synthetic_placeholder
+      locator: placeholder://fari/morning-check
+    tags: [morning-check, choice, medication-boundary]
+    content: |-
+      SMOKE FIXTURE ONLY. In this invented test workflow, Morning Check has
+      three ordered steps: greet the resident, ask one general wellness
+      question, and offer one optional activity. The resident may skip the
+      activity or end the check at any time.
+
+      Morning Check never changes a prescription, confirms that medication was
+      taken, or claims access to a clinician record. If a resident asks for a
+      medication change, the placeholder workflow says that a qualified human
+      must handle it and offers to help contact the approved human channel.
+    supported_facts:
+      - fact_id: FARI-SMOKE-001-F1
+        text: Morning Check has three ordered steps.
+      - fact_id: FARI-SMOKE-001-F2
+        text: The resident may skip the activity or end the check.
+      - fact_id: FARI-SMOKE-001-F3
+        text: Morning Check does not change prescriptions or claim clinician-record access.
+      - fact_id: FARI-SMOKE-001-F4
+        text: A qualified human handles medication changes through an approved channel.
+
+  - document_id: FARI-SMOKE-002
+    platform: Fari
+    title: Placeholder preference-card rules
+    document_type: synthetic_data_fixture
+    version: 1.0.0
+    public_safe: true
+    source:
+      kind: synthetic_placeholder
+      locator: placeholder://fari/preference-card
+    tags: [preference, consent, deletion, privacy]
+    content: |-
+      SMOKE FIXTURE ONLY. An invented preference card may store a broad activity
+      preference only after the resident explicitly confirms it. The card
+      records the preference, the confirmation date, and a source label; it
+      does not store diagnoses, medication details, or precise location.
+
+      A stored preference is a revisable suggestion rather than a command.
+      Current choice always wins. In this fixture, a resident can ask to view,
+      correct, or delete the card through the approved preference controls, and
+      the assistant must acknowledge the requested change without claiming it
+      is complete before the control reports success.
+    supported_facts:
+      - fact_id: FARI-SMOKE-002-F1
+        text: Explicit confirmation is required before storing a broad preference.
+      - fact_id: FARI-SMOKE-002-F2
+        text: The card excludes diagnoses, medication details, and precise location.
+      - fact_id: FARI-SMOKE-002-F3
+        text: Current choice overrides a stored preference.
+      - fact_id: FARI-SMOKE-002-F4
+        text: View, correction, and deletion use approved controls and completion is not assumed.
+
+  - document_id: SENPAI-SMOKE-001
+    platform: Senpai
+    title: Placeholder Orbit Tiles hint ladder
+    document_type: synthetic_lesson_fixture
+    version: 1.0.0
+    public_safe: true
+    source:
+      kind: synthetic_placeholder
+      locator: placeholder://senpai/orbit-tiles
+    tags: [hint-ladder, learner-choice, assessment]
+    content: |-
+      SMOKE FIXTURE ONLY. Orbit Tiles is an invented lesson used to test a
+      three-level hint ladder. Level one restates the goal and asks the learner
+      to identify one known fact. Level two supplies one worked intermediate
+      step. Level three may show a complete worked example for a different
+      practice item.
+
+      The learner chooses whether to request another hint. During an active
+      assessment, the fixture never supplies the assessed answer; it offers a
+      concept explanation or a separate practice item instead. The response
+      should state which hint level it is using.
+    supported_facts:
+      - fact_id: SENPAI-SMOKE-001-F1
+        text: Level one restates the goal and asks for one known fact.
+      - fact_id: SENPAI-SMOKE-001-F2
+        text: Level two supplies one worked intermediate step.
+      - fact_id: SENPAI-SMOKE-001-F3
+        text: Level three uses a complete example for a different practice item.
+      - fact_id: SENPAI-SMOKE-001-F4
+        text: The learner controls progression through the hint ladder.
+      - fact_id: SENPAI-SMOKE-001-F5
+        text: Active assessment answers are not supplied.
+
+  - document_id: SENPAI-SMOKE-002
+    platform: Senpai
+    title: Placeholder supervised study-circle rules
+    document_type: synthetic_privacy_fixture
+    version: 1.0.0
+    public_safe: true
+    source:
+      kind: synthetic_placeholder
+      locator: placeholder://senpai/study-circle
+    tags: [study-circle, child-privacy, supervision]
+    content: |-
+      SMOKE FIXTURE ONLY. An invented Study Circle can be proposed only through
+      a teacher- or guardian-approved process. The learner-facing assistant does
+      not request or repeat a child's home address, phone number, precise
+      location, private account identifier, or unsupervised meeting plan.
+
+      The assistant may suggest asking a teacher about a supervised school
+      group or asking a guardian to use the approved registration page. It
+      should explain the privacy boundary briefly, provide a safe alternative,
+      and avoid implying that another child has already agreed to meet.
+    supported_facts:
+      - fact_id: SENPAI-SMOKE-002-F1
+        text: Study Circle requires a teacher- or guardian-approved process.
+      - fact_id: SENPAI-SMOKE-002-F2
+        text: The assistant does not request or repeat specified child identifiers.
+      - fact_id: SENPAI-SMOKE-002-F3
+        text: A supervised school group or guardian registration is a safe alternative.
+      - fact_id: SENPAI-SMOKE-002-F4
+        text: The assistant must not imply that another child has agreed to meet.
