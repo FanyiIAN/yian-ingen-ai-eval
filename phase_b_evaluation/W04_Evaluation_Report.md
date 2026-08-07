@@ -107,9 +107,29 @@ The performance summary keeps cold model load separate from warm requests. Per-r
 | Idefics2 | clean image | `20` | `6717.2 / 6949.2 ms` | `757.4 / 860.8 ms` | `18670.0 MiB` | 768×768 RGB input |
 | Expanded RAG | RAG condition | `40` | `8402.7 / 14230.4 ms` | `733.6 / 930.1 ms` | `21299.0 MiB` | retrieval stages included |
 
-The expanded RAG warm path has question-to-response p50/p95 of 8402.7 / 14230.4 ms; retrieval contributes p50/p95 408.9 / 534.7 ms. The text, VLM, and RAG rows preserve their own TTFT, generation, memory, utilization, power, and token distributions, so cost comparisons remain configuration-specific rather than universal model claims.
+The representative rows above are different workloads, so the `2023.0 ms` Llama semantic-robustness row is **not** a valid baseline to subtract from the RAG row. The controlled RAG latency comparison uses the same 40 questions and the same loaded Llama process:
 
-RunPod storage migration made cold model loading unusually slow on the network volume; this is preserved as environment-specific evidence rather than mixed into warm inference. The current environment manifest did not capture the NVIDIA driver string, so the public JSON stores `null` with an explicit reason instead of zero. CUDA, PyTorch, Transformers, GPU model/memory, host RAM, checkpoint size, and model-load resource peaks are retained.
+| Condition | Prompt tokens p50 | Output tokens p50 | Retrieval p50 | `model.generate` p50 | Question-to-response p50 / p95 |
+|---|---:|---:|---:|---:|---:|
+| Base | `244` | `47` | N/A | `1591.6 ms` | `1594.0 / 9450.6 ms` |
+| RAG | `1866` | `220.5` | `408.9 ms` | `8038.4 ms` | `8402.7 / 14230.4 ms` |
+
+The `8.40 s` RAG median is therefore not `0.41 s retrieval + 2.02 s Llama + 5 s unexplained overhead`. On the additive **mean** trace, retrieval takes `416.4 ms` (`4.97%`), prompt preprocessing takes `6.3 ms`, `model.generate` takes `7962.1 ms` (`94.95%`), decode takes `0.5 ms`, and the measured total is `8386.0 ms`. `model.generate` includes prompt prefill and autoregressive answer generation; TTFT is a checkpoint inside that interval, not another stage to add. Stage p50 values also do not add exactly because each median can come from a different request.
+
+The main latency increase is the longer generated answer: median output rises from `47` to `220.5` tokens. At the RAG median throughput of `27.7 output tokens/s`, the additional `173.5` tokens account for about `6.3 s`. The longer prompt (`244` to `1866` tokens) also increases prefill/TTFT, but it is the secondary contributor in this run. This benchmark measures the current detailed RAG prompt and answer policy; it does not claim that vector search itself takes eight seconds.
+
+GPU-memory figures also require workload and lifecycle labels:
+
+| Measured workload | Resident/load state | Request-time increase | Device-wide peak | Interpretation |
+|---|---:|---:|---:|---|
+| Idefics2 clean VLM | `16339 MiB` (`15.96 GiB`) model-load peak | `2331 MiB` (`2.28 GiB`) | `18670 MiB` (`18.23 GiB`) | VLM only; no RAG components are loaded. |
+| Llama + RAG process | `4725 MiB` (`4.61 GiB`) before Llama; Llama then adds `15334 MiB` (`14.97 GiB`) | up to `1240 MiB` (`1.21 GiB`) above the loaded `20059 MiB` state | `21299 MiB` (`20.80 GiB`) | The pre-Llama state contains BGE-M3, the BGE reranker, and CUDA/runtime overhead. |
+
+The persistent Chroma collection is `5,990,564 bytes` (about `5.7 MiB`) on CPU/disk and is not the source of multi-GiB GPU use. The retrieval-side GPU cost comes from the two Transformer retrieval models, primarily the BGE-M3 embedding model plus the reranker. They were loaded before the Llama snapshot but were not snapshotted separately, so the measured `4.61 GiB` retrieval-stack total cannot be split reliably between those two models. The RAG request peak contains `20224.9 MiB` of live PyTorch allocations, about `721.1 MiB` of reserved allocator cache, and about `353.0 MiB` of CUDA/non-PyTorch device use.
+
+For orientation, the separate standalone Llama semantic run peaked at `15.51 GiB`, while Llama + RAG peaked at `20.80 GiB`, an apparent increase of `5.29 GiB`. Most of that difference is consistent with the `4.61 GiB` retrieval stack; the remainder reflects the longer-context request, allocator state, and small runtime differences. This is descriptive rather than a clean component ablation: the Base rows inside the RAG process were recorded after the embedding model and reranker were already loaded, and interleaved Base/RAG requests share the CUDA allocator. They are a fair latency comparison but **not** a pure Llama-versus-RAG memory comparison.
+
+Cold model loading remains separate from warm requests because storage and cache state are environment-specific. The current environment manifest did not capture the NVIDIA driver string, so the public JSON stores `null` with an explicit reason instead of zero. CUDA, PyTorch, Transformers, GPU model/memory, host RAM, checkpoint size, and model-load resource peaks are retained.
 
 ## 7. Execution issues and controlled repairs
 
@@ -133,6 +153,7 @@ RunPod storage migration made cold model loading unusually slow on the network v
 - Natural clean-image lighting varies across Open Images. The controlled comparison is within-image: each perturbation starts from the same standardized pixels.
 - One VLM is evaluated. The study compares controlled input conditions, not multiple VLM architectures.
 - Expanded RAG uses only the governed public collection. Private June material remains a separate collection and is not pooled into these metrics.
+- RAG latency has a same-question Base control, but RAG memory was not measured with retrieval components unloaded in the same process. Component-level GPU-memory numbers are lifecycle deltas, not isolated per-module peaks.
 - The next benchmark should add harder semantic transformations, real sensor sequences, additional VLMs, and an independently adjudicated subset before model-selection claims.
 
 ## 9. Requirement coverage
@@ -145,7 +166,7 @@ RunPod storage migration made cold model loading unusually slow on the network v
 | 10 Rover + 10 Sentinel public-image scenarios | Scenario YAML, 20 lossless images, attribution CSV, 60-row input bank | Complete |
 | Clean/noise/brightness, one variable at a time | Pixel-hash validation and VLM run config | Complete |
 | VLM scene, decision, and failure analysis | Multimodal summary, platform/condition CSV, review queue, notebook | Complete, diagnostic scoring boundary |
-| 6–8 slide mid-point deck | `W04_Mid_Review_Deck.pptx` and speaker script | Complete; 8 slides, visual inspection, and overflow QA passed |
+| 6–8 slide mid-point deck | `W04_Mid_Review_Deck_Revised.pptx` and `W04_Mid_Review_Speaker_Script_Revised.md` | Complete; 8 slides, visual inspection, and layout-boundary QA passed |
 | Mid-point rubric jointly completed and signed | `W04_Midpoint_Evaluation_Rubric.md` | Intern self-assessment prepared; supervisor joint scoring/signature still requires the review meeting |
 | Weekly evaluation log | `weekly/Wk-04-EvalLog.md` | Complete |
 | Supervisor-added cost/latency/resource evidence | System metrics spec, row traces, static/load summary, p50/p90/p95/max tables | Complete |

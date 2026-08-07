@@ -11,8 +11,8 @@
 |---|---|---|
 | Semantic perturbation and masked-input notebook | `W04_Robustness_Eval.ipynb` | Executed aggregate tables and curves for three text models. |
 | Multimodal notebook | `W04_Multimodal_Eval.ipynb` | Executed Idefics2 condition/platform tables and charts. |
-| 6–8 slide mid-point deck | `W04_Mid_Review_Deck.pptx` | Eight-slide architecture, findings, cost, limitations, and next-step review. |
-| Presentation talk track | `W04_Mid_Review_Speaker_Script.md` | 5–8 minute speaking script; the same text is embedded in slide notes. |
+| 6–8 slide mid-point deck | `W04_Mid_Review_Deck_Revised.pptx` | Eight-slide architecture, findings, latency/memory decomposition, limitations, and next-step review. |
+| Presentation talk track | `W04_Mid_Review_Speaker_Script_Revised.md` | 5–8 minute speaking script; the same text is embedded in slide notes. |
 | Mid-point rubric | `W04_Midpoint_Evaluation_Rubric.md` | Intern evidence-based self-assessment and the required joint scoring/signature fields. |
 | Weekly log | `../weekly/Wk-04-EvalLog.md` | Method, mechanism-oriented findings, iterations, failures, and next actions. |
 | Consolidated report | `W04_Evaluation_Report.md` | Scope, frozen method, results, cost evidence, repairs, validity, and requirement audit. |
