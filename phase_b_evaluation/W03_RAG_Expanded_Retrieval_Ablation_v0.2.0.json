@@ -1,0 +1,237 @@
+{
+  "ablation_version": "0.2.0",
+  "created_at_utc": "2026-08-04T07:22:54.980300+00:00",
+  "knowledge_base": "w03_ingen_official_fari_senpai_expanded#0.6.0",
+  "evaluation_set": "w03_ingen_official_fari_senpai_expanded#0.6.0",
+  "random_seed": 42,
+  "asset_sha256": {
+    "knowledge_base": "2913c2c2b500088e6afb9ff6045afb20cc067b56023eb51c699c5a185d6017aa",
+    "evaluation_set": "56975aaa697b801b96ec5dcea9d85b183cc9fbbe3ede3465533cb03d0e723189",
+    "base_config": "5385d0a4e1d763ee93bacd5da48cfb0532d047011d5b471d9b215a05468cd8cc"
+  },
+  "index": {
+    "status": "ok",
+    "pipeline_version": "0.4.1",
+    "collection_name": "w03_smoke_abb28eb24579397e",
+    "persist_directory": "/workspace/w03_rag/experiments/w03-expanded-public-rag-v0.6.0-seed42/chroma",
+    "source_documents": 3,
+    "chunks": 331,
+    "new_chunks_indexed": 0,
+    "existing_chunks": 331,
+    "index_latency_ms": 621684.35,
+    "embedding_model_id": "BAAI/bge-m3",
+    "embedding_model_revision": "5617a9f61b028005a4858fdac845db406aefb181"
+  },
+  "variants": [
+    {
+      "top_k": 4,
+      "fetch_k": 32,
+      "reranker_enabled": false,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.7275,
+      "full_evidence_items": 21,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 286.53,
+        "p50": 222.655,
+        "p90": 340.062,
+        "p95": 432.177,
+        "max": 1685.002
+      },
+      "mean_returned_context_units": 4,
+      "mean_returned_context_tokens": 279.75
+    },
+    {
+      "top_k": 4,
+      "fetch_k": 32,
+      "reranker_enabled": true,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.787917,
+      "full_evidence_items": 24,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 551.901,
+        "p50": 513.693,
+        "p90": 789.24,
+        "p95": 870.331,
+        "max": 1003.813
+      },
+      "mean_returned_context_units": 4,
+      "mean_returned_context_tokens": 293.625
+    },
+    {
+      "top_k": 6,
+      "fetch_k": 32,
+      "reranker_enabled": false,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.7875,
+      "full_evidence_items": 24,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 441.013,
+        "p50": 413.817,
+        "p90": 683.922,
+        "p95": 734.984,
+        "max": 798.484
+      },
+      "mean_returned_context_units": 6,
+      "mean_returned_context_tokens": 394.55
+    },
+    {
+      "top_k": 6,
+      "fetch_k": 32,
+      "reranker_enabled": true,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.8375,
+      "full_evidence_items": 28,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 437.331,
+        "p50": 434.064,
+        "p90": 548.173,
+        "p95": 572.779,
+        "max": 599.51
+      },
+      "mean_returned_context_units": 6,
+      "mean_returned_context_tokens": 429.675
+    },
+    {
+      "top_k": 8,
+      "fetch_k": 32,
+      "reranker_enabled": false,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.825,
+      "full_evidence_items": 25,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 205.978,
+        "p50": 199.546,
+        "p90": 242.389,
+        "p95": 284.984,
+        "max": 305.626
+      },
+      "mean_returned_context_units": 8,
+      "mean_returned_context_tokens": 532.875
+    },
+    {
+      "top_k": 8,
+      "fetch_k": 32,
+      "reranker_enabled": true,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.86875,
+      "full_evidence_items": 29,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 377.974,
+        "p50": 375.567,
+        "p90": 462.252,
+        "p95": 473.039,
+        "max": 485.821
+      },
+      "mean_returned_context_units": 8,
+      "mean_returned_context_tokens": 556.2
+    },
+    {
+      "top_k": 10,
+      "fetch_k": 32,
+      "reranker_enabled": false,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.85625,
+      "full_evidence_items": 27,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 151.221,
+        "p50": 149.326,
+        "p90": 170.451,
+        "p95": 183.755,
+        "max": 230.975
+      },
+      "mean_returned_context_units": 10,
+      "mean_returned_context_tokens": 663.75
+    },
+    {
+      "top_k": 10,
+      "fetch_k": 32,
+      "reranker_enabled": true,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.902083,
+      "full_evidence_items": 30,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 374.425,
+        "p50": 340.005,
+        "p90": 490.105,
+        "p95": 525.663,
+        "max": 576.544
+      },
+      "mean_returned_context_units": 10,
+      "mean_returned_context_tokens": 683.025
+    },
+    {
+      "top_k": 12,
+      "fetch_k": 32,
+      "reranker_enabled": false,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.860417,
+      "full_evidence_items": 27,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 168.767,
+        "p50": 160.033,
+        "p90": 205.762,
+        "p95": 223.242,
+        "max": 393.154
+      },
+      "mean_returned_context_units": 12,
+      "mean_returned_context_tokens": 798.8
+    },
+    {
+      "top_k": 12,
+      "fetch_k": 32,
+      "reranker_enabled": true,
+      "items": 40,
+      "document_recall_at_k": 1.0,
+      "evidence_fact_recall_at_k": 0.908333,
+      "full_evidence_items": 31,
+      "hit_at_k": 40,
+      "mrr": 1.0,
+      "metadata_filter_leakage": 0,
+      "latency_ms": {
+        "mean": 367.047,
+        "p50": 343.675,
+        "p90": 461.382,
+        "p95": 497.248,
+        "max": 647.288
+      },
+      "mean_returned_context_units": 12,
+      "mean_returned_context_tokens": 810.425
+    }
+  ]
+}

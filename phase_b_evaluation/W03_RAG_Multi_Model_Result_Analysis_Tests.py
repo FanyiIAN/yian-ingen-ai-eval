@@ -3,6 +3,9 @@ from __future__ import annotations
 import unittest
 
 from W03_RAG_Multi_Model_Result_Analysis import (
+    build_report,
+    nested_value,
+    percentile_or_none,
     is_question_echo,
     row_citation_diagnostic,
     shared_input_audit,
@@ -73,6 +76,64 @@ class MultiModelResultAnalysisTests(unittest.TestCase):
                 question,
             )
         )
+
+    def test_resource_helpers_handle_missing_and_numeric_values(self) -> None:
+        self.assertEqual(percentile_or_none([1, 2, 3, 4, 5], 0.95), 4.8)
+        self.assertIsNone(percentile_or_none([None], 0.95))
+        value = {"resource_profile": {"gpu": {"peak": 123}}}
+        self.assertEqual(
+            nested_value(value, "resource_profile", "gpu", "peak"),
+            123,
+        )
+        self.assertIsNone(nested_value(value, "resource_profile", "missing"))
+
+    def test_report_includes_ragas_coverage_and_delta(self) -> None:
+        metric = {"mean": 0.5, "valid_rows": 1, "total_rows": 1}
+        summary = {
+            "analyzer_version": "test",
+            "excluded_eval_ids": [],
+            "shared_input_audit": {"passed": True},
+            "models": {
+                "model": {
+                    "uninspected": {
+                        "conditions": {
+                            condition: {
+                                "rows": 1,
+                                "empty_outputs": 0,
+                                "question_echoes": 0,
+                                "mean_output_tokens": 1.0,
+                                "mean_generation_latency_ms": 1.0,
+                                "p95_generation_latency_ms": 1.0,
+                                "mean_output_tokens_per_second": 1.0,
+                                "max_pytorch_peak_reserved_bytes": None,
+                                "citation_precision": None,
+                            }
+                            for condition in ("base", "rag")
+                        }
+                    },
+                    "ragas_provisional": {
+                        "base": {"answer_relevance": metric},
+                        "rag": {
+                            "answer_relevance": {
+                                "mean": 0.75,
+                                "valid_rows": 1,
+                                "total_rows": 1,
+                            },
+                            "faithfulness_to_retrieved_context": metric,
+                            "context_relevance": metric,
+                            "context_recall": metric,
+                            "context_precision": metric,
+                        },
+                    },
+                }
+            },
+        }
+
+        report = build_report(summary)
+
+        self.assertIn("Automatic RAGAS diagnostics", report)
+        self.assertIn("+0.250000", report)
+        self.assertIn("0.750000 (1/1)", report)
 
 
 if __name__ == "__main__":

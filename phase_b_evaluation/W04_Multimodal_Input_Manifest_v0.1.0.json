@@ -1,0 +1,34 @@
+{
+  "builder_version": "0.1.1",
+  "condition_counts": {
+    "brightness_0.60": 20,
+    "clean": 20,
+    "gaussian_noise_std_0.08": 20
+  },
+  "created_at_utc": "2026-08-04T20:47:13.751023+00:00",
+  "manifest_id": "w04_multimodal_input_manifest_v0.1.0",
+  "open_images_metadata": {
+    "path": "validation-images-with-rotation.csv",
+    "sha256": "ed93a0e121fe345effdfc7359b848dbc64a1ff6778c8c73563157cb500b33a17"
+  },
+  "outputs": {
+    "attribution_csv": {
+      "path": "W04_Multimodal_Attribution_v0.1.0.csv",
+      "row_count": 20,
+      "sha256": "adbf379b9bec82778f1819be5bd6855e186747a3255d110b34fa4f378be88e4a"
+    },
+    "clean_image_count": 20,
+    "clean_image_directory": "w04_multimodal_images",
+    "input_jsonl": {
+      "path": "W04_Multimodal_Inputs_v0.1.0.jsonl",
+      "row_count": 60,
+      "sha256": "3c46982e86f66d4f8286c24c68e2584cfdcd83191a27c0b4827bc60a771db3ef"
+    }
+  },
+  "random_seed": 42,
+  "scenario_spec": {
+    "path": "W04_Multimodal_Scenarios_v0.1.0.yaml",
+    "sha256": "519d250d905d87eae64a7405f1823d1394d46ef074fef799078c362e9ce72c57"
+  },
+  "status": "frozen_ready_for_vlm_inference"
+}

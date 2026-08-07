@@ -1,0 +1,133 @@
+schema_version: 1.0.0
+registry_id: w05_pic20_evidence_registry
+registry_version: 0.1.0
+created_date: '2026-08-05'
+status: preparation_no_phase_b_finding_inserted
+mapping_authority: proposed_capability_proxy
+taxonomy_version: programme_plan_v1_with_versioned_conflict_tracks
+claim_boundary: >-
+  These are proposed evaluation mappings and evidence slots, not statements
+  that an InGen product implements a named PIC module. Primary findings remain
+  empty until traceable Phase B evidence is selected and reviewed.
+
+required_analysis_fields:
+  - primary_phase_b_finding
+  - finding_artifact
+  - finding_model_id_and_revision
+  - finding_evaluation_set_and_version
+  - finding_seed
+  - deployment_failure_scenario
+  - readiness_metric
+  - open_evaluation_question
+
+model_classes:
+  - class_id: GRPO
+    programme_track: goal_conditioned_policy
+    mapping_status: proposed_capability_proxy
+    platform_anchors: [Aido_Rover, Aido_Humanoid]
+    candidate_deployment_failure_scenario: >-
+      A policy reaches a navigation or manipulation goal by taking an unsafe
+      shortcut that violates an explicit keep-out or force constraint.
+    primary_readiness_metric: constrained_goal_success_rate
+    companion_metrics: [constraint_violation_rate, steps_to_success, recovery_success_rate]
+    phase_b_evidence_needed:
+      - task-accuracy evidence on Rover or Humanoid goal/constraint scenarios
+      - severity-weighted unsafe-shortcut failures
+      - perturbation stability for goal and constraint wording
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      Does performance generalize to held-out goals and changed constraints
+      without increasing unsafe shortcut frequency?
+
+  - class_id: STUM
+    programme_track: temporal_state_reasoning
+    alternate_public_track: uncertainty_quantification
+    mapping_status: unresolved_versioned_tracks
+    platform_anchors: [Fari, Aido_Rover, Sentinel_Prime_AI]
+    candidate_deployment_failure_scenario: >-
+      Under the programme-temporal track, the model contradicts an earlier care
+      or patrol state after a longer event sequence; under the public uncertainty
+      track, it issues a confident alert despite weak evidence.
+    primary_readiness_metric: temporal_contradiction_rate
+    alternate_track_metric: risk_coverage_curve
+    companion_metrics: [order_accuracy, performance_by_sequence_horizon, brier_score]
+    phase_b_evidence_needed:
+      - paraphrase-consistency evidence must not be relabeled as temporal evidence
+      - uncertainty evidence, if used, must be separately versioned
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      Which STUM definition is authoritative, and how does readiness change with
+      sequence length or abstention threshold under that definition?
+
+  - class_id: SEOM
+    programme_track: spatial_understanding
+    alternate_tracks: [semantic_retrieval, safety_governance]
+    mapping_status: unresolved_versioned_tracks
+    platform_anchors: [Aido_Rover, Sentinel_Prime_AI]
+    candidate_deployment_failure_scenario: >-
+      Under the programme-spatial track, Rover mislocates an obstacle after a
+      viewpoint change and recommends an unsafe path. Retrieval and governance
+      interpretations require separate evidence and must not be pooled.
+    primary_readiness_metric: collision_free_navigation_success_rate
+    alternate_track_metrics: [evidence_fact_recall_at_k, governance_rule_coverage]
+    companion_metrics: [spatial_relation_accuracy, localization_error, override_success_rate]
+    phase_b_evidence_needed:
+      - current Week 4 images provide scene proxies, not 3-D navigation evidence
+      - Week 3 retrieval evidence belongs only to the semantic-retrieval track
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      Which SEOM definition is authoritative, and can the selected track be tested
+      on product-representative spatial or governance state rather than text proxies?
+
+  - class_id: AMDC
+    programme_track: multimodal_decision
+    mapping_status: proposed_capability_proxy
+    platform_anchors: [Aido_Rover, Sentinel_Prime_AI]
+    candidate_deployment_failure_scenario: >-
+      A corrupted visual channel dominates other evidence and the system keeps an
+      unsafe decision instead of degrading confidence or escalating.
+    primary_readiness_metric: modality_degradation_auc
+    companion_metrics: [decision_consistency, clean_to_corruption_score_drop, calibrated_abstention_rate]
+    phase_b_evidence_needed:
+      - W04 multimodal condition-level rows and exact Idefics2 revision
+      - clean versus one-variable noise/brightness comparisons
+      - review of decision flips and evidence dependence
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      Does the same degradation pattern hold across a second VLM and synchronized
+      multi-sensor inputs rather than static public-image proxies?
+
+  - class_id: HTD-IRL
+    programme_track: hierarchical_task_decomposition
+    mapping_status: proposed_capability_proxy
+    platform_anchors: [Aido_Humanoid]
+    candidate_deployment_failure_scenario: >-
+      A plausible multi-step plan omits a prerequisite safety check or executes
+      dependent subtasks in the wrong order, creating a physically unsafe state.
+    primary_readiness_metric: dependency_violation_rate
+    companion_metrics: [full_task_success, subgoal_completion_rate, recovery_after_injected_failure]
+    phase_b_evidence_needed:
+      - Week 2 Humanoid task-decomposition rows with human-reviewed failure labels
+      - order, prerequisite, feasibility, and recovery failures kept separate
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      Can the model revise its task graph after a failed subtask while preserving
+      safety prerequisites and already completed state?
+
+  - class_id: CRL-MRS
+    programme_track: cooperative_continual_multi_agent_reasoning
+    mapping_status: proposed_capability_proxy
+    platform_anchors: [Aido_Humanoid, multi_Rover]
+    candidate_deployment_failure_scenario: >-
+      Two agents duplicate one subtask, leave another uncovered, and fail to
+      reallocate work after communication loss while the aggregate output still
+      appears superficially complete.
+    primary_readiness_metric: joint_success_under_communication_loss
+    companion_metrics: [per_agent_contribution, coordination_redundancy_rate, backward_transfer]
+    phase_b_evidence_needed:
+      - no current Phase B experiment directly measures multi-agent coordination
+      - text-only cooperative reasoning may be cited only as a weak proxy
+    primary_phase_b_finding: null
+    open_evaluation_question: >-
+      How much communication can be removed before joint success collapses, and
+      does adaptation preserve previously learned cooperative policies?

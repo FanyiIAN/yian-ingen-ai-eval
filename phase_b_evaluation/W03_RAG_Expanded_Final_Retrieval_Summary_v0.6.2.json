@@ -1,0 +1,236 @@
+{
+  "analyzer_version": "0.1.0",
+  "items": 40,
+  "top_k": 10,
+  "mean_evidence_fact_recall_at_k": 0.902083,
+  "full_evidence_items": 30,
+  "metadata_filter_leakage": 0,
+  "retrieval_latency_ms": {
+    "count": 40,
+    "mean": 551.721125,
+    "p50": 498.1665,
+    "p90": 623.8784,
+    "p95": 677.78005,
+    "max": 2455.712
+  },
+  "retrieved_context_units": {
+    "count": 40,
+    "mean": 10.0,
+    "p50": 10.0,
+    "p90": 10.0,
+    "p95": 10.0,
+    "max": 10.0
+  },
+  "retrieved_context_tokens": {
+    "count": 40,
+    "mean": 683.025,
+    "p50": 632.0,
+    "p90": 928.1,
+    "p95": 1032.7,
+    "max": 1104.0
+  },
+  "by_platform": {
+    "Fari": {
+      "items": 20,
+      "mean_evidence_fact_recall_at_k": 0.858333,
+      "full_evidence_items": 13
+    },
+    "Senpai": {
+      "items": 20,
+      "mean_evidence_fact_recall_at_k": 0.945833,
+      "full_evidence_items": 17
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "items": 6,
+      "mean_evidence_fact_recall_at_k": 1.0,
+      "full_evidence_items": 6
+    },
+    "hard": {
+      "items": 17,
+      "mean_evidence_fact_recall_at_k": 0.867647,
+      "full_evidence_items": 11
+    },
+    "medium": {
+      "items": 17,
+      "mean_evidence_fact_recall_at_k": 0.901961,
+      "full_evidence_items": 13
+    }
+  },
+  "by_answerability": {
+    "answerable": {
+      "items": 37,
+      "mean_evidence_fact_recall_at_k": 0.894144,
+      "full_evidence_items": 27
+    },
+    "not_established": {
+      "items": 3,
+      "mean_evidence_fact_recall_at_k": 1.0,
+      "full_evidence_items": 3
+    }
+  },
+  "incomplete_evidence_rows": [
+    {
+      "eval_id": "W03-EXP-FARI-002",
+      "platform": "Fari",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 2,
+      "evidence_fact_recall_at_k": 0.5,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0064"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 606,
+      "retrieval_latency_ms": 611.964,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-003",
+      "platform": "Fari",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 4,
+      "evidence_fact_recall_at_k": 0.75,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0070"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 632,
+      "retrieval_latency_ms": 458.872,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-007",
+      "platform": "Fari",
+      "difficulty": "medium",
+      "answerability": "answerable",
+      "evidence_fact_count": 2,
+      "evidence_fact_recall_at_k": 0.5,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0001"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 428,
+      "retrieval_latency_ms": 592.427,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-008",
+      "platform": "Fari",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 3,
+      "evidence_fact_recall_at_k": 0.666667,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0001"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 521,
+      "retrieval_latency_ms": 404.11,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-010",
+      "platform": "Fari",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 3,
+      "evidence_fact_recall_at_k": 0.333333,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0001",
+        "FARI-XF0072"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 594,
+      "retrieval_latency_ms": 462.154,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-014",
+      "platform": "Fari",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 4,
+      "evidence_fact_recall_at_k": 0.75,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0061"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 645,
+      "retrieval_latency_ms": 541.688,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-FARI-020",
+      "platform": "Fari",
+      "difficulty": "medium",
+      "answerability": "answerable",
+      "evidence_fact_count": 3,
+      "evidence_fact_recall_at_k": 0.666667,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "FARI-XF0001"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 436,
+      "retrieval_latency_ms": 326.248,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-SENPAI-005",
+      "platform": "Senpai",
+      "difficulty": "medium",
+      "answerability": "answerable",
+      "evidence_fact_count": 2,
+      "evidence_fact_recall_at_k": 0.5,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "SENPAI-XF0018"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 654,
+      "retrieval_latency_ms": 470.213,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-SENPAI-013",
+      "platform": "Senpai",
+      "difficulty": "hard",
+      "answerability": "answerable",
+      "evidence_fact_count": 4,
+      "evidence_fact_recall_at_k": 0.75,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "SENPAI-XF0122"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 842,
+      "retrieval_latency_ms": 635.447,
+      "metadata_filter_leakage": 0
+    },
+    {
+      "eval_id": "W03-EXP-SENPAI-014",
+      "platform": "Senpai",
+      "difficulty": "medium",
+      "answerability": "answerable",
+      "evidence_fact_count": 3,
+      "evidence_fact_recall_at_k": 0.666667,
+      "full_evidence": false,
+      "missing_evidence_fact_ids": [
+        "SENPAI-XF0137"
+      ],
+      "retrieved_units": 10,
+      "retrieved_tokens": 650,
+      "retrieval_latency_ms": 482.09,
+      "metadata_filter_leakage": 0
+    }
+  ]
+}

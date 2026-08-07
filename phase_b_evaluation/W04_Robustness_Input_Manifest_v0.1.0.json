@@ -1,0 +1,27 @@
+{
+  "created_at_utc": "2026-08-03T23:31:32.144997+00:00",
+  "freezer_version": "0.1.0",
+  "manifest_id": "w04_frozen_robustness_inputs_v0.1.0",
+  "output_jsonl": {
+    "path": "W04_Robustness_Inputs_v0.1.0.jsonl",
+    "row_count": 182,
+    "sha256": "b6f227010f50e01dc8cf3a6aa9b83a43d67def1694ee6cb33f518926669a93cf"
+  },
+  "review_record": {
+    "human_reviewer": false,
+    "path": "W04_Robustness_Semantic_Equivalence_Review_v0.1.0.yaml",
+    "review_id": "w04_semantic_equivalence_ai_review_v0.1.0",
+    "reviewer_type": "AI_assisted_manual_inspection",
+    "sha256": "804f88476da7c059b854e5df37b41285b866b24b1473e33e79e2795ec3f100f3"
+  },
+  "semantic_review_status_counts": {
+    "approved_ai_assisted": 105,
+    "not_applicable": 42,
+    "not_applicable_original": 35
+  },
+  "source_jsonl": {
+    "path": "W04_Robustness_Inputs_DRAFT.jsonl",
+    "sha256": "55968de588ed8f7d3d9ed45783311a9085887fefe21fcd505ae29ac2b1d01338"
+  },
+  "status": "frozen_ready_for_candidate_inference"
+}

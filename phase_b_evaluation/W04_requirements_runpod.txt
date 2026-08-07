@@ -1,0 +1,13 @@
+# Week 4 text + multimodal evaluation runtime.
+# Record the exact resolved versions in every run manifest.
+torch>=2.3,<3
+transformers>=4.44,<6
+accelerate>=0.30,<2
+huggingface-hub>=0.24,<2
+numpy>=1.26,<3
+Pillow>=10,<13
+PyYAML>=6,<7
+psutil>=5.9,<8
+
+# Idefics2 model-card compatibility boundary:
+# transformers 4.41.0 through 4.43.3 inclusive must not be used.

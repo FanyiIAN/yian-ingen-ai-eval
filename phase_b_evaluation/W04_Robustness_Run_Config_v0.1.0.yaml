@@ -1,0 +1,168 @@
+run_config_id: w04_text_robustness_three_model
+version: 0.1.0
+status: text_inputs_frozen_ready_for_gpu_multimodal_build_pending
+created_date: 2026-08-03
+random_seed: 42
+claim_boundary: L0_synthetic_product_context_surrogate_open_models
+
+benchmark:
+  source_path: ../phase_a_design/W02_Scenarios.yaml
+  benchmark_id: ingen_physical_ai_text_scenarios
+  benchmark_version: 0.2.0
+  source_sha256: acc34b81538598d679487acd9a46a9141634929d2d0c150894c9267df9e2a7e2
+  frozen_input_path: W04_Robustness_Inputs_v0.1.0.jsonl
+  frozen_input_sha256: b6f227010f50e01dc8cf3a6aa9b83a43d67def1694ee6cb33f518926669a93cf
+  input_manifest_path: W04_Robustness_Input_Manifest_v0.1.0.json
+  semantic_review_path: W04_Robustness_Semantic_Equivalence_Review_v0.1.0.yaml
+  semantic_review_type: AI_assisted_manual_inspection_not_independent_human_review
+  scenario_count: 35
+  platforms: [Fari, Senpai, Sentinel_Prime_AI, Aido_Rover, Aido_Humanoid]
+  inherited_split_note: >-
+    The seven former held-out labels were inspected during Week 2/3. They remain
+    regression strata and are not a fresh blind test.
+
+candidate_prompt:
+  path: ../phase_a_design/W02_Prompt_Spec_v0.4.0.yaml
+  version: 0.4.0
+  sha256: 0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d
+  semantic_prompt_policy: same_rendered_semantic_prompt_across_models
+  serialization_policy: model_native_chat_template_only
+
+rubric:
+  path: ../phase_a_design/W02_Rubric.yaml
+  version: 0.3.0
+  sha256: a26a79aa3f9468fa9cbb483b51e299c71a8351b30be9ad7d7fc7ccbb2fc663d3
+  pass_definition: task_accuracy_greater_than_or_equal_to_4
+  automatic_judge_status: diagnostic_failed_calibration
+  pass_fail_source_priority:
+    - human_or_approved_ai_adjudication
+    - deterministic_critical_contract
+    - uncalibrated_automatic_judge_diagnostic
+  mandatory_review:
+    - every_severity_5_row
+    - every_original_to_paraphrase_pass_fail_flip
+    - every_mask_level_non_monotonic_safety_improvement
+
+semantic_perturbation:
+  variants_per_scenario: 3
+  variant_types:
+    - synonym_substitution
+    - sentence_reordering
+    - tone_shift
+  original_plus_variants_per_scenario: 4
+  inputs_per_model: 140
+  total_three_model_generations: 420
+  generation_backend:
+    preferred_synonym_backend: textattack_0.3.10_embedding_or_wordnet_augmenter
+    deterministic_fallback: conservative_phrase_map
+    sentence_reordering: quote_aware_sentence_rotation
+    tone_shift: outer_instruction_style_only
+  review_gate:
+    required_before_candidate_inference: true
+    checks:
+      - numeric_token_multiset_unchanged
+      - negation_token_multiset_unchanged
+      - protected_entity_multiset_unchanged
+      - no_sentence_deleted_for_reordering
+      - variants_are_pairwise_unique
+      - semantic_equivalence_review_approved
+  primary_metric: semantic_robustness_score
+  definition: >-
+    Fraction of 35 scenarios for which all four versions have the same pass/fail
+    result. Stable-pass and stable-fail are reported separately.
+
+masked_input:
+  platforms: [Sentinel_Prime_AI, Aido_Rover]
+  scenario_count: 14
+  key_span_spec: W04_Robustness_Mask_Spans_v0.1.0.yaml
+  mask_marker: "[MISSING]"
+  levels: [0.0, 0.2, 0.4, 0.6]
+  groups_per_scenario: 5
+  nested_selection: true
+  ranking: sha256_of_seed_scenario_id_group_id
+  reuse_zero_percent_from_semantic_original: true
+  additional_masked_inputs_per_model: 42
+  additional_three_model_generations: 126
+  primary_metric: task_accuracy_by_mask_ratio
+  companion_metrics:
+    - severity_weighted_task_accuracy_by_mask_ratio
+    - pass_rate_by_mask_ratio
+    - original_to_mask_flip_rate
+    - safety_critical_failure_count_by_mask_ratio
+
+candidate_generation:
+  seed: 42
+  do_sample: false
+  temperature: 0.0
+  max_input_tokens: 512
+  max_new_tokens: 256
+  batch_size: 1
+  warmup_items_per_model: 1
+  warmup_excluded_from_quality_and_steady_state_latency: true
+
+candidate_models:
+  - model_key: flan_t5_base
+    model_id: google/flan-t5-base
+    revision: 7bcac572ce56db69c1ea7c8af255c5d7c9672fc2
+    checkpoint_path_on_gpu_host: /workspace/models/flan_t5_base
+    precision: float32
+    serialization: direct_semantic_prompt
+  - model_key: mistral_7b_instruct_v0_2
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    checkpoint_path_on_gpu_host: /workspace/models/mistral_7b_instruct_v0_2
+    precision: bfloat16
+    serialization: official_tokenizer_chat_template
+  - model_key: llama31_8b_instruct
+    model_id: meta-llama/Llama-3.1-8B-Instruct
+    revision: 0e9e39f249a16976918f6564b8830bc894c89659
+    checkpoint_path_on_gpu_host: /workspace/models/llama31_8b_instruct
+    precision: bfloat16
+    serialization: official_tokenizer_chat_template
+
+performance_measurement:
+  specification: W04_System_Performance_Metrics_Spec.md
+  implementation: W04_Resource_Monitor.py
+  request_batch_size: 1
+  host_sample_interval_ms: 250
+  nvidia_smi_sample_interval_ms: 1000
+  required_latency_fields:
+    - prompt_build_ms
+    - preprocess_ms
+    - ttft_ms
+    - generation_ms
+    - decode_ms
+    - question_to_response_ms
+  required_token_fields: [prompt_tokens, output_tokens, total_tokens]
+  required_resource_groups:
+    - process_rss_mib
+    - system_memory_used_mib
+    - torch_cuda
+    - gpu_device_memory_used_mib
+    - gpu_utilization_pct
+    - gpu_power_w
+
+compute:
+  provider: RunPod
+  expected_gpu: NVIDIA_A40_48GB
+  device: cuda:0
+  model_storage_root: /workspace/models
+  experiment_storage_root: /workspace/experiments
+
+required_outputs:
+  frozen_input_jsonl: W04_Robustness_Inputs_v0.1.0.jsonl
+  input_manifest_json: W04_Robustness_Input_Manifest_v0.1.0.json
+  candidate_jsonl_per_model: true
+  request_trace_jsonl_per_model: true
+  environment_manifest_per_model: true
+  scored_rows_csv: W04_Robustness_Scored_Rows.csv
+  summary_json: W04_Robustness_Summary.json
+
+interpretation:
+  automatic_quality_scores: diagnostic_until_calibrated
+  system_metrics: hardware_and_config_specific
+  prohibited_claims:
+    - deployed_ingen_product_performance
+    - fresh_held_out_generalization
+    - universal_hardware_latency
+    - production_readiness_from_this_small_surrogate_benchmark

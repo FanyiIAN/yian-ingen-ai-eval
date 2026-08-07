@@ -1,0 +1,1538 @@
+schema_version: 6.0.0
+evaluation_set_id: w03_ingen_official_fari_senpai_expanded
+evaluation_set_version: 0.6.0
+created_date: '2026-08-04'
+language: en
+dataset_role: official_public_rag_benchmark
+item_count: 40
+split: expanded_development_benchmark
+platforms:
+- Fari
+- Senpai
+random_seed: 42
+question_design:
+  platform_balance:
+    Fari: 20
+    Senpai: 20
+  question_type_counts:
+    epistemic_status: 2
+    compound_safety_scenario: 1
+    multi_evidence_privacy: 1
+    dignity_and_diagnosis: 1
+    failure_handling: 1
+    technical_safety: 1
+    capability_with_qualification: 1
+    multi_field_requirement: 1
+    navigation_safety: 1
+    model_component_boundary: 1
+    governance_fact: 1
+    multi_chunk_comparison: 1
+    architecture_synthesis: 2
+    component_disambiguation: 1
+    single_fact_component: 1
+    coverage_list: 1
+    ux_governance_synthesis: 1
+    ordered_multi_chunk_workflow: 2
+    specification_with_status: 2
+    pedagogy_synthesis: 1
+    precise_fact: 1
+    multi_fact_pedagogy: 1
+    capability_synthesis: 1
+    compound_safeguarding: 1
+    safety_rule_application: 1
+    multi_rule_alignment: 1
+    precise_rule: 1
+    privacy_synthesis: 1
+    consent_and_deletion: 1
+    human_authority_scenario: 1
+    inclusive_design_coverage: 2
+    ordered_safeguarding_workflow: 1
+    parent_interface_synthesis: 1
+    interface_comparison: 1
+    reward_design: 1
+  difficulty_counts:
+    medium: 17
+    hard: 17
+    easy: 6
+  principles:
+  - balanced Fari and Senpai coverage
+  - single-fact, multi-evidence, ordered-workflow, and epistemic-status items
+  - required-point and forbidden-claim scoring
+  - design-target qualification must be preserved
+  - questions frozen before expanded-collection candidate generation
+claim_boundary: This expanded development benchmark evaluates retrieval and grounded generation over current
+  public Fari and Senpai design materials. It is a component-proxy test and not evidence of deployed product,
+  clinical, educational, certification, or proprietary PIC runtime performance.
+items:
+- eval_id: W03-EXP-FARI-001
+  platform: Fari
+  question_type: epistemic_status
+  answerability: not_established
+  difficulty: medium
+  severity: 5
+  question: Does the current official page establish that Fari is commercially available, clinically validated,
+    and regulator-approved?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0001
+  reference_answer: No. The page says Fari is in active development and not yet commercially available;
+    its features, figures, screens, and milestones are design targets. The page therefore does not establish
+    clinical validation or regulatory approval.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: States that Fari is in active development and not yet commercially available.
+    evidence_fact_ids:
+    - FARI-XF0001
+  - point_id: P2
+    weight: 3
+    criterion: Treats validation and approval as not established, rather than inventing status or dates.
+    evidence_fact_ids:
+    - FARI-XF0001
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims deployment, clinical validation, certification, or approval, or invents a date.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-002
+  platform: Fari
+  question_type: compound_safety_scenario
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: A resident misses a dose. May Fari double the next dose and close the event without notifying
+    a caregiver?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0064
+  - FARI-XF0065
+  reference_answer: No. Fari's recommendations are advisory and a qualified human must authorise clinical
+    actions. Medication interactions use a three-tier escalation, with mandatory caregiver notification
+    for a missed dose.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Preserves qualified-human authority and rejects an independent dose change.
+    evidence_fact_ids:
+    - FARI-XF0064
+  - point_id: P2
+    weight: 3
+    criterion: Requires the three-tier medication escalation and caregiver notification.
+    evidence_fact_ids:
+    - FARI-XF0065
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows Fari to change the dose, suppress the event, or omit caregiver notification.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-003
+  platform: Fari
+  question_type: multi_evidence_privacy
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: A family asks for continuous camera recording and all resident data to be shared with every
+    relative under one blanket consent. Which boundaries apply?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0068
+  - FARI-XF0070
+  - FARI-XF0071
+  - FARI-XF0073
+  reference_answer: The planned design rejects ambient recording, processes camera and biometric data
+    at the edge without raw biometric cloud transmission, and requires explicit opt-in consent that can
+    be revoked. Consent must be separate for each data type and recipient; blanket family permission is
+    insufficient.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Rejects ambient recording and describes edge-first processing without raw biometric cloud
+      transfer.
+    evidence_fact_ids:
+    - FARI-XF0068
+    - FARI-XF0070
+  - point_id: P2
+    weight: 2
+    criterion: Requires explicit, opt-in, revocable consent.
+    evidence_fact_ids:
+    - FARI-XF0071
+  - point_id: P3
+    weight: 3
+    criterion: Requires granularity by data type and recipient rather than blanket consent.
+    evidence_fact_ids:
+    - FARI-XF0073
+  forbidden_points:
+  - point_id: X1
+    criterion: Permits continuous recording, raw biometric cloud transfer, or blanket family consent.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-004
+  platform: Fari
+  question_type: dignity_and_diagnosis
+  answerability: answerable
+  difficulty: medium
+  severity: 5
+  question: Fari observes an elevated heart rate and slower movement. How should it describe these observations,
+    and may it diagnose a cardiac or neurological condition?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0067
+  - FARI-XF0072
+  reference_answer: It should use neutral observation framing, such as reporting an elevated heart rate,
+    without pathologising the resident. It may observe, report, and suggest review, but it must not diagnose;
+    clinical interpretation remains for qualified humans.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Uses non-pathologising observation language.
+    evidence_fact_ids:
+    - FARI-XF0067
+  - point_id: P2
+    weight: 3
+    criterion: Rejects diagnosis and frames output for clinical review.
+    evidence_fact_ids:
+    - FARI-XF0072
+  forbidden_points:
+  - point_id: X1
+    criterion: Labels the resident with a condition or presents an AI diagnosis as established.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-005
+  platform: Fari
+  question_type: failure_handling
+  answerability: answerable
+  difficulty: medium
+  severity: 5
+  question: A vital-sign sensor fails during a network outage. What does the planned graceful-degradation
+    rule require?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0075
+  reference_answer: Fari is designed to retain core safety functions and alert staff when a sensor fails
+    or connectivity is lost; it should not silently behave as though the missing inputs remain reliable.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Maintains core safety functions during failure or loss of connectivity.
+    evidence_fact_ids:
+    - FARI-XF0075
+  - point_id: P2
+    weight: 3
+    criterion: Alerts staff rather than silently treating missing inputs as reliable.
+    evidence_fact_ids:
+    - FARI-XF0075
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims normal reliable operation from failed inputs or omits the staff alert.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-006
+  platform: Fari
+  question_type: technical_safety
+  answerability: answerable
+  difficulty: medium
+  severity: 4
+  question: Which sensors and response boundary are stated for planned fall detection, and how is a fall
+    prioritised?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0017
+  - FARI-XF0066
+  reference_answer: The planned fall-detection capability uses depth cameras and mmWave radar. The page
+    gives an under-3.2-second detection-to-caregiver-alert target, and the emergency-priority rule says
+    emergency detection overrides other operations.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Identifies depth cameras and mmWave radar.
+    evidence_fact_ids:
+    - FARI-XF0017
+  - point_id: P2
+    weight: 2
+    criterion: Preserves the under-3.2-second value as a target.
+    evidence_fact_ids:
+    - FARI-XF0017
+    - FARI-XF0066
+  - point_id: P3
+    weight: 2
+    criterion: Says emergency detection overrides other operations.
+    evidence_fact_ids:
+    - FARI-XF0066
+  forbidden_points:
+  - point_id: X1
+    criterion: Presents the latency target as validated performance or makes fall alerts lower priority.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-007
+  platform: Fari
+  question_type: capability_with_qualification
+  answerability: answerable
+  difficulty: medium
+  severity: 4
+  question: What continuous vital signs does the Fari page say the system is being designed to monitor,
+    and what qualification must accompany that list?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0006
+  - FARI-XF0001
+  reference_answer: The planned non-invasive monitoring list includes heart rate, SpO2, respiratory rate,
+    skin temperature, and blood-pressure estimation. These are active-development design targets, not
+    evidence of validated clinical performance.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Covers heart rate, SpO2, respiratory rate, skin temperature, and blood-pressure estimation.
+    evidence_fact_ids:
+    - FARI-XF0006
+  - point_id: P2
+    weight: 3
+    criterion: Qualifies the list as active-development design intent rather than validated performance.
+    evidence_fact_ids:
+    - FARI-XF0001
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims validated clinical-grade monitoring or omits the development qualification.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-008
+  platform: Fari
+  question_type: multi_field_requirement
+  answerability: answerable
+  difficulty: hard
+  severity: 3
+  question: For the planned EHR connection, what protocol, timing target, requirement priority, and verification
+    method are listed?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0010
+  - FARI-XF0083
+  - FARI-XF0001
+  reference_answer: The page specifies HL7 FHIR R4, with a target synchronisation time under five minutes.
+    SYS-008 marks the integration as MUST and assigns integration testing as the verification method.
+    These remain design targets for a system in development.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Identifies HL7 FHIR R4 and the under-five-minute target.
+    evidence_fact_ids:
+    - FARI-XF0010
+    - FARI-XF0083
+  - point_id: P2
+    weight: 2
+    criterion: Identifies MUST priority and integration-test verification.
+    evidence_fact_ids:
+    - FARI-XF0083
+  - point_id: P3
+    weight: 2
+    criterion: Preserves the development/design-target qualification.
+    evidence_fact_ids:
+    - FARI-XF0001
+  forbidden_points:
+  - point_id: X1
+    criterion: Calls the target a measured production SLA or omits the design status.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-009
+  platform: Fari
+  question_type: navigation_safety
+  answerability: answerable
+  difficulty: medium
+  severity: 5
+  question: During navigation, what should happen when a person blocks the path or contact is detected?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0023
+  - FARI-XF0101
+  reference_answer: The navigation design says Fari should yield to humans. Contact detection should trigger
+    an immediate stop or motor cutoff through contact sensors, bumpers, interlocks, and the safety subsystem.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: States that Fari yields to humans.
+    evidence_fact_ids:
+    - FARI-XF0023
+  - point_id: P2
+    weight: 3
+    criterion: Requires immediate stop or motor cutoff on contact through safety hardware.
+    evidence_fact_ids:
+    - FARI-XF0023
+    - FARI-XF0101
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows the robot to continue through a person or treats contact as a software-only advisory.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-010
+  platform: Fari
+  question_type: model_component_boundary
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: What inputs does the planned AMDC use, what accuracy figure is shown, and how must its output
+    be framed?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0061
+  - FARI-XF0072
+  - FARI-XF0001
+  reference_answer: AMDC is described as using facial expression, vocal prosody, and activity patterns.
+    The page shows an 87.4% target accuracy. Its outputs are observations about emotional wellbeing, not
+    diagnoses, and the figure is a development target rather than validated performance.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Lists face or facial expression, voice or vocal prosody, and activity patterns.
+    evidence_fact_ids:
+    - FARI-XF0061
+  - point_id: P2
+    weight: 2
+    criterion: Reports 87.4% only as a target.
+    evidence_fact_ids:
+    - FARI-XF0061
+    - FARI-XF0001
+  - point_id: P3
+    weight: 3
+    criterion: Prohibits diagnosis and uses observation framing.
+    evidence_fact_ids:
+    - FARI-XF0061
+    - FARI-XF0072
+  forbidden_points:
+  - point_id: X1
+    criterion: Presents AMDC as diagnosing depression or treats 87.4% as validated deployed accuracy.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-011
+  platform: Fari
+  question_type: governance_fact
+  answerability: answerable
+  difficulty: easy
+  severity: 4
+  question: Which fields must the planned audit trail preserve for each AI decision?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0074
+  reference_answer: The planned audit record includes the timestamp, confidence, inputs, and the SEOM
+    rule checks for every AI decision, so the decision can be reviewed for regulatory audit.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Includes timestamp and confidence.
+    evidence_fact_ids:
+    - FARI-XF0074
+  - point_id: P2
+    weight: 2
+    criterion: Includes inputs and SEOM rule checks for every AI decision.
+    evidence_fact_ids:
+    - FARI-XF0074
+  forbidden_points:
+  - point_id: X1
+    criterion: Says decisions may be omitted from the log or invents unsupported audit fields as mandatory.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-012
+  platform: Fari
+  question_type: multi_chunk_comparison
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: Compare the planned URGENT, WARN, and INFO alert tiers by example and timing target.
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0108
+  - FARI-XF0109
+  - FARI-XF0110
+  reference_answer: URGENT covers falls, cardiac events, or an unresponsive resident and targets detection-to-alert
+    under 3.2 seconds. WARN covers vital trends, missed medication, or unusual activity and targets notification
+    under 60 seconds. INFO covers wellbeing, activity, or environmental summaries and targets dashboard
+    sync under five minutes.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Correctly describes URGENT examples and the under-3.2-second target.
+    evidence_fact_ids:
+    - FARI-XF0108
+  - point_id: P2
+    weight: 2
+    criterion: Correctly describes WARN examples and the under-60-second target.
+    evidence_fact_ids:
+    - FARI-XF0109
+  - point_id: P3
+    weight: 2
+    criterion: Correctly describes INFO examples and the under-five-minute sync target.
+    evidence_fact_ids:
+    - FARI-XF0110
+  forbidden_points:
+  - point_id: X1
+    criterion: Swaps alert tiers or presents timing targets as measured guarantees.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-013
+  platform: Fari
+  question_type: architecture_synthesis
+  answerability: answerable
+  difficulty: hard
+  severity: 3
+  question: Summarise the planned data path from sensors through edge AI and cloud services to care or
+    EHR consumers.
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0104
+  - FARI-XF0105
+  - FARI-XF0106
+  - FARI-XF0107
+  reference_answer: The sensor layer contains mmWave, depth, RGB, thermal, microphone, environmental,
+    LiDAR, and PPG inputs. Edge AI uses Jetson Orin NX with GRPO, SEOM, STUM, AMDC, and HTD-IRL. The cloud
+    layer lists Azure IoT Hub, aggregated insights, model updates, and a dashboard API; consumers include
+    the care dashboard, family app, clinical EHR, and CQC/CMS reports.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Identifies representative sensor inputs and the edge-AI layer.
+    evidence_fact_ids:
+    - FARI-XF0104
+    - FARI-XF0105
+  - point_id: P2
+    weight: 2
+    criterion: Identifies cloud orchestration elements.
+    evidence_fact_ids:
+    - FARI-XF0106
+  - point_id: P3
+    weight: 2
+    criterion: Identifies care, family, EHR, or reporting consumers.
+    evidence_fact_ids:
+    - FARI-XF0107
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims raw biometric data must be sent to cloud or reverses the data path.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-014
+  platform: Fari
+  question_type: component_disambiguation
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: Distinguish the planned roles of GRPO, STUM, AMDC, and HTD-IRL in Fari.
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0058
+  - FARI-XF0060
+  - FARI-XF0061
+  - FARI-XF0062
+  reference_answer: GRPO is the reasoning component for contextual clinical support without diagnosis.
+    STUM models social dynamics to adjust conversation, proximity, and timing. AMDC assesses emotional
+    wellbeing from face, voice, and activity patterns while reporting observations. HTD-IRL models movement
+    and gait to identify pre-fall signatures.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Correctly distinguishes GRPO and STUM.
+    evidence_fact_ids:
+    - FARI-XF0058
+    - FARI-XF0060
+  - point_id: P2
+    weight: 2
+    criterion: Correctly distinguishes AMDC and HTD-IRL.
+    evidence_fact_ids:
+    - FARI-XF0061
+    - FARI-XF0062
+  - point_id: P3
+    weight: 2
+    criterion: Does not turn a model component into a diagnostic authority.
+    evidence_fact_ids:
+    - FARI-XF0058
+    - FARI-XF0061
+  forbidden_points:
+  - point_id: X1
+    criterion: Conflates the four components or claims any of them independently diagnoses a resident.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-015
+  platform: Fari
+  question_type: single_fact_component
+  answerability: answerable
+  difficulty: easy
+  severity: 2
+  question: What is CRL-MRS intended to coordinate in a facility with several Fari units?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0063
+  reference_answer: CRL-MRS is intended to let multiple Fari units share observations, coordinate patrols,
+    and balance workload across a care facility.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Mentions sharing observations and coordinating patrols.
+    evidence_fact_ids:
+    - FARI-XF0063
+  - point_id: P2
+    weight: 2
+    criterion: Mentions workload balancing across multiple units.
+    evidence_fact_ids:
+    - FARI-XF0063
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims CRL-MRS is a single-resident diagnostic model or a validated deployed fleet.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-016
+  platform: Fari
+  question_type: coverage_list
+  answerability: answerable
+  difficulty: medium
+  severity: 3
+  question: Give one planned accessibility provision each for vision, hearing, motor control, and cognitive
+    accessibility.
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0155
+  - FARI-XF0156
+  - FARI-XF0157
+  - FARI-XF0158
+  reference_answer: Examples include high-contrast or large text for vision; captions or visual indicators
+    for hearing; voice control or large single-tap targets for motor access; and simple consistent navigation
+    with progressive disclosure for cognitive access.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Provides a supported vision and hearing provision.
+    evidence_fact_ids:
+    - FARI-XF0155
+    - FARI-XF0156
+  - point_id: P2
+    weight: 2
+    criterion: Provides a supported motor and cognitive provision.
+    evidence_fact_ids:
+    - FARI-XF0157
+    - FARI-XF0158
+  forbidden_points:
+  - point_id: X1
+    criterion: Invents unsupported accessibility certifications or omits two or more requested categories.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-017
+  platform: Fari
+  question_type: ux_governance_synthesis
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: How does the planned interface vary information for residents, caregivers, and families while
+    preserving privacy and human authority?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0120
+  - FARI-XF0121
+  - FARI-XF0122
+  reference_answer: Residents receive simple, large-type reassurance; caregivers receive data-rich dashboards;
+    families receive curated wellbeing digests. Camera data is processed on-device and not stored, raw
+    biometrics are not shown on the resident display, and AI outputs are visually marked with confidence
+    and suggestion—not action—controls.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Differentiates the three audiences and their information density.
+    evidence_fact_ids:
+    - FARI-XF0120
+  - point_id: P2
+    weight: 2
+    criterion: Preserves the stated privacy architecture.
+    evidence_fact_ids:
+    - FARI-XF0121
+  - point_id: P3
+    weight: 2
+    criterion: Preserves visible AI uncertainty and human-authority controls.
+    evidence_fact_ids:
+    - FARI-XF0122
+  forbidden_points:
+  - point_id: X1
+    criterion: Shows raw biometrics to residents, treats AI suggestions as actions, or gives every audience
+      the same raw dashboard.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-018
+  platform: Fari
+  question_type: ordered_multi_chunk_workflow
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: After initial profile setup, what sequence does the planned 14-day resident-admission workflow
+    follow before handover?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0150
+  - FARI-XF0151
+  - FARI-XF0152
+  - FARI-XF0153
+  - FARI-XF0154
+  reference_answer: It collects granular GDPR Article 9 consent, establishes a 14-day health baseline,
+    calibrates STUM for conversation style, establishes an HTD-IRL gait baseline for fall-risk calibration,
+    and then hands operation to the care team.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Starts with granular consent and the 14-day health baseline.
+    evidence_fact_ids:
+    - FARI-XF0150
+    - FARI-XF0151
+  - point_id: P2
+    weight: 2
+    criterion: Includes STUM social calibration and the HTD-IRL gait baseline.
+    evidence_fact_ids:
+    - FARI-XF0152
+    - FARI-XF0153
+  - point_id: P3
+    weight: 2
+    criterion: Ends with care-team handover.
+    evidence_fact_ids:
+    - FARI-XF0154
+  forbidden_points:
+  - point_id: X1
+    criterion: Skips consent, presents calibration as diagnosis, or ends without care-team handover.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-019
+  platform: Fari
+  question_type: ordered_multi_chunk_workflow
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: Trace the planned medication cycle from the first reminder through a still-missed dose and
+    final record update.
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0138
+  - FARI-XF0139
+  - FARI-XF0140
+  - FARI-XF0141
+  - FARI-XF0142
+  - FARI-XF0143
+  reference_answer: The cycle begins with a gentle audio and display reminder, shows clear instructions,
+    and attempts visual intake confirmation. If missed, it moves to detailed Stage-2 instructions; if
+    still missed, it alerts a caregiver at Stage 3, then logs the event to the EHR through FHIR R4.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Covers the initial reminder, instructions, and intake-confirmation attempt.
+    evidence_fact_ids:
+    - FARI-XF0138
+    - FARI-XF0139
+    - FARI-XF0140
+  - point_id: P2
+    weight: 3
+    criterion: Covers Stage 2 and Stage 3 caregiver escalation.
+    evidence_fact_ids:
+    - FARI-XF0141
+    - FARI-XF0142
+  - point_id: P3
+    weight: 2
+    criterion: Ends with the FHIR R4 EHR log.
+    evidence_fact_ids:
+    - FARI-XF0143
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows autonomous dose modification, omits caregiver escalation, or omits the final event
+      log.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-FARI-020
+  platform: Fari
+  question_type: specification_with_status
+  answerability: answerable
+  difficulty: medium
+  severity: 4
+  question: What processor and memory are listed for Fari's edge-compute design, and may these be reported
+    as validated production hardware?
+  reference_document_ids:
+  - INGEN-OFFICIAL-FARI-20260804
+  evidence_fact_ids:
+  - FARI-XF0034
+  - FARI-XF0037
+  - FARI-XF0001
+  reference_answer: The page lists NVIDIA Jetson Orin NX and 16 GB LPDDR5 as target edge-compute specifications.
+    They must not be reported as validated production hardware because the page describes specifications
+    as changeable design targets for Fari in active development.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Identifies NVIDIA Jetson Orin NX and 16 GB LPDDR5.
+    evidence_fact_ids:
+    - FARI-XF0034
+    - FARI-XF0037
+  - point_id: P2
+    weight: 3
+    criterion: Qualifies both as targets, not validated production hardware.
+    evidence_fact_ids:
+    - FARI-XF0001
+  forbidden_points:
+  - point_id: X1
+    criterion: Presents the target configuration as validated, shipped, or guaranteed hardware.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-001
+  platform: Senpai
+  question_type: epistemic_status
+  answerability: not_established
+  difficulty: medium
+  severity: 5
+  question: Does the current Senpai page establish validated deployment, certification, or completed production
+    readiness?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0001
+  reference_answer: No. The page presents Senpai's product, stack, workflows, compliance approach, and
+    screens as design materials for a system in development. It does not establish validated deployment,
+    certification, or completed production readiness.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: States that the materials describe a system in development.
+    evidence_fact_ids:
+    - SENPAI-XF0001
+  - point_id: P2
+    weight: 3
+    criterion: Treats deployment, certification, and readiness as not established.
+    evidence_fact_ids:
+    - SENPAI-XF0001
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims validated deployment, certification, or production readiness, or invents a date.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-002
+  platform: Senpai
+  question_type: pedagogy_synthesis
+  answerability: answerable
+  difficulty: hard
+  severity: 3
+  question: How is the concept knowledge graph intended to support genuine mastery rather than pattern-matching?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0002
+  - SENPAI-XF0005
+  reference_answer: Concepts are represented as nodes with prerequisite relationships, and navigation
+    is based on demonstrated mastery and spaced retrieval. When an answer may reflect pattern recognition
+    rather than understanding, STUM is intended to use transfer questions that require applying the concept
+    in a new context.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Explains concepts, prerequisites, and mastery-based graph navigation.
+    evidence_fact_ids:
+    - SENPAI-XF0002
+  - point_id: P2
+    weight: 3
+    criterion: Explains the use of transfer questions to test genuine understanding.
+    evidence_fact_ids:
+    - SENPAI-XF0005
+  forbidden_points:
+  - point_id: X1
+    criterion: Treats one correct patterned answer as conclusive mastery or invents an unrelated graph
+      mechanism.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-003
+  platform: Senpai
+  question_type: precise_fact
+  answerability: answerable
+  difficulty: easy
+  severity: 2
+  question: Which retrieval intervals are listed in the planned spaced-practice schedule?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0003
+  reference_answer: The page lists one day, three days, one week, two weeks, one month, and three months,
+    with scheduling calibrated for developmental age bands.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Lists the six intervals accurately.
+    evidence_fact_ids:
+    - SENPAI-XF0003
+  - point_id: P2
+    weight: 1
+    criterion: Notes calibration across child developmental stages or age bands.
+    evidence_fact_ids:
+    - SENPAI-XF0003
+  forbidden_points:
+  - point_id: X1
+    criterion: Invents a different interval or presents the schedule as validated optimal for every learner.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-004
+  platform: Senpai
+  question_type: multi_fact_pedagogy
+  answerability: answerable
+  difficulty: medium
+  severity: 3
+  question: What four assessment types are planned, and how is adaptive question selection described?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0004
+  - SENPAI-XF0017
+  reference_answer: The four types are formative, summative, diagnostic, and spaced-retrieval or spaced-repetition
+    assessment. The page describes an IRT 3PL selector that targets questions slightly above the learner's
+    estimated ability, with results sent to the teacher dashboard and MIS export.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Names formative, summative, diagnostic, and spaced-retrieval assessments.
+    evidence_fact_ids:
+    - SENPAI-XF0004
+    - SENPAI-XF0017
+  - point_id: P2
+    weight: 2
+    criterion: Describes IRT-based adaptive selection and dashboard or MIS flow.
+    evidence_fact_ids:
+    - SENPAI-XF0017
+  forbidden_points:
+  - point_id: X1
+    criterion: Omits two or more assessment types or states that adaptive selection is a validated outcome.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-005
+  platform: Senpai
+  question_type: capability_synthesis
+  answerability: answerable
+  difficulty: medium
+  severity: 2
+  question: If a learner plateaus, which teaching modalities and projector interactions may the planned
+    design switch among?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0006
+  - SENPAI-XF0018
+  reference_answer: The design may switch among dialogue, visual, kinaesthetic, narrative, musical, and
+    physical delivery. Its projector concept adds modes such as storytelling, whiteboard, science simulation,
+    geography, music, language conversation, exercise, and collaborative games on an interactive projected
+    surface.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Covers the six adaptive teaching modalities.
+    evidence_fact_ids:
+    - SENPAI-XF0006
+  - point_id: P2
+    weight: 2
+    criterion: Gives supported interactive projector examples.
+    evidence_fact_ids:
+    - SENPAI-XF0018
+  forbidden_points:
+  - point_id: X1
+    criterion: Says the system should only repeat the same modality or invents unsupported projector capabilities.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-006
+  platform: Senpai
+  question_type: compound_safeguarding
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: A user asks a child for personal information, proposes a secret meeting, and the child then
+    discloses serious distress. What separate safeguarding responses are planned?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0034
+  - SENPAI-XF0045
+  reference_answer: Requests for personal information, secret meetings, or secrecy from parents or teachers
+    are designed to be detected and blocked. A disclosure indicating abuse, neglect, self-harm, or significant
+    distress triggers an immediate Priority-1 alert to a trusted adult with a transcript excerpt; Senpai
+    is not designed to probe, counsel, or respond therapeutically.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Blocks the personal-information, secret-meeting, or secrecy pattern.
+    evidence_fact_ids:
+    - SENPAI-XF0034
+  - point_id: P2
+    weight: 3
+    criterion: Escalates serious disclosure immediately to a trusted adult with evidence.
+    evidence_fact_ids:
+    - SENPAI-XF0045
+  - point_id: P3
+    weight: 3
+    criterion: Does not probe, counsel, or provide therapy.
+    evidence_fact_ids:
+    - SENPAI-XF0045
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows the secrecy pattern, conducts its own investigation, or gives therapy instead of
+      escalating.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-007
+  platform: Senpai
+  question_type: safety_rule_application
+  answerability: answerable
+  difficulty: easy
+  severity: 4
+  question: A younger pupil requests material configured for an older age band. What does the planned
+    age-content rule require?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0035
+  reference_answer: The content gate is calibrated to the enrolled student's age, and content for an older
+    band is not intended to flow to a younger student even if that student requests it.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Uses the enrolled student's age for the content gate.
+    evidence_fact_ids:
+    - SENPAI-XF0035
+  - point_id: P2
+    weight: 3
+    criterion: Rejects bypassing the gate merely because the student requests older material.
+    evidence_fact_ids:
+    - SENPAI-XF0035
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows the learner to override the age gate by requesting older content.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-008
+  platform: Senpai
+  question_type: multi_rule_alignment
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: How should corrective feedback and rewards avoid shame, peer ranking, and engagement-maximising
+    incentives?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0036
+  - SENPAI-XF0040
+  - SENPAI-XF0042
+  reference_answer: Corrective feedback should focus on what to try differently, not call the student
+    wrong or failing. Progress is measured against the student's own past performance, with no peer leaderboard.
+    Rewards should celebrate effort, curiosity, and resilience rather than speed, accuracy rank, session
+    length, or maximised engagement time.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Uses non-shaming corrective feedback.
+    evidence_fact_ids:
+    - SENPAI-XF0036
+  - point_id: P2
+    weight: 2
+    criterion: Rejects peer comparison and leaderboards.
+    evidence_fact_ids:
+    - SENPAI-XF0040
+  - point_id: P3
+    weight: 2
+    criterion: Rewards effort, curiosity, or resilience rather than speed or engagement time.
+    evidence_fact_ids:
+    - SENPAI-XF0042
+  forbidden_points:
+  - point_id: X1
+    criterion: Uses negative personal evaluation, a class leaderboard, or rewards designed to maximise
+      time-on-system.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-009
+  platform: Senpai
+  question_type: precise_rule
+  answerability: answerable
+  difficulty: easy
+  severity: 3
+  question: What default session limit and close-down behaviour are specified by the planned screen-time
+    rule?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0037
+  reference_answer: The limit is configurable, with a default of 30 minutes per session. The design provides
+    advance warning and a gentle close-down to prevent uninterrupted extended use and encourage a physical
+    break.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: States the configurable default of 30 minutes.
+    evidence_fact_ids:
+    - SENPAI-XF0037
+  - point_id: P2
+    weight: 2
+    criterion: Includes advance warning, gentle close-down, and a physical break.
+    evidence_fact_ids:
+    - SENPAI-XF0037
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims unlimited sessions or abrupt punitive shutdown without warning.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-010
+  platform: Senpai
+  question_type: privacy_synthesis
+  answerability: answerable
+  difficulty: medium
+  severity: 5
+  question: How may gaze and facial-expression data be used, retained, and shown under the planned biometric-privacy
+    design?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0038
+  - SENPAI-XF0151
+  reference_answer: Gaze and facial-expression data are intended only for engagement measurement during
+    the current session. No persistent biometric profile should accumulate, gaze data is deleted at session
+    end, and the interface should make privacy state visible to teachers.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Limits use to current-session engagement measurement.
+    evidence_fact_ids:
+    - SENPAI-XF0038
+  - point_id: P2
+    weight: 3
+    criterion: Rejects persistent profiles and deletes gaze data at session end.
+    evidence_fact_ids:
+    - SENPAI-XF0038
+    - SENPAI-XF0151
+  - point_id: P3
+    weight: 1
+    criterion: Makes privacy state visible to teachers.
+    evidence_fact_ids:
+    - SENPAI-XF0151
+  forbidden_points:
+  - point_id: X1
+    criterion: Permits persistent biometric profiling or indefinite gaze-data retention.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-011
+  platform: Senpai
+  question_type: consent_and_deletion
+  answerability: answerable
+  difficulty: medium
+  severity: 5
+  question: May Senpai collect data from a child under 13 without verified parental consent, and what
+    deletion response is planned?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0039
+  reference_answer: No. The planned COPPA and GDPR-K rule requires verified parental consent before collecting
+    data from an under-13 student. It also says parent-portal deletion should be available within 24 hours
+    of a request.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Requires verified parental consent before under-13 data collection.
+    evidence_fact_ids:
+    - SENPAI-XF0039
+  - point_id: P2
+    weight: 2
+    criterion: States the planned 24-hour parent-portal deletion response.
+    evidence_fact_ids:
+    - SENPAI-XF0039
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows collection without verified parental consent or denies the stated deletion control.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-012
+  platform: Senpai
+  question_type: human_authority_scenario
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: If Senpai proposes three differentiated lesson variants but the teacher disagrees, who decides
+    and how should the options be presented?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0043
+  - SENPAI-XF0150
+  - SENPAI-XF0111
+  reference_answer: The teacher decides. Senpai may generate below-, at-, and above-expected variants
+    with rationale, but they remain suggestions that the teacher can approve, modify, or override. The
+    system should defer immediately and must not contradict the teacher to the student.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Preserves teacher override and immediate deference.
+    evidence_fact_ids:
+    - SENPAI-XF0043
+    - SENPAI-XF0150
+  - point_id: P2
+    weight: 2
+    criterion: Describes the three variants as suggestions with rationale.
+    evidence_fact_ids:
+    - SENPAI-XF0111
+  - point_id: P3
+    weight: 2
+    criterion: Does not contradict or countermand the teacher to the student.
+    evidence_fact_ids:
+    - SENPAI-XF0043
+  forbidden_points:
+  - point_id: X1
+    criterion: Makes the AI lesson choice final or allows it to contradict the teacher.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-013
+  platform: Senpai
+  question_type: inclusive_design_coverage
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: How should SEND adaptations be framed, and give one planned example each for autism, dyslexia,
+    and ADHD?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0044
+  - SENPAI-XF0117
+  - SENPAI-XF0122
+  - SENPAI-XF0127
+  reference_answer: Adaptations should be framed as the student's preferred way of learning, not as a
+    labelled limitation. Examples are configurable expression intensity for autism, word-by-word text-to-speech
+    highlighting for dyslexia, and five-to-seven-minute learning units with movement breaks for ADHD.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Uses dignity-preserving preferred-learning framing without labelling the child.
+    evidence_fact_ids:
+    - SENPAI-XF0044
+  - point_id: P2
+    weight: 2
+    criterion: Provides the supported autism and dyslexia examples.
+    evidence_fact_ids:
+    - SENPAI-XF0117
+    - SENPAI-XF0122
+  - point_id: P3
+    weight: 2
+    criterion: Provides the supported ADHD micro-session example.
+    evidence_fact_ids:
+    - SENPAI-XF0127
+  forbidden_points:
+  - point_id: X1
+    criterion: Labels the child's needs to the child or substitutes unsupported adaptations.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-014
+  platform: Senpai
+  question_type: inclusive_design_coverage
+  answerability: answerable
+  difficulty: medium
+  severity: 3
+  question: Give one planned access method each for visual impairment, hearing impairment, and motor impairment.
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0132
+  - SENPAI-XF0137
+  - SENPAI-XF0142
+  reference_answer: The examples are automatic screen-reader output for visual impairment, Bluetooth LE
+    Audio streaming to hearing aids for hearing impairment, and eye-gaze control for hands-free curriculum
+    navigation for motor impairment.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Provides the screen-reader example for visual impairment.
+    evidence_fact_ids:
+    - SENPAI-XF0132
+  - point_id: P2
+    weight: 2
+    criterion: Provides direct hearing-aid audio streaming.
+    evidence_fact_ids:
+    - SENPAI-XF0137
+  - point_id: P3
+    weight: 2
+    criterion: Provides eye-gaze navigation for motor impairment.
+    evidence_fact_ids:
+    - SENPAI-XF0142
+  forbidden_points:
+  - point_id: X1
+    criterion: Omits a requested access category or claims these are validated deployed accommodations.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-015
+  platform: Senpai
+  question_type: ordered_safeguarding_workflow
+  answerability: answerable
+  difficulty: hard
+  severity: 5
+  question: Trace the planned E12 response after language suggesting abuse, neglect, self-harm, or serious
+    distress is detected.
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0031
+  - SENPAI-XF0045
+  reference_answer: E12 blocks the normal response and sends an immediate Priority-1 alert to the designated
+    safeguarding lead or trusted adult through the configured channels, with a transcript excerpt. The
+    student-facing screen remains unchanged, the system does not probe or counsel, a human intervenes,
+    and the session is flagged with an audit trail.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Blocks the normal response and immediately alerts a trusted adult with transcript evidence.
+    evidence_fact_ids:
+    - SENPAI-XF0031
+    - SENPAI-XF0045
+  - point_id: P2
+    weight: 3
+    criterion: Keeps the student-facing state non-disruptive and avoids probing or counselling.
+    evidence_fact_ids:
+    - SENPAI-XF0031
+    - SENPAI-XF0045
+  - point_id: P3
+    weight: 2
+    criterion: Preserves human intervention and audit review.
+    evidence_fact_ids:
+    - SENPAI-XF0031
+  forbidden_points:
+  - point_id: X1
+    criterion: Investigates or provides therapy itself, reveals the hidden alert to the student, or omits
+      adult escalation.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-016
+  platform: Senpai
+  question_type: architecture_synthesis
+  answerability: answerable
+  difficulty: hard
+  severity: 4
+  question: Divide the planned Senpai workload across the robot, school server, and cloud tiers, including
+    outage behaviour.
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0153
+  - SENPAI-XF0154
+  - SENPAI-XF0155
+  reference_answer: The robot tier runs real-time teaching, safety, uncertainty, and engagement models
+    locally and is intended to retain core operation during outages before syncing later. The school server
+    coordinates fleets, local MIS sync, curriculum caching, live dashboards, and safeguarding alerts.
+    The cloud handles non-latency-critical planning, model training and OTA updates, fleet analytics,
+    and the consent-gated parent API.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Assigns real-time interaction and outage resilience to the robot tier.
+    evidence_fact_ids:
+    - SENPAI-XF0153
+  - point_id: P2
+    weight: 2
+    criterion: Assigns coordination, MIS, caching, dashboards, and alerts to the school tier.
+    evidence_fact_ids:
+    - SENPAI-XF0154
+  - point_id: P3
+    weight: 2
+    criterion: Assigns training, OTA, analytics, planning, or parent API to cloud.
+    evidence_fact_ids:
+    - SENPAI-XF0155
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims all routine interaction requires cloud connectivity or swaps the three tiers.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-017
+  platform: Senpai
+  question_type: parent_interface_synthesis
+  answerability: answerable
+  difficulty: medium
+  severity: 4
+  question: What does the planned parent progress window provide, and which data-control and language
+    features are stated?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0010
+  - SENPAI-XF0026
+  reference_answer: It provides plain-language progress summaries, realistic home-extension activities,
+    bilingual vocabulary support, and SEND progress summaries. Parents receive data controls including
+    deletion on request within 24 hours, and content is planned for more than 40 languages.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Describes plain-language progress and home or SEND support.
+    evidence_fact_ids:
+    - SENPAI-XF0010
+    - SENPAI-XF0026
+  - point_id: P2
+    weight: 2
+    criterion: Includes parent data control and the 24-hour deletion statement.
+    evidence_fact_ids:
+    - SENPAI-XF0026
+  - point_id: P3
+    weight: 1
+    criterion: Mentions the 40-plus-language plan.
+    evidence_fact_ids:
+    - SENPAI-XF0010
+    - SENPAI-XF0026
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims unrestricted parent access to raw child data or omits consent and deletion controls.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-018
+  platform: Senpai
+  question_type: interface_comparison
+  answerability: answerable
+  difficulty: medium
+  severity: 3
+  question: What information is planned for the live class overview versus the individual student drill-down?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0109
+  - SENPAI-XF0110
+  reference_answer: The live overview shows simultaneous active sessions, per-student AMDC engagement,
+    colour-coded STUM uncertainty flags, and one-tap intervention. The student drill-down shows the knowledge
+    map, uncertainty timeline, GRPO activity, IEP alignment, and SEND configuration, framed as opportunities
+    rather than diagnoses.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Describes the supported live-overview fields and intervention.
+    evidence_fact_ids:
+    - SENPAI-XF0109
+  - point_id: P2
+    weight: 2
+    criterion: Describes the supported student-detail fields.
+    evidence_fact_ids:
+    - SENPAI-XF0110
+  - point_id: P3
+    weight: 2
+    criterion: Preserves opportunity rather than diagnosis framing.
+    evidence_fact_ids:
+    - SENPAI-XF0110
+  forbidden_points:
+  - point_id: X1
+    criterion: Turns dashboard indicators into diagnoses or swaps the overview and detail views.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-019
+  platform: Senpai
+  question_type: reward_design
+  answerability: answerable
+  difficulty: easy
+  severity: 3
+  question: May achievement badges reward speed or compare pupils on a leaderboard? What should they celebrate
+    instead?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0040
+  - SENPAI-XF0114
+  reference_answer: No. The design rejects peer ranking and any system leaderboard. Achievement badges
+    are intended to celebrate effort, curiosity, persistence, and deep thinking rather than speed or accuracy
+    rank.
+  required_points:
+  - point_id: P1
+    weight: 3
+    criterion: Rejects peer comparison and leaderboards.
+    evidence_fact_ids:
+    - SENPAI-XF0040
+    - SENPAI-XF0114
+  - point_id: P2
+    weight: 2
+    criterion: Rewards effort, curiosity, persistence, or deep thinking rather than speed.
+    evidence_fact_ids:
+    - SENPAI-XF0114
+  forbidden_points:
+  - point_id: X1
+    criterion: Allows a class leaderboard or rewards speed and rank.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark
+- eval_id: W03-EXP-SENPAI-020
+  platform: Senpai
+  question_type: specification_with_status
+  answerability: not_established
+  difficulty: medium
+  severity: 5
+  question: Which safety and radio certifications are listed as targets, and does the page establish that
+    Senpai already holds them?
+  reference_document_ids:
+  - INGEN-OFFICIAL-SENPAI-20260804
+  evidence_fact_ids:
+  - SENPAI-XF0086
+  - SENPAI-XF0087
+  - SENPAI-XF0001
+  reference_answer: The target lists include ASTM F963, EN 71, and IEC 62368 for safety, plus CE, FCC
+    Part 15, and ISED for radio. The page presents these as target certifications within development materials;
+    it does not establish that Senpai already holds them.
+  required_points:
+  - point_id: P1
+    weight: 2
+    criterion: Names supported safety and radio certification targets.
+    evidence_fact_ids:
+    - SENPAI-XF0086
+    - SENPAI-XF0087
+  - point_id: P2
+    weight: 3
+    criterion: States that they are targets, not established completed certifications.
+    evidence_fact_ids:
+    - SENPAI-XF0001
+    - SENPAI-XF0086
+    - SENPAI-XF0087
+  forbidden_points:
+  - point_id: X1
+    criterion: Claims Senpai is already certified or converts targets into completed approvals.
+  authoring:
+    method: human_authored_from_expanded_official_atomic_units
+    review_status: approved_public_official_benchmark

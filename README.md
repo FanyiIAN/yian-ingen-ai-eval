@@ -47,6 +47,17 @@ Week 3 Phase B artifacts:
 
 - `phase_b_evaluation/W03_Submission_Index.md`: reference-to-artifact map,
   collection boundaries, final verification, and remaining limitations.
+- `phase_b_evaluation/W03_RAG_Expanded_Benchmark_Report.md`: expanded Week 3
+  report covering the 331-unit official-public knowledge base, 40-question
+  benchmark, retrieval ablation, 240-row three-model Base/RAG run, local RAGAS
+  diagnostics, and warm-path latency/resource profile.
+- `phase_b_evaluation/W03_RAG_Expanded_Knowledge_Base_v0.6.0.yaml` and
+  `W03_RAG_Expanded_Eval_Set_v0.6.0.yaml`: frozen expanded public inputs with
+  fact-level provenance, hidden rubrics, and metadata-governed evidence links.
+- `phase_b_evaluation/W03_RAG_Architecture_Review_7min.pptx` and
+  `W03_RAG_Architecture_Review_Speaker_Script.md`: seven-slide meeting review
+  covering architecture, controlled test design, results, limitations, and the
+  next benchmark, with a 5–8 minute speaking script.
 - `phase_b_evaluation/W03_RAG_Official_Knowledge_Base_v0.3.0.yaml`: governed
   official-public Fari/Senpai source snapshots with section, fact and provenance
   metadata. The older `W03_RAG_Knowledge_Base.yaml` remains a synthetic smoke fixture.
@@ -144,6 +155,37 @@ Internship Data Sources` material was tested through a separately governed
 private collection: retrieval passed 6/6 questions and Llama completed 12/12
 Base/RAG generations. It was not pooled into public metrics, expanded to the
 three-model comparison, or copied into this public repository.
+
+Week 4 Phase B artifacts:
+
+- `phase_b_evaluation/W04_Submission_Index.md`: Week 4 navigation,
+  submission-safe evidence boundary, and verification commands.
+- `phase_b_evaluation/W04_Robustness_Eval.ipynb`: executed aggregate
+  notebook for three-model semantic and masked-input robustness.
+- `phase_b_evaluation/W04_Multimodal_Eval.ipynb`: executed aggregate
+  notebook for the controlled Idefics2 public-image benchmark.
+- `phase_b_evaluation/W04_Evaluation_Report.md`: consolidated method,
+  findings, system cost, incident record, limitations, and requirement audit.
+- `phase_b_evaluation/W04_Mid_Review_Deck.pptx` and
+  `W04_Mid_Review_Speaker_Script.md`: eight-slide 5–8 minute midpoint review.
+- `phase_b_evaluation/W04_Midpoint_Evaluation_Rubric.md`: completed intern
+  self-assessment and evidence map; supervisor joint scoring and signatures
+  remain intentionally blank for the review meeting.
+- `phase_b_evaluation/W04_Robustness_Summary_v0.1.0.json`,
+  `W04_Multimodal_Summary_v0.1.0.json`, and
+  `W04_System_Performance_Summary_v0.1.0.json`: submission-safe aggregate
+  quality, latency, resource, model-load, and reproducibility evidence.
+- `weekly/Wk-04-EvalLog.md`: frozen method, iteration history, controlled
+  repairs, mechanism-oriented findings, and next actions.
+
+The Week 4 measured workload contains 686 candidate requests: 420 semantic
+paraphrase generations, 126 masked-input generations, 60 controlled public-image
+VLM generations, and 80 expanded public-collection Base/RAG requests. Candidate
+quality scoring is cross-model and diagnostic because the local Judge did not
+pass human-equivalent calibration. Raw prompts, outputs, request traces, AI
+scoring rows, and review queues remain in the private experiment archive; the
+public repository contains frozen inputs, source attribution, code, aggregate
+results, notebooks, reports, and the presentation.
 
 ## Reproduce the Week 1 environment check
 

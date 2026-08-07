@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from W03_RAG_Multi_Model_Generation import adapt_messages
+from W03_RAG_Multi_Model_Generation import adapt_messages, host_memory_snapshot
 
 
 MESSAGES = [
@@ -37,6 +37,19 @@ class MultiModelGenerationTests(unittest.TestCase):
     def test_unknown_adapter_is_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "Unsupported runtime adapter"):
             adapt_messages(MESSAGES, "unknown")
+
+    def test_host_memory_snapshot_has_json_safe_nonnegative_counters(self) -> None:
+        snapshot = host_memory_snapshot()
+        self.assertEqual(
+            {
+                "process_rss_bytes",
+                "process_peak_rss_bytes",
+                "system_used_bytes",
+            },
+            set(snapshot),
+        )
+        for value in snapshot.values():
+            self.assertTrue(value is None or value >= 0)
 
 
 if __name__ == "__main__":

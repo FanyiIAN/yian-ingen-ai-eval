@@ -1,0 +1,7 @@
+﻿platform,condition_id,row_count,parsed_row_count,mean_total_score,mean_scene_interpretation,mean_decision_recommendation,mean_uncertainty_and_claim_control,acceptable_decision_rate,forbidden_claim_rate
+Aido_Rover,clean,10,10,5.0,2.0,2.0,1.0,1.0,0.0
+Aido_Rover,gaussian_noise_std_0.08,10,10,5.0,2.0,2.0,1.0,1.0,0.0
+Aido_Rover,brightness_0.60,10,10,5.0,2.0,2.0,1.0,1.0,0.0
+Sentinel_Prime_AI,clean,10,10,4.8,1.9,1.9,1.0,0.9,0.0
+Sentinel_Prime_AI,gaussian_noise_std_0.08,10,10,4.6,1.8,1.8,1.0,0.8,0.1
+Sentinel_Prime_AI,brightness_0.60,10,10,4.5,1.7,1.8,1.0,0.8,0.0

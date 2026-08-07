@@ -1,0 +1,141 @@
+schema_version: 1.0.0
+experiment_id: w05_senpai_rag_optimisation
+experiment_version: 0.1.0
+status: framework_frozen_local_smoke_only
+random_seed: 42
+
+objective: >-
+  Prepare the Week 5 controlled RAG ablation without claiming final results.
+  The production study will compare chunk size, retrieval breadth, and
+  cross-encoder reranking on the frozen Senpai subset while preserving the
+  Week 3 candidate, prompt, evaluator, and source-governance boundaries.
+
+production_inputs:
+  knowledge_base: ../phase_b_evaluation/W03_RAG_Expanded_Knowledge_Base_v0.6.0.yaml
+  knowledge_base_id: w03_ingen_official_fari_senpai_expanded
+  knowledge_base_version: 0.6.0
+  evaluation_set: ../phase_b_evaluation/W03_RAG_Expanded_Eval_Set_v0.6.0.yaml
+  evaluation_set_id: w03_ingen_official_fari_senpai_expanded
+  evaluation_set_version: 0.6.0
+  platform_filter: Senpai
+  expected_items: 20
+  readiness: deferred_until_phase_b_inputs_are_accepted
+
+factorial_design:
+  chunk_size_tokens: [256, 512, 1024]
+  top_k: [1, 3, 5]
+  reranking: [none, cross_encoder]
+  expected_configurations: 18
+  full_factorial_required: true
+  matched_contrasts_required: true
+  matched_contrast_rule: >-
+    A causal contrast may differ in exactly one factor. Full-grid summaries
+    support Pareto selection; matched pairs support factor-attribution claims.
+  fixed_variables:
+    - evaluation item IDs and references
+    - eligible source collection and metadata gates
+    - candidate model ID and revision
+    - grounded prompt version
+    - deterministic decoding and seed
+    - evaluator model, prompt, and calibration status
+    - hardware within a timing comparison block
+  execution_controls:
+    randomized_variant_order: true
+    warmup_requests_per_runtime: 1
+    repetitions_per_item: 1
+    separate_cold_load_from_warm_latency: true
+    preserve_row_level_evidence: true
+
+production_models:
+  generator:
+    model_id: meta-llama/Llama-3.1-8B-Instruct
+    model_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+    prompt_source: ../phase_b_evaluation/W03_RAG_Expanded_MultiModel_Run_Config_v0.6.2.yaml
+    adapter_status: deferred_no_runpod_in_this_preparation
+  embedding:
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    adapter_status: reuse_week3_pipeline_later
+  reranker:
+    model_id: BAAI/bge-reranker-v2-m3
+    model_revision: b5160aeac3c6c8fe7beaaaf04c9e0142826b58d1
+    architecture: cross_encoder
+    adapter_status: interface_frozen_execution_deferred
+  evaluator:
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    model_revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    calibration_status: diagnostic_not_human_validated
+
+local_smoke:
+  fixture: W05_RAG_Local_Smoke_Fixture_v0.1.0.yaml
+  fixture_id: w05_senpai_synthetic_smoke
+  fixture_version: 0.1.0
+  generator:
+    model_id: google/flan-t5-small
+    model_revision: 0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab
+    runtime: local_cpu
+    local_files_only: true
+    deterministic_decoding: true
+    max_input_tokens: 384
+    max_new_tokens: 24
+  first_stage_retrieval:
+    implementation: sklearn_tfidf_cosine
+    status: smoke_surrogate_not_production_retrieval
+    fetch_k: 10
+  reranker_surrogate:
+    requested_factor_value: cross_encoder
+    effective_implementation: minilm_bi_encoder_cosine
+    model_id: sentence-transformers/all-MiniLM-L6-v2
+    model_revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+    status: interface_smoke_only_not_cross_encoder_evidence
+  chunk_overlap_tokens: 32
+  context_preview_tokens_per_chunk: 56
+  metric_status: deterministic_lexical_proxies_not_ragas
+
+metrics:
+  required_final_metrics:
+    - faithfulness
+    - answer_relevance
+    - required_point_coverage
+  local_smoke_proxy_metrics:
+    - lexical_context_support_proxy
+    - reference_token_f1_proxy
+    - required_term_coverage_proxy
+  latency_fields:
+    - retrieval_latency_ms
+    - rerank_latency_ms
+    - generation_latency_ms
+    - question_to_response_ms
+  pareto_objectives:
+    maximize:
+      - faithfulness
+      - required_point_coverage
+    minimize:
+      - question_to_response_latency_ms
+  missing_metric_policy: exclude_from_pareto_and_report_coverage
+
+row_contract:
+  required_traceability:
+    - run_id
+    - variant_id
+    - model_id
+    - model_revision
+    - evaluation_set_id
+    - evaluation_set_version
+    - random_seed
+    - eval_id
+    - platform
+    - chunk_size_tokens
+    - top_k
+    - requested_reranking
+    - effective_reranking
+    - retrieved_chunk_ids
+    - response
+    - metric_status
+    - latency_ms
+
+claim_boundary: >-
+  The local run is an infrastructure smoke test over a synthetic Senpai-like
+  fixture. It does not use RunPod, does not execute the production BGE or Llama
+  stack, does not compute validated RAGAS metrics, and is not evidence about
+  Senpai, InGen products, or the final Week 5 optimal configuration.

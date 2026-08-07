@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ingen/W05_Normalized_Result_Schema_v0.1.0.json",
+  "title": "Week 5 normalized row-level evaluation evidence",
+  "description": "A public-safe normalization contract for Weeks 2-4 row evidence. Rows from different evaluation families remain separate comparison strata.",
+  "type": "object",
+  "required": [
+    "result_id",
+    "source_week",
+    "evaluation_family",
+    "model_id",
+    "model_revision",
+    "evaluation_set_id",
+    "evaluation_set_version",
+    "random_seed",
+    "platform",
+    "scenario_id",
+    "severity",
+    "score_name",
+    "score_value",
+    "pass_indicator",
+    "failure_mode",
+    "claim_boundary"
+  ],
+  "properties": {
+    "result_id": {"type": "string", "minLength": 1},
+    "source_week": {"enum": [2, 3, 4]},
+    "evaluation_family": {
+      "enum": [
+        "text_scenario",
+        "rag_grounded_generation",
+        "semantic_robustness",
+        "masked_input_robustness",
+        "multimodal_robustness"
+      ]
+    },
+    "model_id": {"type": "string", "minLength": 1},
+    "model_revision": {"type": "string", "minLength": 1},
+    "evaluation_set_id": {"type": "string", "minLength": 1},
+    "evaluation_set_version": {"type": "string", "minLength": 1},
+    "random_seed": {"type": "integer"},
+    "platform": {"type": "string", "minLength": 1},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "condition_id": {"type": ["string", "null"]},
+    "severity": {"type": "integer", "minimum": 1, "maximum": 5},
+    "score_name": {"type": "string", "minLength": 1},
+    "score_value": {"type": "number"},
+    "pass_indicator": {"type": "boolean"},
+    "failure_mode": {"type": "string"},
+    "review_status": {"type": ["string", "null"]},
+    "source_artifact": {"type": ["string", "null"]},
+    "source_row_id": {"type": ["string", "null"]},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

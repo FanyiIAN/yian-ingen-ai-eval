@@ -29,7 +29,39 @@ REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_KB_PATH = SCRIPT_DIR / "W03_RAG_Knowledge_Base.yaml"
 DEFAULT_EVAL_PATH = SCRIPT_DIR / "W03_RAG_Eval_Set.yaml"
 DEFAULT_CONFIG_PATH = SCRIPT_DIR / "W03_RAG_Run_Config.yaml"
-PIPELINE_VERSION = "0.4.0"
+PIPELINE_VERSION = "0.4.1"
+
+
+class ProfiledEmbeddings:
+    """Transparent LangChain embeddings adapter with request-local timing.
+
+    Chroma's public string-query API performs query embedding inside the
+    vector-store call.  The adapter lets Week 4 record that nested component
+    without changing vectors, normalization, or retrieval behavior.  The
+    vector-search stage therefore remains an inclusive integration latency;
+    ``query_embedding_ms`` is a nested measurement and must not be added to it.
+
+    The benchmark runner is deliberately single-request/single-thread.  A
+    profiler is attached only for the duration of one retrieval call and is
+    cleared in a ``finally`` block.
+    """
+
+    def __init__(self, delegate: Any) -> None:
+        self.delegate = delegate
+        self._request_profiler: Any | None = None
+
+    def set_request_profiler(self, profiler: Any | None) -> None:
+        self._request_profiler = profiler
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return self.delegate.embed_documents(texts)
+
+    def embed_query(self, text: str) -> list[float]:
+        profiler = self._request_profiler
+        if profiler is None:
+            return self.delegate.embed_query(text)
+        with profiler.stage("query_embedding_ms"):
+            return self.delegate.embed_query(text)
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
@@ -552,6 +584,7 @@ def build_source_documents(kb: dict[str, Any]) -> list[Any]:
                 "source_locator": source["locator"],
                 "source_url": source["locator"],
                 "source_domain": source.get("domain", ""),
+                "source_snapshot_sha256": source.get("snapshot_sha256", ""),
                 "publisher": record.get("publisher", ""),
                 "authority": record.get("authority", ""),
                 "owner_type": record.get("owner_type", "synthetic"),
@@ -568,6 +601,14 @@ def build_source_documents(kb: dict[str, Any]) -> list[Any]:
                 "is_current": bool(record.get("is_current", True)),
                 "section_id": section_id,
                 "section_path": section["section_path"],
+                "source_fragment": section.get("source_fragment", ""),
+                "source_record_index": int(
+                    section.get("source_record_index", 0)
+                ),
+                "atomic_unit_type": section.get("atomic_unit_type", ""),
+                "curation_method": section.get(
+                    "curation_method", source.get("curation_method", "")
+                ),
                 "parent_chunk_id": parent_chunk_id,
                 "fact_ids_json": json.dumps(fact_ids, separators=(",", ":")),
                 "document_content_sha256": document_sha256,
@@ -664,7 +705,12 @@ def split_documents(kb: dict[str, Any], config: dict[str, Any]) -> list[Any]:
     return split
 
 
-def build_embeddings(config: dict[str, Any], device: str) -> Any:
+def build_embeddings(
+    config: dict[str, Any],
+    device: str,
+    *,
+    profile_query_embeddings: bool = False,
+) -> Any:
     from langchain_huggingface import HuggingFaceEmbeddings
 
     embedding_config = config["retrieval"]["embedding"]
@@ -675,7 +721,7 @@ def build_embeddings(config: dict[str, Any], device: str) -> Any:
             "frozen revision to this RunPod persistent-volume path first."
         )
     model_kwargs: dict[str, Any] = {"device": device}
-    return HuggingFaceEmbeddings(
+    embeddings = HuggingFaceEmbeddings(
         model_name=str(model_dir),
         model_kwargs=model_kwargs,
         encode_kwargs={
@@ -684,6 +730,7 @@ def build_embeddings(config: dict[str, Any], device: str) -> Any:
             )
         },
     )
+    return ProfiledEmbeddings(embeddings) if profile_query_embeddings else embeddings
 
 
 def build_reranker(config: dict[str, Any], device: str) -> Any | None:
@@ -720,16 +767,28 @@ def open_vector_store(
     config: dict[str, Any],
     persist_dir: Path,
     embedding_device: str,
+    *,
+    profile_query_embeddings: bool = False,
 ) -> Any:
     from langchain_chroma import Chroma
 
-    embeddings = build_embeddings(config, embedding_device)
-    return Chroma(
+    embeddings = build_embeddings(
+        config,
+        embedding_device,
+        profile_query_embeddings=profile_query_embeddings,
+    )
+    store = Chroma(
         collection_name=collection_name(kb, config),
         embedding_function=embeddings,
         persist_directory=str(persist_dir),
         collection_metadata={"hnsw:space": "cosine"},
     )
+    # Keep an explicit handle instead of depending on Chroma's private
+    # attribute name.  This is used only by the optional Week 4 profiler.
+    store._ingen_profiled_embeddings = (
+        embeddings if isinstance(embeddings, ProfiledEmbeddings) else None
+    )
+    return store
 
 
 def index_documents(
@@ -737,6 +796,8 @@ def index_documents(
     config: dict[str, Any],
     persist_dir: Path,
     embedding_device: str,
+    *,
+    profile_query_embeddings: bool = False,
 ) -> tuple[dict[str, Any], Any]:
     started = time.perf_counter()
     chunks = split_documents(kb, config)
@@ -745,6 +806,7 @@ def index_documents(
         config=config,
         persist_dir=persist_dir,
         embedding_device=embedding_device,
+        profile_query_embeddings=profile_query_embeddings,
     )
     ids = [chunk.metadata["chunk_id"] for chunk in chunks]
     existing = store.get(ids=ids)
@@ -850,18 +912,40 @@ def retrieve_item(
     config: dict[str, Any],
     kb: dict[str, Any] | None = None,
     reranker: Any | None = None,
+    profiler: Any | None = None,
 ) -> tuple[list[Any], float]:
     retriever_config = config["retrieval"]["retriever"]
-    metadata_filter = metadata_filter_for_item(item, config)
+    retrieval_started = time.perf_counter()
+    if profiler is None:
+        metadata_filter = metadata_filter_for_item(item, config)
+    else:
+        with profiler.stage("metadata_filter_ms"):
+            metadata_filter = metadata_filter_for_item(item, config)
     fetch_k = int(
         retriever_config.get("fetch_k", retriever_config["top_k"])
     )
-    started = time.perf_counter()
-    results = store.similarity_search_with_relevance_scores(
-        item["question"],
-        k=fetch_k,
-        filter=metadata_filter,
-    )
+    profiled_embeddings = getattr(store, "_ingen_profiled_embeddings", None)
+    if profiled_embeddings is not None:
+        profiled_embeddings.set_request_profiler(profiler)
+    try:
+        if profiler is None:
+            results = store.similarity_search_with_relevance_scores(
+                item["question"],
+                k=fetch_k,
+                filter=metadata_filter,
+            )
+        else:
+            # Inclusive integration call.  query_embedding_ms is nested inside
+            # this stage when ProfiledEmbeddings is enabled.
+            with profiler.stage("vector_search_ms"):
+                results = store.similarity_search_with_relevance_scores(
+                    item["question"],
+                    k=fetch_k,
+                    filter=metadata_filter,
+                )
+    finally:
+        if profiled_embeddings is not None:
+            profiled_embeddings.set_request_profiler(None)
     threshold = float(
         retriever_config.get("relevance_score_threshold", float("-inf"))
     )
@@ -871,9 +955,15 @@ def retrieve_item(
         if float(relevance_score) >= threshold
     ]
     if reranker is not None and eligible:
-        rerank_scores = reranker.score(
-            [(item["question"], document.page_content) for document, _ in eligible]
-        )
+        rerank_pairs = [
+            (item["question"], document.page_content)
+            for document, _ in eligible
+        ]
+        if profiler is None:
+            rerank_scores = reranker.score(rerank_pairs)
+        else:
+            with profiler.stage("rerank_ms"):
+                rerank_scores = reranker.score(rerank_pairs)
         reranked: list[tuple[Any, float]] = []
         for (document, dense_score), rerank_score in zip(
             eligible, rerank_scores, strict=True
@@ -944,7 +1034,7 @@ def retrieve_item(
             }
         )
         documents.append(document)
-    elapsed_ms = (time.perf_counter() - started) * 1000
+    elapsed_ms = (time.perf_counter() - retrieval_started) * 1000
     return documents, elapsed_ms
 
 
@@ -959,11 +1049,20 @@ def retrieval_trace(documents: list[Any]) -> list[dict[str, Any]]:
             "section_path": document.metadata.get("section_path"),
             "source_url": document.metadata.get("source_url"),
             "source_domain": document.metadata.get("source_domain"),
+            "source_fragment": document.metadata.get("source_fragment"),
+            "source_record_index": document.metadata.get(
+                "source_record_index"
+            ),
+            "source_snapshot_sha256": document.metadata.get(
+                "source_snapshot_sha256"
+            ),
             "accessed_at": document.metadata.get("accessed_at"),
             "owner_type": document.metadata.get("owner_type"),
             "access_scope": document.metadata.get("access_scope"),
             "confidentiality": document.metadata.get("confidentiality"),
             "claim_status": document.metadata.get("claim_status"),
+            "atomic_unit_type": document.metadata.get("atomic_unit_type"),
+            "curation_method": document.metadata.get("curation_method"),
             "conflict_group": document.metadata.get("conflict_group"),
             "retrieval_unit": document.metadata.get("retrieval_unit", "child"),
             "merged_child_ids_json": document.metadata.get(
@@ -1104,6 +1203,8 @@ def format_context(documents: list[Any]) -> str:
         blocks.append(
             f"[{metadata['chunk_id']} | {metadata['title']} | "
             f"{metadata.get('section_path', '')} | "
+            f"claim={metadata.get('claim_status', '')} | "
+            f"accessed={metadata.get('accessed_at', '')} | "
             f"{metadata.get('source_url', metadata.get('source_locator', ''))}]\n"
             f"{document.page_content}"
         )
@@ -1117,6 +1218,7 @@ def render_candidate_messages(
     data_origin: str = "synthetic_placeholder",
     base_system_prompt: str | None = None,
     rag_system_prompt: str | None = None,
+    formatted_context: str | None = None,
 ) -> list[dict[str, str]]:
     if condition not in {"base", "rag"}:
         raise ValueError(f"Unsupported condition: {condition}")
@@ -1154,7 +1256,7 @@ def render_candidate_messages(
         )
     user = (
         "RETRIEVED CONTEXT\n"
-        f"{format_context(visible_documents)}\n\n"
+        f"{formatted_context if formatted_context is not None else format_context(visible_documents)}\n\n"
         "QUESTION\n"
         f"{item['question'].strip()}"
     )

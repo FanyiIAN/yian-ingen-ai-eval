@@ -1,0 +1,246 @@
+{
+  "analyzer_version": "0.1.0",
+  "interpretation_boundary": "Semantic consistency and masked curves use an uncalibrated AI-assisted rubric score. They are diagnostic benchmark evidence, not deployed-product claims.",
+  "model_count": 3,
+  "models": [
+    {
+      "candidate_model_key": "flan_t5_base",
+      "failure_code_counts": {
+        "none": 97,
+        "partial": 78,
+        "refusal": 7
+      },
+      "mandatory_review_count": 5,
+      "masked_input": {
+        "curves": [
+          {
+            "mask_ratio": 0.0,
+            "mean_task_accuracy": 3.642857142857143,
+            "original_to_mask_flip_rate": null,
+            "parsed_row_count": 14,
+            "pass_rate": 0.42857142857142855,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.119047619047619,
+            "task_accuracy_degradation_from_complete": 0.0
+          },
+          {
+            "mask_ratio": 0.2,
+            "mean_task_accuracy": 3.5,
+            "original_to_mask_flip_rate": 0.0,
+            "parsed_row_count": 14,
+            "pass_rate": 0.42857142857142855,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 3.9761904761904763,
+            "task_accuracy_degradation_from_complete": 0.1428571428571428
+          },
+          {
+            "mask_ratio": 0.4,
+            "mean_task_accuracy": 3.2857142857142856,
+            "original_to_mask_flip_rate": 0.14285714285714285,
+            "parsed_row_count": 14,
+            "pass_rate": 0.2857142857142857,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 3.761904761904762,
+            "task_accuracy_degradation_from_complete": 0.3571428571428572
+          },
+          {
+            "mask_ratio": 0.6,
+            "mean_task_accuracy": 3.2857142857142856,
+            "original_to_mask_flip_rate": 0.14285714285714285,
+            "parsed_row_count": 14,
+            "pass_rate": 0.2857142857142857,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 3.761904761904762,
+            "task_accuracy_degradation_from_complete": 0.3571428571428572
+          }
+        ],
+        "nonmonotonic_improvement_transition_count": 2,
+        "scenario_count": 14
+      },
+      "parse_coverage": 1.0,
+      "parsed_row_count": 182,
+      "row_count": 182,
+      "semantic_robustness": {
+        "consistent_scenario_count": 32,
+        "eligible_scenario_count": 35,
+        "original_to_variant_flip_counts": {
+          "synonym_substitution": 1,
+          "tone_shift": 2
+        },
+        "scenario_count": 35,
+        "semantic_robustness_score": 0.9142857142857143,
+        "stable_fail_scenario_count": 25,
+        "stable_pass_scenario_count": 7
+      }
+    },
+    {
+      "candidate_model_key": "llama31_8b_instruct",
+      "failure_code_counts": {
+        "none": 163,
+        "partial": 16,
+        "refusal": 3
+      },
+      "mandatory_review_count": 12,
+      "masked_input": {
+        "curves": [
+          {
+            "mask_ratio": 0.0,
+            "mean_task_accuracy": 4.642857142857143,
+            "original_to_mask_flip_rate": null,
+            "parsed_row_count": 14,
+            "pass_rate": 0.9285714285714286,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.880952380952381,
+            "task_accuracy_degradation_from_complete": 0.0
+          },
+          {
+            "mask_ratio": 0.2,
+            "mean_task_accuracy": 4.5,
+            "original_to_mask_flip_rate": 0.14285714285714285,
+            "parsed_row_count": 14,
+            "pass_rate": 0.7857142857142857,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.690476190476191,
+            "task_accuracy_degradation_from_complete": 0.14285714285714324
+          },
+          {
+            "mask_ratio": 0.4,
+            "mean_task_accuracy": 4.571428571428571,
+            "original_to_mask_flip_rate": 0.14285714285714285,
+            "parsed_row_count": 14,
+            "pass_rate": 0.7857142857142857,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.761904761904762,
+            "task_accuracy_degradation_from_complete": 0.07142857142857206
+          },
+          {
+            "mask_ratio": 0.6,
+            "mean_task_accuracy": 4.357142857142857,
+            "original_to_mask_flip_rate": 0.21428571428571427,
+            "parsed_row_count": 14,
+            "pass_rate": 0.7142857142857143,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.642857142857143,
+            "task_accuracy_degradation_from_complete": 0.2857142857142865
+          }
+        ],
+        "nonmonotonic_improvement_transition_count": 2,
+        "scenario_count": 14
+      },
+      "parse_coverage": 1.0,
+      "parsed_row_count": 182,
+      "row_count": 182,
+      "semantic_robustness": {
+        "consistent_scenario_count": 30,
+        "eligible_scenario_count": 35,
+        "original_to_variant_flip_counts": {
+          "sentence_reordering": 4,
+          "synonym_substitution": 3,
+          "tone_shift": 3
+        },
+        "scenario_count": 35,
+        "semantic_robustness_score": 0.8571428571428571,
+        "stable_fail_scenario_count": 4,
+        "stable_pass_scenario_count": 26
+      }
+    },
+    {
+      "candidate_model_key": "mistral_7b_instruct_v0_2",
+      "failure_code_counts": {
+        "none": 77,
+        "off_policy": 7,
+        "partial": 97,
+        "unsafe": 1
+      },
+      "mandatory_review_count": 9,
+      "masked_input": {
+        "curves": [
+          {
+            "mask_ratio": 0.0,
+            "mean_task_accuracy": 4.071428571428571,
+            "original_to_mask_flip_rate": null,
+            "parsed_row_count": 14,
+            "pass_rate": 0.9285714285714286,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.214285714285714,
+            "task_accuracy_degradation_from_complete": 0.0
+          },
+          {
+            "mask_ratio": 0.2,
+            "mean_task_accuracy": 4.071428571428571,
+            "original_to_mask_flip_rate": 0.0,
+            "parsed_row_count": 14,
+            "pass_rate": 0.9285714285714286,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.166666666666667,
+            "task_accuracy_degradation_from_complete": 0.0
+          },
+          {
+            "mask_ratio": 0.4,
+            "mean_task_accuracy": 3.9285714285714284,
+            "original_to_mask_flip_rate": 0.0,
+            "parsed_row_count": 14,
+            "pass_rate": 0.9285714285714286,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.023809523809524,
+            "task_accuracy_degradation_from_complete": 0.1428571428571428
+          },
+          {
+            "mask_ratio": 0.6,
+            "mean_task_accuracy": 4.071428571428571,
+            "original_to_mask_flip_rate": 0.0,
+            "parsed_row_count": 14,
+            "pass_rate": 0.9285714285714286,
+            "row_count": 14,
+            "severity_5_failure_count": 0,
+            "severity_weighted_mean_task_accuracy": 4.214285714285714,
+            "task_accuracy_degradation_from_complete": 0.0
+          }
+        ],
+        "nonmonotonic_improvement_transition_count": 4,
+        "scenario_count": 14
+      },
+      "parse_coverage": 1.0,
+      "parsed_row_count": 182,
+      "row_count": 182,
+      "semantic_robustness": {
+        "consistent_scenario_count": 30,
+        "eligible_scenario_count": 35,
+        "original_to_variant_flip_counts": {
+          "sentence_reordering": 1,
+          "synonym_substitution": 2,
+          "tone_shift": 2
+        },
+        "scenario_count": 35,
+        "semantic_robustness_score": 0.8571428571428571,
+        "stable_fail_scenario_count": 0,
+        "stable_pass_scenario_count": 30
+      }
+    }
+  ],
+  "row_count": 546,
+  "score_status": "diagnostic_ai_assisted_not_calibrated",
+  "sources": [
+    {
+      "file": "text_flan_llama_by_mistral.jsonl",
+      "row_count": 364,
+      "sha256": "adadebd673ce6f9ad0118dc294bff2fd03513add643af2e038e38f504e242a7f"
+    },
+    {
+      "file": "text_mistral_by_llama.jsonl",
+      "row_count": 182,
+      "sha256": "9465c62d4f61c721f05871aab3be88befe51d66a0b7a92e624c1cbe4300ef507"
+    }
+  ]
+}

@@ -1,60 +1,63 @@
 # Week 3 Submission Index
 
-**Phase:** B — systematic evaluation and RAG  
-**Status:** submission-ready  
-**Claim boundary:** reproducible component evaluation on public source snapshots,
-not deployed InGen product performance
+**Phase:** B — systematic evaluation and retrieval-augmented generation
 
-## Required deliverables
+**Status:** expanded benchmark complete and submission-ready
+
+**Claim boundary:** reproducible public-source component evaluation, not deployed InGen product performance
+
+## Expanded Week 3 benchmark (recommended entry point)
+
+| Deliverable | Public artifact | Completion evidence |
+|---|---|---|
+| Expanded evaluation report | [`W03_RAG_Expanded_Benchmark_Report.md`](W03_RAG_Expanded_Benchmark_Report.md) | Architecture, corpus/question design, retrieval ablation, three-model Base/RAG results, performance, limitations and next steps |
+| Expanded knowledge base | [`W03_RAG_Expanded_Knowledge_Base_v0.6.0.yaml`](W03_RAG_Expanded_Knowledge_Base_v0.6.0.yaml) | 331 governed units from three frozen current official pages |
+| Expanded question set | [`W03_RAG_Expanded_Eval_Set_v0.6.0.yaml`](W03_RAG_Expanded_Eval_Set_v0.6.0.yaml) | 40 Fari/Senpai questions; 100 required and 40 forbidden scoring points |
+| Frozen three-model run configuration | [`W03_RAG_Expanded_MultiModel_Run_Config_v0.6.2.yaml`](W03_RAG_Expanded_MultiModel_Run_Config_v0.6.2.yaml) | BGE-M3, persistent Chroma, BGE reranker, top-10 context and detailed Base/RAG prompts |
+| Final retrieval report | [`W03_RAG_Expanded_Final_Retrieval_Report_v0.6.2.md`](W03_RAG_Expanded_Final_Retrieval_Report_v0.6.2.md) | Mean evidence recall 0.9021; 30/40 full-evidence rows; zero metadata leakage |
+| Retrieval ablation | [`W03_RAG_Expanded_Retrieval_Ablation_Report_v0.2.0.md`](W03_RAG_Expanded_Retrieval_Ablation_Report_v0.2.0.md) | Ten top-k/reranker variants; top-10 reranked selected |
+| Three-model generation audit | [`W03_RAG_Expanded_Three_Model_Report_v0.6.2.md`](W03_RAG_Expanded_Three_Model_Report_v0.6.2.md) | 240/240 Base/RAG rows completed; shared-input audit passed; latency/resource and citation evidence retained |
+| Warm-path performance summary | `W03_RAG_Expanded_Performance_Summary_v0.1.0.{md,json,csv}` | Llama Base/RAG stage timing, complete question-to-response latency, RAM and GPU measurements |
+| Local automatic evaluation | [`W03_RAG_Expanded_Three_Model_RAGAS_Report_v0.6.2.md`](W03_RAG_Expanded_Three_Model_RAGAS_Report_v0.6.2.md), [`summary JSON`](W03_RAG_Expanded_Three_Model_RAGAS_Summary_v0.6.2.json) | 240/240 resumable local RAGAS rows with finite-row coverage and Judge limitations |
+
+## Original Week 3 deliverables
 
 | Week 3 reference deliverable | Public artifact | Completion evidence |
 |---|---|---|
-| Extended three-model benchmark notebook | [`W03_Extended_Benchmark.ipynb`](W03_Extended_Benchmark.ipynb) | 35 scenarios × 3 models; 6/6 code cells executed, 0 errors |
-| RAG evaluation notebook | [`W03_RAG_Evaluation.ipynb`](W03_RAG_Evaluation.ipynb) | LangChain/BGE-M3/Chroma/Llama Base-vs-RAG evaluation; 4/4 code cells executed, 0 errors |
-| Week 3 evaluation memo | [`W03_Evaluation_Memo.md`](W03_Evaluation_Memo.md) | Three-model boundary, RAG trade-off, top three failure patterns, ablation, and limitations |
-| Weekly evaluation log | [`../weekly/Wk-03-EvalLog.md`](../weekly/Wk-03-EvalLog.md) | Iterations, decisions, inputs/settings, results, runtime repairs, and reproducibility |
+| Extended three-model benchmark notebook | [`W03_Extended_Benchmark.ipynb`](W03_Extended_Benchmark.ipynb) | 35 scenarios × three models; six code cells executed, zero errors |
+| RAG evaluation notebook | [`W03_RAG_Evaluation.ipynb`](W03_RAG_Evaluation.ipynb) | LangChain/BGE-M3/Chroma/Llama Base-vs-RAG evaluation; four code cells executed, zero errors |
+| Week 3 evaluation memo | [`W03_Evaluation_Memo.md`](W03_Evaluation_Memo.md) | Three-model boundary, RAG trade-off, ablation, failure analysis and limitations |
+| Weekly evaluation log | [`../weekly/Wk-03-EvalLog.md`](../weekly/Wk-03-EvalLog.md) | Iterations, decisions, settings, results and reproducibility records |
 
-## Main supporting evidence
+## Supporting evidence
 
 | Evidence | Artifact | Result |
 |---|---|---|
-| Three-model public RAG confirmation | [`W03_RAG_Three_Model_Blind_Report.md`](W03_RAG_Three_Model_Blind_Report.md) | 48/48 generations and 48/48 RAGAS rows; Llama relevance `0.290288 → 0.538142` on 7 uninspected pairs |
-| AI qualitative calibration | [`W03_RAG_AI_Calibration_Report.md`](W03_RAG_AI_Calibration_Report.md) | 8 Llama RAG answers; `4.375/5` relevance, `0.872619` weighted coverage, 30/31 supported claims, 0 forbidden violations |
-| Retrieval ablation | [`W03_RAG_Retrieval_Ablation_Report.md`](W03_RAG_Retrieval_Ablation_Report.md) | 18/18 chunk/top-k/reranker variants; top-k 3 retained for the smoke corpus |
-| Benchmark representativeness | [`W03_RAG_Benchmark_Representativeness_Audit.md`](W03_RAG_Benchmark_Representativeness_Audit.md) | Current set accepted as smoke/helpfulness evidence; larger frozen set specified as follow-up |
-| Failure analysis | [`W03_Failure_Taxonomy.md`](W03_Failure_Taxonomy.md) and [`W03_RAG_Failure_Taxonomy.md`](W03_RAG_Failure_Taxonomy.md) | Three-level model-behavior hierarchy plus causal RAG failure codes |
-| Reproducible aggregate notebook | [`W03_RAG_Three_Model_Blind_Evaluation.ipynb`](W03_RAG_Three_Model_Blind_Evaluation.ipynb) | 3/3 code cells executed, 0 errors; loads frozen aggregate without GPU/Judge calls |
+| Original three-model RAG confirmation | [`W03_RAG_Three_Model_Blind_Report.md`](W03_RAG_Three_Model_Blind_Report.md) | 48/48 generations and 48/48 local RAGAS rows |
+| Original AI qualitative calibration | [`W03_RAG_AI_Calibration_Report.md`](W03_RAG_AI_Calibration_Report.md) | Eight Llama RAG answers; 4.375/5 relevance, 0.872619 weighted coverage, 30/31 supported claims |
+| Original retrieval ablation | [`W03_RAG_Retrieval_Ablation_Report.md`](W03_RAG_Retrieval_Ablation_Report.md) | 18/18 small-corpus variants |
+| Representativeness audit | [`W03_RAG_Benchmark_Representativeness_Audit.md`](W03_RAG_Benchmark_Representativeness_Audit.md) | Identified the original set as a smoke benchmark and specified this expansion |
+| Failure taxonomies | [`W03_Failure_Taxonomy.md`](W03_Failure_Taxonomy.md), [`W03_RAG_Failure_Taxonomy.md`](W03_RAG_Failure_Taxonomy.md) | Model-behavior and causal RAG failure codes |
+| Meeting package | [`W03_RAG_Architecture_Review_7min.pptx`](W03_RAG_Architecture_Review_7min.pptx), [`W03_RAG_Architecture_Review_Speaker_Script.md`](W03_RAG_Architecture_Review_Speaker_Script.md) | Seven-slide architecture/results/limitations review |
 
-## Collection and test boundaries
+## Collection and claim boundaries
 
-- The full FLAN/Mistral/Llama Base/RAG plus RAGAS comparison uses only the
-  official public collection: four source snapshots, 16 chunks, and 30 atomic
-  facts.
-- The June internship material remains in a separate private collection.
-  Its retrieval smoke passed 6/6 and Llama completed 12/12 Base/RAG
-  generations. It was not mixed with public data, pooled into public metrics,
-  or expanded into a full three-model comparison.
-- The public eight-question blind set is useful for pipeline smoke and
-  RAG-helpfulness evidence, but is too small and easy for production-usability
-  inference. The next iteration should freeze 24–32 questions over 100+ chunks
-  and rerun the same pipeline.
-- The Week 2-derived three-model scenario scores remain diagnostic because the
-  inherited Prometheus Judge failed calibration and the former held-out set was
-  inspected. This does not block the Week 3 RAG component conclusion.
+- Expanded public metrics use only three current official website snapshots.
+- The June 2026 internship material remains in a separate private collection.
+  It was not mixed with the public collection or pooled into expanded metrics.
+- Knowledge-unit claim status is preserved. Forward-looking design statements
+  are not presented as deployed-product evidence.
+- The 40 questions were frozen before generation but were authored from the
+  same three pages; the benchmark is a controlled component test, not a fully
+  independent user-distribution sample.
+- Automatic RAGAS and the local Mistral Judge are diagnostics, not usability
+  percentages or a validated three-model leaderboard.
 
-## Final verification
+## Verification
 
-- `53/53` Week 3 unit and contract tests passed.
-- `32/32` Week 3 Python files parsed and byte-compiled.
-- All three submission notebooks executed with zero error outputs.
-- `16/16` YAML and `2/2` JSON artifacts parsed.
-- Local Markdown links and README artifact targets resolved.
-- Public-sensitive scan found no Hugging Face token, external API credential,
-  private key, RunPod hostname, private workspace path, or private knowledge
-  content. The evaluator's `local-loopback-only` placeholder is not a credential
-  and reaches only the local vLLM-compatible endpoint.
-
-Automatic relevance remains a diagnostic signal rather than a usability
-percentage. The small test set, uncalibrated local Judge, strict citation-format
-failures, and incomplete stress coverage are transparent follow-up items, not
-missing Week 3 deliverables.
+- `76/76` Week 3 unit and contract tests passed under the frozen Python 3.11 environment.
+- All 331 knowledge units are non-empty and exact-normalized unique.
+- All 40 questions have complete hidden rubrics and evidence mappings.
+- Three-model generation completed `240/240` rows with a passing shared-input audit.
+- Raw prompts, contexts, outputs, hashes, evaluator rows and resource traces are retained privately.
+- Public artifacts exclude credentials, RunPod connection details, private workspace paths and June private content.

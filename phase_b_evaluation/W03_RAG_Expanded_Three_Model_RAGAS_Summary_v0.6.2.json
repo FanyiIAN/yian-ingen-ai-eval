@@ -1,0 +1,576 @@
+{
+  "analyzer_version": "0.2.0",
+  "excluded_eval_ids": [],
+  "shared_input_audit": {
+    "baseline_model_key": "flan_t5_base",
+    "models_checked": 3,
+    "passed": true,
+    "mismatches": []
+  },
+  "models": {
+    "flan_t5_base": {
+      "all_rows": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 7,
+            "mean_input_tokens": 290.775,
+            "mean_output_tokens": 8.45,
+            "mean_generation_latency_ms": 221.24405,
+            "p50_generation_latency_ms": 200.7355,
+            "p95_generation_latency_ms": 351.15225,
+            "mean_output_tokens_per_second": 43.019953,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 4058517504.0,
+            "max_pytorch_peak_allocated_bytes": 547743744.0,
+            "max_pytorch_peak_reserved_bytes": 5175771136.0,
+            "max_gpu_device_used_bytes_after": 5545066496.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 2,
+            "mean_input_tokens": 2240.775,
+            "mean_output_tokens": 39.675,
+            "mean_generation_latency_ms": 862.40895,
+            "p50_generation_latency_ms": 316.8775,
+            "p95_generation_latency_ms": 4903.4974,
+            "mean_output_tokens_per_second": 35.55769,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 4058517504.0,
+            "max_pytorch_peak_allocated_bytes": 1597232640.0,
+            "max_pytorch_peak_reserved_bytes": 5175771136.0,
+            "max_gpu_device_used_bytes_after": 5545066496.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 4,
+            "rows_with_eligible_chunk_mention": 2,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 39,
+        "paired_output_changed_rate": 0.975
+      },
+      "uninspected": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 7,
+            "mean_input_tokens": 290.775,
+            "mean_output_tokens": 8.45,
+            "mean_generation_latency_ms": 221.24405,
+            "p50_generation_latency_ms": 200.7355,
+            "p95_generation_latency_ms": 351.15225,
+            "mean_output_tokens_per_second": 43.019953,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 4058517504.0,
+            "max_pytorch_peak_allocated_bytes": 547743744.0,
+            "max_pytorch_peak_reserved_bytes": 5175771136.0,
+            "max_gpu_device_used_bytes_after": 5545066496.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 2,
+            "mean_input_tokens": 2240.775,
+            "mean_output_tokens": 39.675,
+            "mean_generation_latency_ms": 862.40895,
+            "p50_generation_latency_ms": 316.8775,
+            "p95_generation_latency_ms": 4903.4974,
+            "mean_output_tokens_per_second": 35.55769,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 4058517504.0,
+            "max_pytorch_peak_allocated_bytes": 1597232640.0,
+            "max_pytorch_peak_reserved_bytes": 5175771136.0,
+            "max_gpu_device_used_bytes_after": 5545066496.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 4,
+            "rows_with_eligible_chunk_mention": 2,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 39,
+        "paired_output_changed_rate": 0.975
+      },
+      "ragas_provisional": {
+        "base": {
+          "answer_relevance": {
+            "mean": 0.42254,
+            "valid_rows": 36,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_recall": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_relevance": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_without_retrieved_context"
+            ]
+          }
+        },
+        "rag": {
+          "answer_relevance": {
+            "mean": 0.448278,
+            "valid_rows": 37,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": 0.841127,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_recall": {
+            "mean": 0.835833,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_relevance": {
+            "mean": 0.98125,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": 0.847222,
+            "valid_rows": 36,
+            "total_rows": 40,
+            "invalid_reasons": []
+          }
+        }
+      }
+    },
+    "mistral_7b_instruct_v0_2": {
+      "all_rows": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 255.175,
+            "mean_output_tokens": 159.875,
+            "mean_generation_latency_ms": 5141.0645,
+            "p50_generation_latency_ms": 4194.66,
+            "p95_generation_latency_ms": 10538.9948,
+            "mean_output_tokens_per_second": 30.87959,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 16677822464.0,
+            "max_pytorch_peak_allocated_bytes": 14626336768.0,
+            "max_pytorch_peak_reserved_bytes": 16357785600.0,
+            "max_gpu_device_used_bytes_after": 16727080960.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 2358.075,
+            "mean_output_tokens": 189.65,
+            "mean_generation_latency_ms": 6673.326075,
+            "p50_generation_latency_ms": 6190.818,
+            "p95_generation_latency_ms": 13178.9717,
+            "mean_output_tokens_per_second": 27.907627,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 16677822464.0,
+            "max_pytorch_peak_allocated_bytes": 15222695936.0,
+            "max_pytorch_peak_reserved_bytes": 16357785600.0,
+            "max_gpu_device_used_bytes_after": 16727080960.0,
+            "citation_references": 2,
+            "citation_precision": 1.0,
+            "rows_with_citation": 1,
+            "eligible_chunk_mentions": 40,
+            "rows_with_eligible_chunk_mention": 17,
+            "citation_format_compliant_rows": 1,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 40,
+        "paired_output_changed_rate": 1.0
+      },
+      "uninspected": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 255.175,
+            "mean_output_tokens": 159.875,
+            "mean_generation_latency_ms": 5141.0645,
+            "p50_generation_latency_ms": 4194.66,
+            "p95_generation_latency_ms": 10538.9948,
+            "mean_output_tokens_per_second": 30.87959,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 16677822464.0,
+            "max_pytorch_peak_allocated_bytes": 14626336768.0,
+            "max_pytorch_peak_reserved_bytes": 16357785600.0,
+            "max_gpu_device_used_bytes_after": 16727080960.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 2358.075,
+            "mean_output_tokens": 189.65,
+            "mean_generation_latency_ms": 6673.326075,
+            "p50_generation_latency_ms": 6190.818,
+            "p95_generation_latency_ms": 13178.9717,
+            "mean_output_tokens_per_second": 27.907627,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 16677822464.0,
+            "max_pytorch_peak_allocated_bytes": 15222695936.0,
+            "max_pytorch_peak_reserved_bytes": 16357785600.0,
+            "max_gpu_device_used_bytes_after": 16727080960.0,
+            "citation_references": 2,
+            "citation_precision": 1.0,
+            "rows_with_citation": 1,
+            "eligible_chunk_mentions": 40,
+            "rows_with_eligible_chunk_mention": 17,
+            "citation_format_compliant_rows": 1,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 40,
+        "paired_output_changed_rate": 1.0
+      },
+      "ragas_provisional": {
+        "base": {
+          "answer_relevance": {
+            "mean": 0.222679,
+            "valid_rows": 36,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_recall": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_relevance": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_without_retrieved_context"
+            ]
+          }
+        },
+        "rag": {
+          "answer_relevance": {
+            "mean": 0.635032,
+            "valid_rows": 35,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": 0.841127,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_recall": {
+            "mean": 0.835833,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_relevance": {
+            "mean": 0.98125,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": 0.877956,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          }
+        }
+      }
+    },
+    "llama31_8b_instruct": {
+      "all_rows": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 1,
+            "mean_input_tokens": 243.675,
+            "mean_output_tokens": 90.675,
+            "mean_generation_latency_ms": 3048.359275,
+            "p50_generation_latency_ms": 1576.5125,
+            "p95_generation_latency_ms": 9337.99175,
+            "mean_output_tokens_per_second": 29.313921,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 18493042688.0,
+            "max_pytorch_peak_allocated_bytes": 16196454912.0,
+            "max_pytorch_peak_reserved_bytes": 17255366656.0,
+            "max_gpu_device_used_bytes_after": 17624662016.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 1903.0,
+            "mean_output_tokens": 220.4,
+            "mean_generation_latency_ms": 7839.686425,
+            "p50_generation_latency_ms": 7809.6225,
+            "p95_generation_latency_ms": 13450.9604,
+            "mean_output_tokens_per_second": 27.059894,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 18493042688.0,
+            "max_pytorch_peak_allocated_bytes": 16665492480.0,
+            "max_pytorch_peak_reserved_bytes": 17255366656.0,
+            "max_gpu_device_used_bytes_after": 17624662016.0,
+            "citation_references": 52,
+            "citation_precision": 1.0,
+            "rows_with_citation": 16,
+            "eligible_chunk_mentions": 92,
+            "rows_with_eligible_chunk_mention": 29,
+            "citation_format_compliant_rows": 16,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 40,
+        "paired_output_changed_rate": 1.0
+      },
+      "uninspected": {
+        "rows": 80,
+        "evaluation_items": 40,
+        "conditions": {
+          "base": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 1,
+            "mean_input_tokens": 243.675,
+            "mean_output_tokens": 90.675,
+            "mean_generation_latency_ms": 3048.359275,
+            "p50_generation_latency_ms": 1576.5125,
+            "p95_generation_latency_ms": 9337.99175,
+            "mean_output_tokens_per_second": 29.313921,
+            "mean_retrieval_latency_ms": null,
+            "max_process_peak_rss_bytes": 18493042688.0,
+            "max_pytorch_peak_allocated_bytes": 16196454912.0,
+            "max_pytorch_peak_reserved_bytes": 17255366656.0,
+            "max_gpu_device_used_bytes_after": 17624662016.0,
+            "citation_references": 0,
+            "citation_precision": null,
+            "rows_with_citation": 0,
+            "eligible_chunk_mentions": 0,
+            "rows_with_eligible_chunk_mention": 0,
+            "citation_format_compliant_rows": 0,
+            "invalid_citation_ids": []
+          },
+          "rag": {
+            "rows": 40,
+            "empty_outputs": 0,
+            "question_echoes": 0,
+            "mean_input_tokens": 1903.0,
+            "mean_output_tokens": 220.4,
+            "mean_generation_latency_ms": 7839.686425,
+            "p50_generation_latency_ms": 7809.6225,
+            "p95_generation_latency_ms": 13450.9604,
+            "mean_output_tokens_per_second": 27.059894,
+            "mean_retrieval_latency_ms": 551.721125,
+            "max_process_peak_rss_bytes": 18493042688.0,
+            "max_pytorch_peak_allocated_bytes": 16665492480.0,
+            "max_pytorch_peak_reserved_bytes": 17255366656.0,
+            "max_gpu_device_used_bytes_after": 17624662016.0,
+            "citation_references": 52,
+            "citation_precision": 1.0,
+            "rows_with_citation": 16,
+            "eligible_chunk_mentions": 92,
+            "rows_with_eligible_chunk_mention": 29,
+            "citation_format_compliant_rows": 16,
+            "invalid_citation_ids": []
+          }
+        },
+        "paired_output_changed": 40,
+        "paired_output_changed_rate": 1.0
+      },
+      "ragas_provisional": {
+        "base": {
+          "answer_relevance": {
+            "mean": 0.263927,
+            "valid_rows": 38,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_recall": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "context_relevance": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_to_base_condition"
+            ]
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": null,
+            "valid_rows": 0,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "not_applicable_without_retrieved_context"
+            ]
+          }
+        },
+        "rag": {
+          "answer_relevance": {
+            "mean": 0.642118,
+            "valid_rows": 39,
+            "total_rows": 40,
+            "invalid_reasons": [
+              "InstructorRetryException: litellm.InternalServerError: InternalServerError: Hosted_vllmException - Server disconnected"
+            ]
+          },
+          "context_precision": {
+            "mean": 0.841127,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_recall": {
+            "mean": 0.835833,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "context_relevance": {
+            "mean": 0.98125,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          },
+          "faithfulness_to_retrieved_context": {
+            "mean": 0.876272,
+            "valid_rows": 40,
+            "total_rows": 40,
+            "invalid_reasons": []
+          }
+        }
+      }
+    }
+  }
+}

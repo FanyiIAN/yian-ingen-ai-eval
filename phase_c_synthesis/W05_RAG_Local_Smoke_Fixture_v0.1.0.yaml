@@ -1,0 +1,152 @@
+schema_version: 1.0.0
+fixture_id: w05_senpai_synthetic_smoke
+fixture_version: 0.1.0
+created_date: '2026-08-05'
+language: en
+platform: Senpai
+data_origin: synthetic_public_safe_fixture
+public_safe: true
+random_seed: 42
+claim_boundary: >-
+  Synthetic curriculum-policy text used only to exercise the local Week 5
+  ablation code. It is not an InGen product specification, approved curriculum,
+  evaluation ground truth, or evidence of deployed behaviour.
+
+materialization:
+  repeat_each_segment: 4
+  separator: ' '
+  note: >-
+    Repetition deliberately creates documents long enough to exercise the
+    registered 256, 512, and 1024 token chunk-size branches in a CPU smoke run.
+    Repeated prose must not be interpreted as a representative corpus.
+
+documents:
+  - document_id: SYN-SENPAI-MATH-01
+    title: Synthetic adaptive arithmetic lesson policy
+    segments:
+      - >-
+        The tutoring sequence begins with one worked example, then asks the
+        learner to solve a similar problem. The tutor should reveal a short hint
+        before showing a complete solution so that the learner has an opportunity
+        to reason independently.
+      - >-
+        When the learner makes the same subtraction error twice, the tutor lowers
+        the difficulty by one step, explains place value with a concrete example,
+        and checks the prerequisite skill before returning to the original task.
+      - >-
+        A correct answer without an explanation receives a brief reasoning prompt.
+        The system records the attempted skill and hint level, but this synthetic
+        policy does not authorize grading, discipline, or a permanent student label.
+      - >-
+        If uncertainty remains after two hints, the tutor summarizes the observed
+        difficulty and asks a responsible teacher to review it. The tutor must not
+        diagnose a learning disability or claim that one exercise proves mastery.
+      - >-
+        Difficulty increases only after two consecutive correct responses with a
+        valid explanation. A single fast response is insufficient because speed
+        alone is not evidence of conceptual understanding.
+      - >-
+        The learner may request another example at any point. Explanations should
+        use neutral language, preserve learner dignity, and distinguish an observed
+        mistake from a claim about ability.
+
+  - document_id: SYN-SENPAI-PRIVACY-01
+    title: Synthetic learner privacy and human authority policy
+    segments:
+      - >-
+        The fixture stores only a pseudonymous learner identifier, the active skill,
+        the response, and the hint level needed for the current lesson. It does not
+        require a full name, home address, medical record, or continuous recording.
+      - >-
+        A teacher may review a lesson summary for educational support. Sharing data
+        with another recipient requires a stated purpose and separate authorization;
+        blanket permission is not treated as consent for every future use.
+      - >-
+        The learner or responsible guardian may request correction or deletion of
+        the synthetic lesson record. The system should acknowledge the request and
+        route it to a responsible human rather than falsely claiming instant deletion.
+      - >-
+        The tutor provides practice and explanations, while teachers retain authority
+        over grades, safeguarding actions, curriculum exceptions, and accommodations.
+        Automated suggestions are advisory and should expose their evidence limits.
+      - >-
+        If a learner discloses an immediate safety concern, the tutoring flow stops,
+        preserves the minimum necessary context, and escalates to the responsible
+        human according to the locally approved safeguarding process.
+      - >-
+        The synthetic policy prohibits inferring sensitive traits from response speed
+        or vocabulary. It also prohibits using a lesson transcript for unrelated
+        advertising, ranking, or disciplinary surveillance.
+
+  - document_id: SYN-SENPAI-SCIENCE-01
+    title: Synthetic evidence-grounded science explanation policy
+    segments:
+      - >-
+        A grounded science answer should cite only facts present in the eligible
+        lesson context. When the lesson does not contain a requested fact, the tutor
+        states that the available material is insufficient instead of inventing it.
+      - >-
+        For a plant-growth lesson, the synthetic curriculum states that light, water,
+        suitable temperature, and nutrients are relevant conditions. It does not say
+        that more of every condition always produces faster growth.
+      - >-
+        The tutor separates observation from explanation. A taller seedling is an
+        observation; the cause requires a controlled comparison because light, water,
+        temperature, soil, and measurement error can vary together.
+      - >-
+        A useful experiment changes one factor at a time, keeps the remaining factors
+        fixed, records repeated measurements, and compares the measurements with the
+        original prediction. One observation is not enough for a causal conclusion.
+      - >-
+        If sources conflict, the tutor presents both supported statements and asks for
+        a source-quality check. It must not silently choose the more confident wording
+        or convert missing evidence into a definite negative.
+      - >-
+        The final explanation should answer the learner's question directly, include
+        the minimum sufficient evidence, and offer a short follow-up check rather than
+        burying the answer under unrelated curriculum text.
+
+evaluation_set:
+  evaluation_set_id: w05_senpai_synthetic_smoke
+  evaluation_set_version: 0.1.0
+  split: infrastructure_smoke
+  items:
+    - eval_id: W05-SMOKE-SENPAI-001
+      platform: Senpai
+      question: >-
+        What should the tutor do after the learner repeats the same subtraction
+        error and still struggles after two hints?
+      reference_answer: >-
+        Lower the difficulty, check the prerequisite skill, and after two hints
+        summarize the difficulty for a responsible teacher without diagnosing the learner.
+      required_terms:
+        - [lower, difficulty]
+        - [prerequisite]
+        - [teacher, human]
+        - [not diagnose, without diagnosing, must not diagnose]
+    - eval_id: W05-SMOKE-SENPAI-002
+      platform: Senpai
+      question: >-
+        Who retains authority over grades and what learner information is needed
+        for the current synthetic lesson?
+      reference_answer: >-
+        Teachers retain authority over grades. The lesson needs only a pseudonymous
+        identifier, active skill, response, and hint level, not direct identity or medical data.
+      required_terms:
+        - [teacher, teachers]
+        - [grades]
+        - [pseudonymous]
+        - [skill]
+        - [hint]
+    - eval_id: W05-SMOKE-SENPAI-003
+      platform: Senpai
+      question: >-
+        How should a learner test whether light affected plant growth?
+      reference_answer: >-
+        Change light while keeping other factors fixed, take repeated measurements,
+        and compare them with the prediction before making a causal conclusion.
+      required_terms:
+        - [light]
+        - [one factor, keeping other factors fixed, remaining factors fixed]
+        - [measurements]
+        - [prediction]

@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-ANALYZER_VERSION = "0.1.2"
+ANALYZER_VERSION = "0.2.0"
 CITATION_RE = re.compile(r"\[([A-Za-z0-9_.:-]+)\]")
 CONDITIONS = ("base", "rag")
 
@@ -64,6 +64,47 @@ def finite_number(value: Any) -> float | None:
 def mean_or_none(values: Iterable[Any]) -> float | None:
     finite = [number for value in values if (number := finite_number(value)) is not None]
     return round(statistics.fmean(finite), 6) if finite else None
+
+
+def percentile_or_none(values: Iterable[Any], proportion: float) -> float | None:
+    finite = sorted(
+        number
+        for value in values
+        if (number := finite_number(value)) is not None
+    )
+    if not finite:
+        return None
+    position = (len(finite) - 1) * proportion
+    lower = int(position)
+    upper = min(lower + 1, len(finite) - 1)
+    fraction = position - lower
+    return round(
+        finite[lower] + (finite[upper] - finite[lower]) * fraction,
+        6,
+    )
+
+
+def max_or_none(values: Iterable[Any]) -> float | None:
+    finite = [
+        number
+        for value in values
+        if (number := finite_number(value)) is not None
+    ]
+    return round(max(finite), 6) if finite else None
+
+
+def nested_value(row: dict[str, Any], *keys: str) -> Any:
+    value: Any = row
+    for key in keys:
+        if not isinstance(value, dict):
+            return None
+        value = value.get(key)
+    return value
+
+
+def gpu_peak_gib(value: Any) -> str:
+    number = finite_number(value)
+    return "n/a" if number is None else f"{number / (1024**3):.3f}"
 
 
 def normalized_text(value: str) -> str:
@@ -186,8 +227,55 @@ def summarize_subset(
             "mean_generation_latency_ms": mean_or_none(
                 row.get("generation_latency_ms") for row in selected
             ),
+            "p50_generation_latency_ms": percentile_or_none(
+                (row.get("generation_latency_ms") for row in selected),
+                0.50,
+            ),
+            "p95_generation_latency_ms": percentile_or_none(
+                (row.get("generation_latency_ms") for row in selected),
+                0.95,
+            ),
+            "mean_output_tokens_per_second": mean_or_none(
+                row.get("output_tokens_per_second") for row in selected
+            ),
             "mean_retrieval_latency_ms": mean_or_none(
                 row.get("retrieval_latency_ms") for row in selected
+            ),
+            "max_process_peak_rss_bytes": max_or_none(
+                nested_value(
+                    row,
+                    "resource_profile",
+                    "process_rss_bytes",
+                    "peak",
+                )
+                for row in selected
+            ),
+            "max_pytorch_peak_allocated_bytes": max_or_none(
+                nested_value(
+                    row,
+                    "resource_profile",
+                    "pytorch_allocated_bytes",
+                    "peak",
+                )
+                for row in selected
+            ),
+            "max_pytorch_peak_reserved_bytes": max_or_none(
+                nested_value(
+                    row,
+                    "resource_profile",
+                    "pytorch_reserved_bytes",
+                    "peak",
+                )
+                for row in selected
+            ),
+            "max_gpu_device_used_bytes_after": max_or_none(
+                nested_value(
+                    row,
+                    "resource_profile",
+                    "gpu_device_used_bytes",
+                    "after",
+                )
+                for row in selected
             ),
             "citation_references": references,
             "citation_precision": round(valid / references, 6) if references else None,
@@ -305,8 +393,11 @@ def build_report(summary: dict[str, Any]) -> str:
         "",
         "## Uninspected aggregate",
         "",
-        "| Model | Condition | Rows | Empty | Echo | Mean output tokens | Mean latency (ms) | Citation precision |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|",
+        (
+            "| Model | Condition | Rows | Empty | Echo | Mean output tokens | "
+            "Mean / p95 latency ms | tok/s | GPU peak GiB | Citation precision |"
+        ),
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for model_key, model_summary in summary["models"].items():
         for condition in CONDITIONS:
@@ -320,7 +411,60 @@ def build_report(summary: dict[str, Any]) -> str:
                 f"| {model_key} | {condition} | {item['rows']} | "
                 f"{item['empty_outputs']} | {item['question_echoes']} | "
                 f"{item['mean_output_tokens']} | "
-                f"{item['mean_generation_latency_ms']} | {citation_precision} |"
+                f"{item['mean_generation_latency_ms']} / "
+                f"{item['p95_generation_latency_ms']} | "
+                f"{item['mean_output_tokens_per_second']} | "
+                f"{gpu_peak_gib(item['max_pytorch_peak_reserved_bytes'])} | "
+                f"{citation_precision} |"
+            )
+
+    ragas_models = [
+        (model_key, model_summary["ragas_provisional"])
+        for model_key, model_summary in summary["models"].items()
+        if "ragas_provisional" in model_summary
+    ]
+    if ragas_models:
+        lines.extend(
+            [
+                "",
+                "## Automatic RAGAS diagnostics",
+                "",
+                (
+                    "| Model | Base relevance | RAG relevance | Delta | "
+                    "RAG faithfulness | Context relevance | Context recall | "
+                    "Context precision |"
+                ),
+                "|---|---:|---:|---:|---:|---:|---:|---:|",
+            ]
+        )
+
+        def metric_cell(value: dict[str, Any] | None) -> str:
+            if not value or value.get("mean") is None:
+                return "n/a"
+            return (
+                f"{value['mean']:.6f} "
+                f"({value['valid_rows']}/{value['total_rows']})"
+            )
+
+        for model_key, ragas_summary in ragas_models:
+            base = ragas_summary.get("base", {})
+            rag = ragas_summary.get("rag", {})
+            base_relevance = base.get("answer_relevance")
+            rag_relevance = rag.get("answer_relevance")
+            base_mean = (base_relevance or {}).get("mean")
+            rag_mean = (rag_relevance or {}).get("mean")
+            delta = (
+                f"{rag_mean - base_mean:+.6f}"
+                if base_mean is not None and rag_mean is not None
+                else "n/a"
+            )
+            lines.append(
+                f"| {model_key} | {metric_cell(base_relevance)} | "
+                f"{metric_cell(rag_relevance)} | {delta} | "
+                f"{metric_cell(rag.get('faithfulness_to_retrieved_context'))} | "
+                f"{metric_cell(rag.get('context_relevance'))} | "
+                f"{metric_cell(rag.get('context_recall'))} | "
+                f"{metric_cell(rag.get('context_precision'))} |"
             )
     lines.extend(
         [
@@ -328,7 +472,7 @@ def build_report(summary: dict[str, Any]) -> str:
             "Automatic RAGAS values are diagnostic because the local Judge is "
             "uncalibrated. Mistral candidate rows use a non-independent Mistral "
             "self-judge and must not be used for a winner claim. A separate AI "
-            "qualitative calibration reviews answer content.",
+            "qualitative review is required for answer-content claims.",
             "",
         ]
     )

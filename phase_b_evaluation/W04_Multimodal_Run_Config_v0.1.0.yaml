@@ -1,0 +1,97 @@
+run_config_id: w04_idefics2_public_image_robustness
+version: 0.1.0
+status: frozen_ready_for_gpu
+created_date: 2026-08-03
+random_seed: 42
+claim_boundary: public_image_proxy_not_deployed_product_performance
+
+benchmark:
+  input_path: W04_Multimodal_Inputs_v0.1.0.jsonl
+  input_sha256: 3c46982e86f66d4f8286c24c68e2584cfdcd83191a27c0b4827bc60a771db3ef
+  input_row_count: 60
+  scenario_path: W04_Multimodal_Scenarios_v0.1.0.yaml
+  scenario_sha256: 519d250d905d87eae64a7405f1823d1394d46ef074fef799078c362e9ce72c57
+  attribution_path: W04_Multimodal_Attribution_v0.1.0.csv
+  attribution_sha256: adbf379b9bec82778f1819be5bd6855e186747a3255d110b34fa4f378be88e4a
+  scenario_count: 20
+  platforms: [Aido_Rover, Sentinel_Prime_AI]
+  conditions: [clean, gaussian_noise_std_0.08, brightness_0.60]
+  controlled_change_policy: one_image_factor_at_a_time_from_same_clean_pixels
+
+candidate_model:
+  model_key: idefics2_8b_chatty
+  model_id: HuggingFaceM4/idefics2-8b-chatty
+  revision: 8e65868b394317b973bd61db3b08e6478ebeedbf
+  checkpoint_path_on_gpu_host: /tmp/w04_idefics2_8b_chatty
+  license: apache-2.0
+  precision: bfloat16
+  device: cuda:0
+  attention_implementation: sdpa
+  processor_configuration: checkpoint_default_record_at_runtime
+  transformers_constraint: not_4.41.0_through_4.43.3_inclusive
+
+generation:
+  seed: 42
+  do_sample: false
+  temperature: 0.0
+  max_new_tokens: 192
+  batch_size: 1
+  warmup_items: 1
+  warmup_excluded_from_quality_and_steady_state_latency: true
+
+image_input:
+  width_px: 768
+  height_px: 768
+  source_color_mode: RGB
+  perturbation_implementation: W04_Multimodal_Data.py#apply_condition
+  expected_pixel_hash_must_match_before_inference: true
+
+performance_measurement:
+  specification: W04_System_Performance_Metrics_Spec.md
+  implementation: W04_Resource_Monitor.py
+  host_sample_interval_ms: 250
+  nvidia_smi_sample_interval_ms: 1000
+  required_latency_fields:
+    - input_load_ms
+    - image_perturb_ms
+    - prompt_build_ms
+    - preprocess_ms
+    - ttft_ms
+    - generation_ms
+    - decode_ms
+    - question_to_response_ms
+  required_resource_groups:
+    - process_rss_mib
+    - system_memory_used_mib
+    - torch_cuda
+    - gpu_device_memory_used_mib
+    - gpu_utilization_pct
+    - gpu_power_w
+  rag:
+    enabled: false
+    latency_value: null
+    reason: Week_4_multimodal_pipeline_has_no_retrieval_component
+
+quality:
+  rubric_path: W04_Multimodal_Scenarios_v0.1.0.yaml#rubric
+  score_range: [0, 5]
+  dimensions:
+    - scene_interpretation
+    - decision_recommendation
+    - uncertainty_and_claim_control
+  review_policy:
+    - AI_assisted_row_level_scoring_with_evidence
+    - manually_review_all_clean_to_perturbed_decision_flips
+    - automatic_scores_are_diagnostic_until_calibrated
+
+compute:
+  provider: RunPod
+  expected_gpu: NVIDIA_A40_48GB
+  model_storage_root: /workspace/models
+  experiment_storage_root: /workspace/experiments
+
+prohibited_claims:
+  - deployed_ingen_product_performance
+  - production_readiness
+  - person_identity_or_sensitive_attribute_inference
+  - universal_latency_across_hardware

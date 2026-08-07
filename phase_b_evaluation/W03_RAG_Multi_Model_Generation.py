@@ -30,8 +30,38 @@ from W03_RAG_Generation import (
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
-RUNNER_VERSION = "0.1.1"
+RUNNER_VERSION = "0.2.0"
 ADAPTERS = {"native_chat", "fold_system_into_user", "seq2seq_text"}
+
+
+def host_memory_snapshot() -> dict[str, int | None]:
+    """Return portable approximate process/system memory counters in bytes."""
+
+    process_rss: int | None = None
+    system_used: int | None = None
+    process_peak_rss: int | None = None
+    try:
+        import psutil
+
+        process_rss = int(psutil.Process().memory_info().rss)
+        system_used = int(psutil.virtual_memory().used)
+    except (ImportError, OSError):
+        pass
+    try:
+        import resource
+
+        raw_peak = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        # Linux reports KiB; macOS reports bytes.
+        process_peak_rss = (
+            raw_peak if platform.system() == "Darwin" else raw_peak * 1024
+        )
+    except (ImportError, OSError, ValueError):
+        pass
+    return {
+        "process_rss_bytes": process_rss,
+        "process_peak_rss_bytes": process_peak_rss,
+        "system_used_bytes": system_used,
+    }
 
 
 def adapt_messages(
@@ -131,6 +161,10 @@ class LocalMultiModelGenerator:
         self.model.eval()
         self.device = next(self.model.parameters()).device
         self.load_seconds = time.perf_counter() - started
+        self.model_parameter_bytes = sum(
+            parameter.numel() * parameter.element_size()
+            for parameter in self.model.parameters()
+        )
 
         eos_ids = [self.tokenizer.eos_token_id]
         eot_id = self.tokenizer.convert_tokens_to_ids("<|eot_id|>")
@@ -178,6 +212,12 @@ class LocalMultiModelGenerator:
                 f"limit {self.max_input_tokens}; do not silently truncate."
             )
         input_ids = input_ids.to(self.device)
+        before_host = host_memory_snapshot()
+        self.torch.cuda.reset_peak_memory_stats(self.device)
+        before_allocated = int(self.torch.cuda.memory_allocated(self.device))
+        before_reserved = int(self.torch.cuda.memory_reserved(self.device))
+        before_free, device_total = self.torch.cuda.mem_get_info(self.device)
+        before_device_used = int(device_total - before_free)
         self.torch.cuda.synchronize()
         started = time.perf_counter()
         with self.torch.inference_mode():
@@ -194,6 +234,13 @@ class LocalMultiModelGenerator:
             )
         self.torch.cuda.synchronize()
         elapsed_seconds = time.perf_counter() - started
+        after_host = host_memory_snapshot()
+        after_allocated = int(self.torch.cuda.memory_allocated(self.device))
+        after_reserved = int(self.torch.cuda.memory_reserved(self.device))
+        peak_allocated = int(self.torch.cuda.max_memory_allocated(self.device))
+        peak_reserved = int(self.torch.cuda.max_memory_reserved(self.device))
+        after_free, after_total = self.torch.cuda.mem_get_info(self.device)
+        after_device_used = int(after_total - after_free)
         continuation = (
             generated[0]
             if self.runtime_adapter == "seq2seq_text"
@@ -215,6 +262,36 @@ class LocalMultiModelGenerator:
                 output_tokens / elapsed_seconds if elapsed_seconds else 0.0,
                 6,
             ),
+            "resource_profile": {
+                "process_rss_bytes": {
+                    "before": before_host["process_rss_bytes"],
+                    "peak": after_host["process_peak_rss_bytes"],
+                    "after": after_host["process_rss_bytes"],
+                },
+                "system_used_bytes": {
+                    "before": before_host["system_used_bytes"],
+                    "after": after_host["system_used_bytes"],
+                },
+                "pytorch_allocated_bytes": {
+                    "before": before_allocated,
+                    "peak": peak_allocated,
+                    "after": after_allocated,
+                },
+                "pytorch_reserved_bytes": {
+                    "before": before_reserved,
+                    "peak": peak_reserved,
+                    "after": after_reserved,
+                },
+                "gpu_device_used_bytes": {
+                    "before": before_device_used,
+                    "after": after_device_used,
+                    "total": int(after_total),
+                },
+                "measurement_note": (
+                    "Process peak RSS is the cumulative operating-system high-water "
+                    "mark; PyTorch peak counters are reset per generation request."
+                ),
+            },
         }
 
     def runtime_metadata(self) -> dict[str, Any]:
@@ -231,6 +308,16 @@ class LocalMultiModelGenerator:
             "transformers_version": self.transformers_version,
             "cuda_version": self.torch.version.cuda,
             "model_load_seconds": round(self.load_seconds, 6),
+            "model_parameter_bytes": int(self.model_parameter_bytes),
+            "host_memory_after_model_load": host_memory_snapshot(),
+            "cuda_after_model_load": {
+                "allocated_bytes": int(
+                    self.torch.cuda.memory_allocated(self.device)
+                ),
+                "reserved_bytes": int(
+                    self.torch.cuda.memory_reserved(self.device)
+                ),
+            },
         }
 
 

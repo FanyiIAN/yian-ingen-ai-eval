@@ -1,0 +1,74 @@
+review_id: w04_semantic_equivalence_ai_review_v0.1.0
+review_version: 0.1.0
+review_date: 2026-08-03
+review_status: approved_with_nonhuman_reviewer_disclosure
+
+reviewer:
+  label: AI-H1
+  system: OpenAI Codex
+  model_family: GPT-5-based
+  immutable_model_revision_available: false
+  reviewer_type: AI_assisted_manual_inspection
+  human_reviewer: false
+
+reviewed_artifact:
+  filename: W04_Robustness_Inputs_DRAFT.jsonl
+  sha256: 55968de588ed8f7d3d9ed45783311a9085887fefe21fcd505ae29ac2b1d01338
+  total_rows: 182
+  semantic_original_rows: 35
+  semantic_variant_rows_reviewed: 105
+  reviewed_request_ids_sha256: e0a7945d0db54980a1ee978af5cc30958355c86ae7ef53fc9fc41dea4f7b0b0b
+
+decision_scale:
+  approved: >-
+    The variant preserves the original scenario facts, quantities, negations,
+    entities, uncertainty, authority state, requested task, and safety meaning.
+  rejected: >-
+    Any material proposition changes, disappears, becomes more certain, or is
+    introduced beyond the intended surface/tone transformation.
+
+inspection_record:
+  synonym_substitution:
+    row_count: 35
+    decision: approved
+    method: >-
+      Inspected the complete operation vocabulary and every occurrence in the
+      frozen artifact. All rows contain at least one actual conservative lexical
+      substitution; no fallback framing rows remain.
+  sentence_reordering:
+    row_count: 35
+    decision: approved
+    method: >-
+      Inspected all 35 original/variant pairs individually. Thirty-one rotate
+      complete outer sentences and four rotate complete sentences inside the
+      quoted learner request. No sentence is deleted or rewritten.
+    operation_counts:
+      quote_aware_left_rotation: 31
+      quoted_sentence_left_rotation: 4
+  tone_shift:
+    row_count: 35
+    decision: approved
+    method: >-
+      Verified a single style-only prefix is used on all rows and that the full
+      original scenario remains byte-for-byte as its suffix.
+    prefix_sha256: 471ca7c80e41e29d4614887c80c84ebc3ba12f8a4465f4de79fe29f93fe3eb40
+
+cross_row_checks:
+  automated_invariant_failures: 0
+  numeric_multiset_preserved: true
+  negation_multiset_preserved: true
+  protected_entity_multiset_preserved: true
+  sentence_unit_multiset_preserved_for_reordering: true
+  variants_unique_within_scenario: true
+
+exceptions: []
+approved_variant_types:
+  - synonym_substitution
+  - sentence_reordering
+  - tone_shift
+
+limitations:
+  - This is an AI-assisted review, not an independent human equivalence study.
+  - Sentence reordering intentionally changes discourse order and may reduce fluency.
+  - The review supports benchmark execution but not a claim of psychometric validity.
+
