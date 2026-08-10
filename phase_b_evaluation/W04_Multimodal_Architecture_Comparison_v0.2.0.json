@@ -1,0 +1,482 @@
+{
+  "comparison_version": "0.2.0",
+  "controlled_inputs": {
+    "condition_counts_per_model": {
+      "brightness_0.60": 20,
+      "clean": 20,
+      "gaussian_noise_std_0.08": 20
+    },
+    "control_fields": [
+      "request_base_id",
+      "scenario_id",
+      "platform",
+      "condition_id",
+      "condition_seed",
+      "image_file_sha256",
+      "processed_pixel_sha256",
+      "user_prompt_sha256",
+      "seed"
+    ],
+    "matched_request_count_per_model": 60,
+    "model_count": 2,
+    "reference_model_key": "idefics2_8b_chatty",
+    "seeds": [
+      42
+    ],
+    "status": "matched"
+  },
+  "evaluation_family": "multimodal_architecture_comparison",
+  "interpretation_boundary": "The same public-image proxies, prompts, perturbations, rubric, Judge, and seed are used for every VLM. Results do not measure deployed products.",
+  "judge_control": {
+    "judge_method": "ai_assisted_single_pass_rubric",
+    "model_config_sha256": "29e4c210b0d6ac178b16b2a255a568bdb23b581e50ca1ef6a6d071dd85704e6e",
+    "scorer_version": "0.1.2",
+    "status": "matched"
+  },
+  "models": [
+    {
+      "identity": {
+        "attention_implementation": "sdpa",
+        "gpu_name": "NVIDIA A40",
+        "model_id": "HuggingFaceM4/idefics2-8b-chatty",
+        "model_key": "idefics2_8b_chatty",
+        "model_load_gpu_peak_mib": 16339.0,
+        "model_load_ms": 12154.239088,
+        "model_revision": "8e65868b394317b973bd61db3b08e6478ebeedbf",
+        "precision": "bfloat16",
+        "processor_class": "Idefics2Processor",
+        "runner_architecture": "idefics2",
+        "torch_version": "2.8.0+cu128",
+        "transformers_version": "5.14.1"
+      },
+      "mandatory_review_count": 3,
+      "model_key": "idefics2_8b_chatty",
+      "performance": {
+        "generation_ms": {
+          "count": 60,
+          "max": 7266.575193,
+          "mean": 5864.800707583333,
+          "p50": 6157.5040895,
+          "p95": 7054.240394699999
+        },
+        "gpu_device_memory_used_peak_mib": {
+          "count": 60,
+          "max": 18670.0,
+          "mean": 18411.383333333335,
+          "p50": 18407.0,
+          "p95": 18407.0
+        },
+        "gpu_power_peak_w": {
+          "count": 60,
+          "max": 272.83,
+          "mean": 262.1356666666667,
+          "p50": 266.235,
+          "p95": 268.74
+        },
+        "output_tokens_per_second": {
+          "count": 60,
+          "max": 28.82962584677786,
+          "mean": 27.621567162099446,
+          "p50": 27.867154552250476,
+          "p95": 28.580779531296503
+        },
+        "question_to_response_ms": {
+          "count": 60,
+          "max": 7378.793341,
+          "mean": 6001.316896599999,
+          "p50": 6305.443754,
+          "p95": 7281.59997275
+        },
+        "row_count": 60,
+        "ttft_ms": {
+          "count": 60,
+          "max": 882.555613,
+          "mean": 767.9727337500001,
+          "p50": 768.809213,
+          "p95": 874.7544940500001
+        }
+      },
+      "quality": {
+        "analyzer_version": "0.1.0",
+        "candidate_model_keys": [
+          "idefics2_8b_chatty"
+        ],
+        "conditions": [
+          {
+            "acceptable_decision_rate": 0.95,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.95,
+            "mean_scene_interpretation": 1.95,
+            "mean_total_score": 4.9,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 20,
+            "row_count": 20
+          },
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.05,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.9,
+            "mean_total_score": 4.8,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 20,
+            "row_count": 20
+          },
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.85,
+            "mean_total_score": 4.75,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 20,
+            "row_count": 20
+          }
+        ],
+        "controlled_input_statement": "Each scenario uses the same 768x768 clean pixels with exactly one deterministic factor changed: Gaussian noise or brightness.",
+        "interpretation_boundary": "Scores are AI-assisted diagnostic rubric judgments over public-image proxies, not measurements of deployed Aido Rover or Sentinel Prime AI.",
+        "mandatory_review_count": 3,
+        "parse_coverage": 1.0,
+        "parsed_row_count": 60,
+        "perturbation_robustness": [
+          {
+            "condition_id": "gaussian_noise_std_0.08",
+            "decision_consistency_clean_vs_perturbed": 0.95,
+            "eligible_scenario_count": 20,
+            "mean_clean_to_perturbed_score_drop": 0.1
+          },
+          {
+            "condition_id": "brightness_0.60",
+            "decision_consistency_clean_vs_perturbed": 0.95,
+            "eligible_scenario_count": 20,
+            "mean_clean_to_perturbed_score_drop": 0.15
+          }
+        ],
+        "platform_conditions": [
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.9,
+            "mean_total_score": 4.8,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.8,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.1,
+            "mean_decision_recommendation": 1.8,
+            "mean_scene_interpretation": 1.8,
+            "mean_total_score": 4.6,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.8,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.8,
+            "mean_scene_interpretation": 1.7,
+            "mean_total_score": 4.5,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          }
+        ],
+        "row_count": 60,
+        "scenario_count": 20,
+        "score_status": "diagnostic_ai_assisted_not_calibrated"
+      }
+    },
+    {
+      "identity": {
+        "attention_implementation": "sdpa",
+        "gpu_name": "NVIDIA A40",
+        "model_id": "llava-hf/llava-1.5-7b-hf",
+        "model_key": "llava_1_5_7b_hf",
+        "model_load_gpu_peak_mib": 13789.0,
+        "model_load_ms": 6559.112506,
+        "model_revision": "b234b804b114d9e37bb655e11cbbb5f5e971b7a9",
+        "precision": "float16",
+        "processor_class": "LlavaProcessor",
+        "runner_architecture": "llava",
+        "torch_version": "2.8.0+cu128",
+        "transformers_version": "5.14.1"
+      },
+      "mandatory_review_count": 3,
+      "model_key": "llava_1_5_7b_hf",
+      "performance": {
+        "generation_ms": {
+          "count": 60,
+          "max": 6461.901014,
+          "mean": 4305.47782305,
+          "p50": 4192.185628,
+          "p95": 5766.502069599999
+        },
+        "gpu_device_memory_used_peak_mib": {
+          "count": 60,
+          "max": 14493.0,
+          "mean": 14493.0,
+          "p50": 14493.0,
+          "p95": 14493.0
+        },
+        "gpu_power_peak_w": {
+          "count": 60,
+          "max": 263.92,
+          "mean": 242.345,
+          "p50": 235.23,
+          "p95": 263.48
+        },
+        "output_tokens_per_second": {
+          "count": 60,
+          "max": 29.9891680432248,
+          "mean": 24.235479275149842,
+          "p50": 22.67904383575064,
+          "p95": 29.950740715313806
+        },
+        "question_to_response_ms": {
+          "count": 60,
+          "max": 6794.235965,
+          "mean": 4489.547593416666,
+          "p50": 4386.536797,
+          "p95": 5966.57872065
+        },
+        "row_count": 60,
+        "ttft_ms": {
+          "count": 60,
+          "max": 694.590581,
+          "mean": 415.6611456666667,
+          "p50": 415.615173,
+          "p95": 589.7927969499998
+        }
+      },
+      "quality": {
+        "analyzer_version": "0.1.0",
+        "candidate_model_keys": [
+          "llava_1_5_7b_hf"
+        ],
+        "conditions": [
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.9,
+            "mean_total_score": 4.8,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 20,
+            "row_count": 20
+          },
+          {
+            "acceptable_decision_rate": 0.95,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.95,
+            "mean_scene_interpretation": 1.9,
+            "mean_total_score": 4.85,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 20,
+            "row_count": 20
+          },
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.85,
+            "mean_total_score": 4.7,
+            "mean_uncertainty_and_claim_control": 0.95,
+            "parsed_row_count": 20,
+            "row_count": 20
+          }
+        ],
+        "controlled_input_statement": "Each scenario uses the same 768x768 clean pixels with exactly one deterministic factor changed: Gaussian noise or brightness.",
+        "interpretation_boundary": "Scores are AI-assisted diagnostic rubric judgments over public-image proxies, not measurements of deployed Aido Rover or Sentinel Prime AI.",
+        "mandatory_review_count": 3,
+        "parse_coverage": 1.0,
+        "parsed_row_count": 60,
+        "perturbation_robustness": [
+          {
+            "condition_id": "gaussian_noise_std_0.08",
+            "decision_consistency_clean_vs_perturbed": 0.95,
+            "eligible_scenario_count": 20,
+            "mean_clean_to_perturbed_score_drop": -0.05
+          },
+          {
+            "condition_id": "brightness_0.60",
+            "decision_consistency_clean_vs_perturbed": 0.9,
+            "eligible_scenario_count": 20,
+            "mean_clean_to_perturbed_score_drop": 0.1
+          }
+        ],
+        "platform_conditions": [
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 1.0,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 2.0,
+            "mean_scene_interpretation": 2.0,
+            "mean_total_score": 5.0,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Aido_Rover",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.8,
+            "condition_id": "clean",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.8,
+            "mean_scene_interpretation": 1.8,
+            "mean_total_score": 4.6,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.9,
+            "condition_id": "gaussian_noise_std_0.08",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.9,
+            "mean_scene_interpretation": 1.8,
+            "mean_total_score": 4.7,
+            "mean_uncertainty_and_claim_control": 1.0,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          },
+          {
+            "acceptable_decision_rate": 0.8,
+            "condition_id": "brightness_0.60",
+            "forbidden_claim_rate": 0.0,
+            "mean_decision_recommendation": 1.8,
+            "mean_scene_interpretation": 1.7,
+            "mean_total_score": 4.4,
+            "mean_uncertainty_and_claim_control": 0.9,
+            "parsed_row_count": 10,
+            "platform": "Sentinel_Prime_AI",
+            "row_count": 10
+          }
+        ],
+        "row_count": 60,
+        "scenario_count": 20,
+        "score_status": "diagnostic_ai_assisted_not_calibrated"
+      }
+    }
+  ],
+  "pairwise_clean_comparison": [
+    {
+      "baseline_model_key": "idefics2_8b_chatty",
+      "comparison_losses": 1,
+      "comparison_model_key": "llava_1_5_7b_hf",
+      "comparison_wins": 0,
+      "mean_total_score_delta": -0.1,
+      "shared_scenario_count": 20,
+      "ties": 19
+    }
+  ],
+  "score_status": "diagnostic_ai_assisted_not_calibrated",
+  "sources": {
+    "events": {
+      "idefics2_8b_chatty": {
+        "file": "idefics2_8b_chatty_Events.jsonl",
+        "sha256": "8f26baacc0f82cbbf464e85171ba1cc65a60b208ab3b44c06b155d87c7e557a1"
+      },
+      "llava_1_5_7b_hf": {
+        "file": "llava_1_5_7b_hf_Events.jsonl",
+        "sha256": "5b09a49f0e1b43c815f8a805efa12567c5c1ddb96067b6e01b47b23afc02fca0"
+      }
+    },
+    "scores": {
+      "idefics2_8b_chatty": {
+        "file": "vlm_idefics2_by_llama.jsonl",
+        "sha256": "710de8c7f3de4469e95ee902981a08267320d7a853a927bb97c547727032c7f1"
+      },
+      "llava_1_5_7b_hf": {
+        "file": "llava_by_llama_scores.jsonl",
+        "sha256": "dd3e12cd2d3972648d2910945187ca7b8826e4e4b66b91c96603b2fc3756e1d3"
+      }
+    },
+    "sessions": {
+      "idefics2_8b_chatty": {
+        "file": "idefics2_8b_chatty_Run_Sessions.jsonl",
+        "sha256": "4ab62b3627fa6c5c0adf85726eb9771b4582723d43860d9613b32094c7c86ccf"
+      },
+      "llava_1_5_7b_hf": {
+        "file": "llava_1_5_7b_hf_Run_Sessions.jsonl",
+        "sha256": "9d0d5a6c59720c413b75789b042cfb559c1ce4895a510d18a86da0930114c2ea"
+      }
+    }
+  }
+}

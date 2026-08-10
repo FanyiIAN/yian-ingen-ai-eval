@@ -163,29 +163,43 @@ Week 4 Phase B artifacts:
 - `phase_b_evaluation/W04_Robustness_Eval.ipynb`: executed aggregate
   notebook for three-model semantic and masked-input robustness.
 - `phase_b_evaluation/W04_Multimodal_Eval.ipynb`: executed aggregate
-  notebook for the controlled Idefics2 public-image benchmark.
+  notebook for the controlled Idefics2/LLaVA public-image comparison.
 - `phase_b_evaluation/W04_Evaluation_Report.md`: consolidated method,
   findings, system cost, incident record, limitations, and requirement audit.
-- `phase_b_evaluation/W04_Mid_Review_Deck.pptx` and
-  `W04_Mid_Review_Speaker_Script.md`: eight-slide 5–8 minute midpoint review.
-- `phase_b_evaluation/W04_Midpoint_Evaluation_Rubric.md`: completed intern
+- `phase_b_evaluation/Phase_AB_Midpoint_Review_Deck.pptx` and
+  `Phase_AB_Midpoint_Review_Speaker_Script.md`: eight-slide 5–8 minute Weeks
+  1–4 midpoint review.
+- `phase_b_evaluation/Phase_AB_Midpoint_Report.pdf` and
+  `Phase_AB_Midpoint_Report.md`: formal paper-style Phase A-B method, result,
+  limitation, reproducibility, calibration, and item-level appendix package.
+- `phase_b_evaluation/Phase_AB_Midpoint_Evidence_Inventory.md` and
+  `Phase_AB_Midpoint_Evidence_Registry.csv`: row counts, artifact hashes,
+  evidence status, prompt/Judge/calibration references, and claim boundaries.
+- `phase_b_evaluation/Phase_AB_W03_RAG_Item_Results.csv`,
+  `Phase_AB_W04_Robustness_Item_Results.csv`,
+  `Phase_AB_W04_VLM_Item_Results.csv`, and
+  `Phase_AB_W04_RAG_Performance_Item_Results.csv`: sanitized public/synthetic
+  row-level evidence for supervisor audit; June private material is excluded.
+- `phase_b_evaluation/Phase_AB_Midpoint_Evaluation_Rubric.md`: completed intern
   self-assessment and evidence map; supervisor joint scoring and signatures
   remain intentionally blank for the review meeting.
 - `phase_b_evaluation/W04_Robustness_Summary_v0.1.0.json`,
-  `W04_Multimodal_Summary_v0.1.0.json`, and
-  `W04_System_Performance_Summary_v0.1.0.json`: submission-safe aggregate
-  quality, latency, resource, model-load, and reproducibility evidence.
+  `W04_Multimodal_Architecture_Comparison_v0.2.0.json`, and
+  `W04_System_Performance_Summary_v0.2.0.json`: submission-safe aggregate
+  quality, two-VLM comparison, latency, resource, model-load, and
+  reproducibility evidence.
 - `weekly/Wk-04-EvalLog.md`: frozen method, iteration history, controlled
   repairs, mechanism-oriented findings, and next actions.
 
-The Week 4 measured workload contains 686 candidate requests: 420 semantic
-paraphrase generations, 126 masked-input generations, 60 controlled public-image
-VLM generations, and 80 expanded public-collection Base/RAG requests. Candidate
+The Week 4 measured workload contains 746 candidate requests: 420 semantic
+paraphrase generations, 126 masked-input generations, 120 controlled public-image
+VLM generations across two architectures, and 80 expanded public-collection Base/RAG requests. Candidate
 quality scoring is cross-model and diagnostic because the local Judge did not
-pass human-equivalent calibration. Raw prompts, outputs, request traces, AI
-scoring rows, and review queues remain in the private experiment archive; the
-public repository contains frozen inputs, source attribution, code, aggregate
-results, notebooks, reports, and the presentation.
+pass human-equivalent calibration. The private archive remains the authoritative
+immutable run/log store. The public repository contains frozen inputs, source
+attribution, code, aggregates, notebooks, reports, presentation materials, and
+sanitized public/synthetic midpoint row exports; it contains no private June
+items, tokens, customer data, or private filesystem paths.
 
 ## Reproduce the Week 1 environment check
 

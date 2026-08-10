@@ -1,4 +1,4 @@
-"""Run the frozen Week 4 Open Images benchmark on pinned Idefics2."""
+"""Run the frozen Week 4 Open Images benchmark on a pinned supported VLM."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ import json
 import os
 import platform
 import time
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -31,7 +32,41 @@ from W04_Text_Robustness_Runner import (
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
-RUNNER_VERSION = "0.1.0"
+RUNNER_VERSION = "0.2.1"
+
+
+def json_safe_metadata(value: Any) -> Any:
+    """Normalize library-specific metadata containers before JSON logging."""
+
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    if isinstance(value, Mapping):
+        return {str(key): json_safe_metadata(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [json_safe_metadata(item) for item in value]
+    if isinstance(value, Path):
+        return str(value)
+    return str(value)
+
+
+def runner_architecture(config: dict[str, Any]) -> str:
+    """Resolve the model adapter without changing the frozen Idefics2 config."""
+
+    model_config = config["candidate_model"]
+    explicit = str(model_config.get("runner_architecture", "")).strip().lower()
+    if explicit:
+        architecture = explicit
+    elif model_config.get("model_key") == "idefics2_8b_chatty":
+        architecture = "idefics2"
+    else:
+        raise ValueError("candidate_model.runner_architecture is required")
+    supported = {"idefics2", "llava"}
+    if architecture not in supported:
+        raise ValueError(
+            f"unsupported multimodal runner architecture {architecture!r}; "
+            f"expected one of {sorted(supported)}"
+        )
+    return architecture
 
 
 def utc_now() -> str:
@@ -70,6 +105,7 @@ def validate_inputs(
     revision = str(config["candidate_model"]["revision"])
     if len(revision) != 40:
         raise ValueError("candidate model revision must be a full commit hash")
+    architecture = runner_architecture(config)
     return {
         "status": "validated",
         "row_count": len(rows),
@@ -77,6 +113,7 @@ def validate_inputs(
         "condition_counts": conditions,
         "input_sha256": sha256_file(input_path),
         "model_revision": revision,
+        "runner_architecture": architecture,
     }
 
 
@@ -228,6 +265,7 @@ class LocalIdefics2Engine:
             "model_key": self.model_config["model_key"],
             "model_id": self.model_config["model_id"],
             "model_revision": self.model_config["revision"],
+            "runner_architecture": "idefics2",
             "model_directory": str(self.model_dir),
             "precision": self.model_config["precision"],
             "attention_implementation": self.model_config["attention_implementation"],
@@ -243,11 +281,159 @@ class LocalIdefics2Engine:
         }
 
 
+class LocalLlavaEngine:
+    """Native Transformers adapter for the reference-listed LLaVA architecture."""
+
+    def __init__(self, model_dir: Path, config: dict[str, Any]) -> None:
+        import numpy as np
+        import torch
+        import transformers
+        from transformers import AutoProcessor, LlavaForConditionalGeneration
+
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is required for the frozen multimodal run")
+        if not (model_dir / "config.json").exists():
+            raise FileNotFoundError(f"incomplete local VLM checkpoint: {model_dir}")
+        self.torch = torch
+        self.transformers_version = transformers.__version__
+        self.model_dir = model_dir
+        self.config = config
+        self.model_config = config["candidate_model"]
+        self.generation = config["generation"]
+        self.gpu_index = 0
+        seed = int(config["random_seed"])
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        np.random.seed(seed)
+        torch.use_deterministic_algorithms(True, warn_only=True)
+
+        load_sampler = ResourceSampler(
+            sample_interval_s=0.25,
+            nvidia_smi_interval_s=1.0,
+            gpu_index=self.gpu_index,
+        ).start()
+        started = time.perf_counter()
+        try:
+            self.processor = AutoProcessor.from_pretrained(
+                model_dir,
+                local_files_only=True,
+            )
+            self.model = LlavaForConditionalGeneration.from_pretrained(
+                model_dir,
+                local_files_only=True,
+                torch_dtype=torch.float16,
+                device_map="auto",
+                low_cpu_mem_usage=True,
+                attn_implementation=self.model_config["attention_implementation"],
+            )
+            self.model.eval()
+            torch.cuda.synchronize(self.gpu_index)
+        finally:
+            self.model_load_resources = load_sampler.stop()
+        self.model_load_ms = round((time.perf_counter() - started) * 1000, 6)
+        self.device = next(self.model.parameters()).device
+
+    def generate(
+        self,
+        image: Image.Image,
+        user_prompt: str,
+        profiler: RequestProfiler,
+    ) -> dict[str, Any]:
+        messages = [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "image"},
+                    {"type": "text", "text": user_prompt},
+                ],
+            }
+        ]
+        with profiler.stage("prompt_build_ms"):
+            rendered_prompt = self.processor.apply_chat_template(
+                messages,
+                add_generation_prompt=True,
+                tokenize=False,
+            )
+        with profiler.stage("preprocess_ms"):
+            inputs = self.processor(
+                images=[image],
+                text=rendered_prompt,
+                return_tensors="pt",
+            )
+            input_tokens = int(inputs["input_ids"].shape[-1])
+            for key, value in inputs.items():
+                if self.torch.is_floating_point(value):
+                    inputs[key] = value.to(self.device, dtype=self.torch.float16)
+                else:
+                    inputs[key] = value.to(self.device)
+
+        streamer = FirstTokenProfilerStreamer(profiler)
+        with profiler.stage("generation_ms"):
+            self.torch.cuda.synchronize(self.gpu_index)
+            with self.torch.inference_mode():
+                generated = self.model.generate(
+                    **inputs,
+                    do_sample=False,
+                    max_new_tokens=int(self.generation["max_new_tokens"]),
+                    streamer=streamer,
+                )
+            self.torch.cuda.synchronize(self.gpu_index)
+        continuation = generated[:, input_tokens:]
+        with profiler.stage("decode_ms"):
+            output = self.processor.batch_decode(
+                continuation,
+                skip_special_tokens=True,
+            )[0].strip()
+        output_tokens = int(continuation.shape[-1])
+        return {
+            "candidate_output": output,
+            "candidate_output_sha256": sha256_text(output),
+            "rendered_model_prompt": rendered_prompt,
+            "rendered_model_prompt_sha256": sha256_text(rendered_prompt),
+            "prompt_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": input_tokens + output_tokens,
+            "first_token_observed": streamer.generated_put_count > 0,
+        }
+
+    def runtime_metadata(self) -> dict[str, Any]:
+        image_processor = getattr(self.processor, "image_processor", None)
+        return {
+            "model_key": self.model_config["model_key"],
+            "model_id": self.model_config["model_id"],
+            "model_revision": self.model_config["revision"],
+            "runner_architecture": "llava",
+            "model_directory": str(self.model_dir),
+            "precision": self.model_config["precision"],
+            "attention_implementation": self.model_config["attention_implementation"],
+            "device": str(self.device),
+            "gpu_name": self.torch.cuda.get_device_name(self.gpu_index),
+            "torch_version": self.torch.__version__,
+            "transformers_version": self.transformers_version,
+            "cuda_runtime": self.torch.version.cuda,
+            "processor_class": type(self.processor).__name__,
+            "image_size": json_safe_metadata(
+                getattr(image_processor, "size", None)
+            ),
+            "model_load_ms": self.model_load_ms,
+            "model_load_resources": self.model_load_resources,
+        }
+
+
+def build_engine(model_dir: Path, config: dict[str, Any]) -> Any:
+    architecture = runner_architecture(config)
+    if architecture == "idefics2":
+        return LocalIdefics2Engine(model_dir, config)
+    if architecture == "llava":
+        return LocalLlavaEngine(model_dir, config)
+    raise AssertionError(f"unreachable architecture: {architecture}")
+
+
 def run_one(
     row: dict[str, Any],
     *,
     input_path: Path,
-    engine: LocalIdefics2Engine,
+    engine: Any,
     config: dict[str, Any],
     cold_or_warm: str,
 ) -> dict[str, Any]:
@@ -363,9 +549,12 @@ def main() -> None:
         pending = pending[: args.limit]
 
     model_dir = args.model_dir or Path(model_config["checkpoint_path_on_gpu_host"])
-    engine = LocalIdefics2Engine(model_dir, config)
+    engine = build_engine(model_dir, config)
     runtime = engine.runtime_metadata()
-    session_id = f"idefics2-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+    session_id = (
+        f"{model_config['model_key']}-"
+        f"{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+    )
     warmup = None
     if rows and int(config["generation"].get("warmup_items", 0)) > 0:
         warmup = run_one(
@@ -378,7 +567,11 @@ def main() -> None:
 
     generated_count = 0
     for index, row in enumerate(pending, start=1):
-        print(f"[idefics2 {index}/{len(pending)}] {row['request_base_id']}", flush=True)
+        print(
+            f"[{model_config['model_key']} {index}/{len(pending)}] "
+            f"{row['request_base_id']}",
+            flush=True,
+        )
         event = run_one(
             row,
             input_path=args.input,
@@ -435,4 +628,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
