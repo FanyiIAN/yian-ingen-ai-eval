@@ -1,5 +1,13 @@
 # Week 4 Evaluation Log — Robustness, Multimodal, and System Cost
 
+> **2026-08-12 corrective RAG update:** The independent robustness, masked-input, and multimodal results below remain current. Only the RAG performance rows were rerun against the complete-document knowledge base; `phase_b_evaluation/W04_RAG_Long_Performance_Report_v1.0.0.md` is the latest RAG performance result.
+
+## Corrective long-source RAG performance
+
+- Replayed the same 40 public questions under paired base/RAG conditions: 80 measured warm-path rows plus one excluded warm-up.
+- Base end-to-end p50/p95 was 385.7/1,390.5 ms; RAG was 8,286.0/17,896.9 ms. The RAG condition includes retrieval, larger prompts, and generation, so the difference is not retrieval-only overhead.
+- Cold load and excluded warm-up remain separate from steady-state quantiles. Public item results omit questions, answers, contexts, local paths, and raw resource traces.
+
 **Week ending:** 2026-08-04  
 **Phase:** B  
 **Seed:** 42  
@@ -77,7 +85,7 @@ The hardest issue was not GPU compatibility; it was distinguishing reproducible 
 
 ## Limitations and next actions
 
-- Complete independent human adjudication on a stratified set of paraphrase flips, severity-5 cases, and VLM decision flips.
+- Optional future validation could independently adjudicate a stratified set of paraphrase flips, severity-5 cases, and VLM decision flips; this is outside the current reference scope and is not scheduled.
 - Add harder transformations that preserve semantics but change syntax more substantially.
 - Add an independently adjudicated VLM subset before treating the small diagnostic score differences as an architecture-selection result.
 - Add temporal sequences and product-representative sensor data when governance permits.

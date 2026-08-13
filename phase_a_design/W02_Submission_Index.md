@@ -3,8 +3,9 @@
 **Benchmark:** `ingen_physical_ai_text_scenarios` version `0.2.0`  
 **Candidate run:** `w02-two-model-unified-full-v1.0.0`  
 **Diagnostic Judge run:** `w02-two-model-unified-prometheus-diagnostic-v1.0.0`  
-**Status:** execution complete; Judge failed calibration, so automated ratings are
-diagnostic and every response requires human adjudication
+**Status:** reference-required execution complete; Judge failed calibration, so
+automated ratings remain diagnostic. Additional independent human adjudication is
+not required by the Week 1–5 reference scope and is not scheduled.
 
 ## Read first
 

@@ -1,5 +1,16 @@
 # Week 3 Evaluation Log
 
+> **2026-08-12 corrective update:** The earlier atomic-section RAG result below is retained as history but is not the latest knowledge-base result. The latest run indexes 21 complete public sources, uses a 40-question long-document set, and is reported in `phase_b_evaluation/W03_RAG_Long_Source_Corrective_Report_v1.0.0.md`.
+
+## Long-source corrective rerun
+
+- Complete-document preflight produced 406/185/94 distinct chunks at 256/512/1,024 tokens and mapped all 58 public evidence facts.
+- Public retrieval reached 1.000 document recall@8, 0.900 fact recall@8, 0.975 MRR, and zero metadata leakage across 40 questions.
+- Paired RAG minus base deltas were +0.656 Answer Relevance and +0.523 weighted Coverage. RAG won Coverage on 36 questions and tied on four; mean RAG Faithfulness was 0.893.
+- Formal Answer Relevance/Faithfulness scoring completed 80/80. Coverage completed 80/80 after 14 deterministic, audited removals of unregistered extra point IDs; no registered-point verdict was imputed.
+- A separate governed private track completed 20 questions and 40 base/RAG rows. Raw internal source material, questions, contexts, answers, and Judge traces remain outside the public repository.
+- The attempted extended Context Relevance/Recall/Precision diagnostic was stopped after persistent HTTP-client retries; those metrics are `NA`, while exact document/fact retrieval metrics and weighted Coverage remain formal.
+
 **Week:** 2026-07-27 to 2026-07-31  
 **Phase:** B — third model and retrieval-augmented generation  
 **Candidate model:** `meta-llama/Llama-3.1-8B-Instruct`  
@@ -52,8 +63,9 @@ The three-model Week 2 replay is not treated as a validated leaderboard. Its
 Prometheus Judge failed the frozen calibration and its former held-out scenarios
 were already inspected. This limitation is recorded here because Week 3 consumed
 the Week 2 outputs, but it is not counted as a RAG defect. A fresh model-blind
-test set and human adjudication are required before making a comparative model
-quality claim.
+test set and independent adjudication would be needed before making a validated
+comparative model-quality claim; they are outside the reference scope and are
+not scheduled.
 
 ## Official-public baseline
 

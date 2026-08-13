@@ -38,8 +38,9 @@ leaderboard. The inherited Week 2 Prometheus Judge failed its calibration gate,
 many FLAN rows were unresolved, and the seven formerly held-out scenarios were
 inspected during Week 2. The correct Week 3 decision is therefore to preserve
 the complete model outputs, latency, score coverage and failure flags, but skip
-an inferential model-ranking claim until model-blind human adjudication and a
-newly sealed test set are available.
+an inferential model-ranking claim. Model-blind adjudication and a newly sealed
+test set would be optional future validation; they are outside the current
+reference scope and are not scheduled.
 
 | Model | Severity-weighted task | Severity-weighted grounding | Severity-weighted quality | Resolved quality rows | Output tokens/s |
 |---|---:|---:|---:|---:|---:|

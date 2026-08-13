@@ -1,5 +1,7 @@
 # Phase A-B Midpoint Evidence Inventory
 
+> **RAG status: historical midpoint inventory; NOT LATEST.** The Week 3 RAG and Week 4 RAG-performance rows listed below are retained for provenance and superseded by the v1.0.0 long-source artifacts in the Week 3/4 submission indexes. Non-RAG evidence remains applicable.
+
 This inventory is the machine-readable appendix to `Phase_AB_Midpoint_Report.pdf`.
 It contains only public/synthetic benchmark evidence. The separately tested June private
 collection is not included in any item-level export or public aggregate.

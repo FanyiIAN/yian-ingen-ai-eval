@@ -2,11 +2,27 @@
 
 **Phase:** B — systematic evaluation and retrieval-augmented generation
 
-**Status:** expanded benchmark complete and submission-ready
+**Status:** corrective long-source benchmark complete and submission-ready
 
 **Claim boundary:** reproducible public-source component evaluation, not deployed InGen product performance
 
-## Expanded Week 3 benchmark (recommended entry point)
+**Adjudication scope:** the reference does not require a separate 105-row human adjudication. No such review is scheduled; the uncalibrated three-model scores remain diagnostic and are not presented as a validated leaderboard.
+
+## Corrective long-source benchmark (recommended RAG entry point)
+
+| Deliverable | Public artifact | Completion evidence |
+|---|---|---|
+| Corrective protocol | `W03_RAG_Long_Source_Corrective_Protocol_v1.0.0.md` | Complete-source parent policy, question taxonomy, cross-week rerun and claim boundary |
+| Public long-source knowledge base | `W03_RAG_Long_Public_Knowledge_Base_v1.0.0.json` | 21 complete official sources with structural blocks and status metadata |
+| Frozen public benchmark | `W03_RAG_Long_Public_Eval_Set_v1.0.0.json` | 40 Fari/Senpai questions with hidden required/forbidden points |
+| Operational chunk preflight | `W03_RAG_Long_Chunk_Preflight_Summary_v1.0.0.json` | 406/185/94 chunks at 256/512/1,024 tokens; all 58 facts mapped |
+| Corrective analysis | `W03_RAG_Long_Source_Corrective_Report_v1.0.0.md` | Retrieval, base/RAG quality, matched deltas and limitations |
+| Sanitized evidence | `W03_RAG_Long_Source_Summary_v1.0.0.json`, `.csv`; `W03_RAG_Long_Source_Item_Results_v1.0.0.csv` | Aggregate and item-level metrics without raw answers or contexts |
+| Executed notebook | `W03_RAG_Long_Source_Evaluation.ipynb` | Reproduces the public summary tables from sanitized evidence |
+
+The v0.6 expanded benchmark below is retained for provenance but is not the latest knowledge-base result.
+
+## Expanded Week 3 benchmark (superseded RAG result)
 
 | Deliverable | Public artifact | Completion evidence |
 |---|---|---|

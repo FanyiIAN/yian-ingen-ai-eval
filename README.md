@@ -35,7 +35,9 @@ Formal Week 2 deliverables:
 The Week 2 automated Judge failed its provisional single-reviewer calibration. The
 16 calibration items are frozen Mistral outputs with reference labels, not training
 examples or additional benchmark scenarios. Its ratings are published as diagnostic
-traces only; every result row requires human adjudication.
+traces only. The reference-required three-prompt agreement analysis was completed;
+additional independent human adjudication is not a Week 1–5 plan deliverable and is
+not scheduled, so the automated scores are not presented as a validated leaderboard.
 
 The scenario YAML contains 28 development and seven originally held-out scenarios.
 Because the seven held-out scenarios were later inspected during iteration, they remain
@@ -44,6 +46,18 @@ regression labels but no longer constitute a fresh blind test set.
 ### Phase B - Systematic evaluation, RAG and multimodal assessment
 
 Week 3 Phase B artifacts:
+
+> **Latest RAG correction (2026-08-12):** the v0.6 atomic-section benchmark
+> below is retained for provenance but is not the latest knowledge-base result.
+> The corrective entry point is
+> `phase_b_evaluation/W03_RAG_Long_Source_Corrective_Protocol_v1.0.0.md`, with
+> 21 complete official sources, a 40-question long-document set, operational
+> 256/512/1,024-token chunking, and new Week 3–5 reports. Cross-week status is
+> registered in
+> `phase_c_synthesis/W05_RAG_Result_Version_Register_v1.1.0.json`.
+> The standard Week 5 notebook entry point is
+> `phase_c_synthesis/W05_RAG_Optimisation.ipynb`; the atomic-section notebook is
+> retained separately with a `SUPERSEDED / HISTORICAL` banner.
 
 - `phase_b_evaluation/W03_Submission_Index.md`: reference-to-artifact map,
   collection boundaries, final verification, and remaining limitations.
@@ -127,8 +141,8 @@ Week 3 Phase B artifacts:
 The Llama full run completed all 35 frozen scenarios with no generation errors or
 input truncation. The three-model contract check passed for 105 rows, but the
 Prometheus Judge failed its Week 2 calibration. Its score ordering is therefore
-diagnostic only and cannot support a validated model-quality claim until
-model-blind human adjudication.
+diagnostic only. Full 105-row model-blind adjudication is not required by the
+reference plan and is not scheduled; no validated model-quality ranking is claimed.
 
 The official-public RAG run completed 12 paired base/RAG questions. Retrieval
 achieved document and evidence-fact recall@k of `1.0000`, MRR `1.0000` and zero
@@ -157,6 +171,10 @@ Base/RAG generations. It was not pooled into public metrics, expanded to the
 three-model comparison, or copied into this public repository.
 
 Week 4 Phase B artifacts:
+
+The latest knowledge-base-dependent performance result is
+`phase_b_evaluation/W04_RAG_Long_Performance_Report_v1.0.0.md`. Independent
+robustness, masked-input and multimodal results remain current.
 
 - `phase_b_evaluation/W04_Submission_Index.md`: Week 4 navigation,
   submission-safe evidence boundary, and verification commands.
@@ -200,6 +218,45 @@ immutable run/log store. The public repository contains frozen inputs, source
 attribution, code, aggregates, notebooks, reports, presentation materials, and
 sanitized public/synthetic midpoint row exports; it contains no private June
 items, tokens, customer data, or private filesystem paths.
+
+### Phase C - Analysis and methodology synthesis
+
+Week 5 completes the controlled long-source RAG optimisation and accumulated
+Weeks 2–4 evidence analysis. The latest entry points are
+`phase_c_synthesis/W05_RAG_Optimisation.ipynb`,
+`W05_RAG_Long_Source_Optimisation_Report_v1.1.0.md`, and
+`W05_Accumulated_Evidence_Report_v1.1.0.md`. The full-factorial RAG comparison
+contains 18 cells and three observed Pareto-optimal configurations. All findings
+remain conditional on the public proxy benchmark and disclosed metric-calibration
+limits.
+
+Week 6 formal and reproducibility artifacts:
+
+- `phase_c_synthesis/W06_Submission_Index.md`: complete artifact map,
+  reproduction commands, and evidence boundary.
+- `phase_c_synthesis/W06_Eval_Methodology_Report.md`: benchmark rationale,
+  scoring reliability, model-validity limits, RAG interpretation, and three
+  registered gaps.
+- `phase_c_synthesis/W06_Eval_Paper_Sketch.md`: exact 150-word abstract,
+  introduction, literature positioning, and reproducible methodology.
+- `phase_c_synthesis/W06_Eval_Paper_Self_Critique.md`: contribution, likely
+  reviewer objection, and closest-work distinction.
+- `phase_c_synthesis/W06_Evidence_Registry_v1.0.0.json` and
+  `W06_Claim_Evidence_Matrix_v1.0.0.csv`: hash-bound evidence sources and
+  claim-level scope/status/causal-language controls.
+- `phase_c_synthesis/W06_Evidence_Synthesis.py` and
+  `W06_Evidence_Synthesis_Tests.py`: standard-library synthesis plus ten
+  contract tests.
+- `phase_c_synthesis/W06_RunPod_Deployment_Report.md` and
+  `W06_RunPod_Deployment_Verification_v1.0.0.json`: clean Linux RunPod
+  reproduction, including matched local/remote output hashes.
+- `weekly/Wk-06-EvalLog.md`: Week 6 decision record and reproducibility
+  reflection.
+
+Week 6 synthesizes rather than reranks the frozen results. Failed Judge
+calibration and uncalibrated RAG quality scores are carried forward as diagnostic
+evidence; deterministic hashes, counts, factor levels, and Pareto membership are
+audit evidence. No product-deployment or causal claim is introduced.
 
 ## Reproduce the Week 1 environment check
 

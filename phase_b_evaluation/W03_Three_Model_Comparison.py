@@ -351,8 +351,8 @@ def build_summary(
         "validated_model_quality_claim_allowed": False,
         "claim_boundary": (
             "L0 synthetic product-context simulation only. Prometheus failed "
-            "calibration; all score ordering is diagnostic and requires human "
-            "adjudication."
+            "calibration; all score ordering is diagnostic. Independent human "
+            "adjudication is outside the current reference scope and is not scheduled."
         ),
         "contract": contract,
         "source_sha256": source_hashes,
@@ -430,8 +430,8 @@ def write_report(path: Path, summary: dict[str, Any]) -> None:
         "",
         "> The Prometheus Judge failed its frozen calibration. Scores below are",
         "> diagnostic, coverage-sensitive evidence and are not a validated model",
-        "> quality leaderboard. Human review remains required for all 105 rows and",
-        "> every severity-5 response.",
+        "> quality leaderboard. A separate 105-row human adjudication is not required",
+        "> by the reference plan and is not scheduled.",
         "",
         f"- Benchmark: `{BENCHMARK_VERSION}` (35 synthetic scenarios)",
         f"- Candidate prompt: `{PROMPT_VERSION}` / `{PROMPT_SPEC_SHA256}`",
@@ -485,7 +485,7 @@ def write_report(path: Path, summary: dict[str, Any]) -> None:
             "",
             "These deltas answer only what the failed-calibration diagnostic Judge",
             "reported under the frozen protocol. They do not establish that Llama is",
-            "better until the rows receive model-blind human adjudication.",
+            "better; no validated ranking is claimed.",
             "",
             "## Per-platform diagnostic quality",
             "",
@@ -546,8 +546,8 @@ def write_report(path: Path, summary: dict[str, Any]) -> None:
             "  behaved differently; architecture size alone is not an explanation.",
             "- Deployment boundary: these are independent open models on synthetic",
             "  text scenarios, not deployed InGen products or PIC runtime results.",
-            "- Next validity gate: model-blind human adjudication, including all",
-            "  severity-5 rows, followed by a freshly sealed held-out set.",
+            "- Optional future validation: independently adjudicate a sample and use",
+            "  a freshly sealed held-out set. This is outside the current reference scope.",
             "",
         ]
     )

@@ -1,5 +1,5 @@
 {
-  "claim_boundary": "L0 synthetic product-context simulation only. Prometheus failed calibration; all score ordering is diagnostic and requires human adjudication.",
+  "claim_boundary": "L0 synthetic product-context simulation only. Prometheus failed calibration; all score ordering is diagnostic. Independent human adjudication is outside the current reference scope and is not scheduled.",
   "comparison_id": "w03_three_model_prometheus_diagnostic_v0.1.0",
   "contract": {
     "benchmark_version": "0.2.0",

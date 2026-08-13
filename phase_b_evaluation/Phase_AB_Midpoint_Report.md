@@ -1,5 +1,7 @@
 # Phase A-B Midpoint Report: Physical AI Model Evaluation
 
+> **RAG status: historical midpoint snapshot; NOT LATEST for knowledge-base-dependent results.** Week 1–2 and independent Week 4 findings remain applicable. Use `W03_RAG_Long_Source_Corrective_Report_v1.0.0.md` and `W04_RAG_Long_Performance_Report_v1.0.0.md` for the corrected RAG evidence.
+
 **Coverage:** Weeks 1-4 (Phase A: landscape and benchmark design; Phase B: model, RAG, robustness, multimodal, and system evaluation)  
 **Intern:** Yian Fan  
 **Supervisor:** Iqbal Patel  

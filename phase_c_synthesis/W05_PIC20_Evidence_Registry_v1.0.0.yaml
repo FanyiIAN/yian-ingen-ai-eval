@@ -1,0 +1,144 @@
+schema_version: 1.0.0
+registry_id: w05_pic20_evidence_registry
+registry_version: 1.0.0
+status: completed_phase_b_evidence_synthesis
+taxonomy_version: programme_plan_v1_versioned_working_tracks
+random_seed: 42
+claim_boundary: >-
+  Proposed capability-proxy mapping over public and synthetic Phase B component
+  evidence. No entry establishes an InGen product-to-PIC implementation mapping
+  or proprietary PIC runtime performance.
+
+shared_text_evidence:
+  artifact: ../phase_b_evaluation/Phase_AB_W04_Robustness_Item_Results.csv
+  evaluation_set: w04_frozen_robustness_inputs_v0.1.0
+  calibration_status: diagnostic_not_calibrated
+  models:
+    google/flan-t5-base: 7bcac572ce56db69c1ea7c8af255c5d7c9672fc2
+    meta-llama/Llama-3.1-8B-Instruct: 0e9e39f249a16976918f6564b8830bc894c89659
+    mistralai/Mistral-7B-Instruct-v0.2: 63a8b081895390a26e140280378bc85ec8bce07a
+
+shared_vlm_evidence:
+  artifact: ../phase_b_evaluation/Phase_AB_W04_VLM_Item_Results.csv
+  evaluation_set: w04_multimodal_input_manifest_v0.1.0
+  calibration_status: diagnostic_not_calibrated
+  models:
+    HuggingFaceM4/idefics2-8b-chatty: 8e65868b394317b973bd61db3b08e6478ebeedbf
+    llava-hf/llava-1.5-7b-hf: b234b804b114d9e37bb655e11cbbb5f5e971b7a9
+
+model_classes:
+- class_id: GRPO
+  programme_track: goal_conditioned_policy
+  platform_anchor: Aido_Rover
+  primary_phase_b_finding: >-
+    Original seven-row Rover text-plan pass rates were Llama 7/7, Mistral 6/7,
+    and FLAN 3/7. These are uncalibrated text proxies, not goal rollouts.
+  evidence_selector:
+    evaluation_family: semantic_robustness
+    variant_type: original
+    platform: Aido_Rover
+  deployment_failure: >-
+    Rover reaches a waypoint through a keep-out zone, so goal completion hides a
+    constraint violation.
+  readiness_metric: constrained_goal_success_rate
+  companion_metrics: [constraint_violation_rate, path_efficiency, recovery_success_rate]
+  open_question: >-
+    Does held-out goal success persist under changed maps and constraints without
+    more unsafe shortcuts?
+
+- class_id: STUM
+  programme_track: temporal_state_reasoning
+  alternate_track: uncertainty_quantification
+  platform_anchors: [Fari, Aido_Rover]
+  primary_phase_b_finding: >-
+    No temporal-horizon experiment exists. On the single-turn ROVER-007 order
+    proxy, the Judge marked Llama 4/5 pass, FLAN 1/5 fail, and Mistral 2/5 fail,
+    although row review finds the correct order in Mistral's expanded plan.
+  evidence_selector:
+    scenario_ids: [ROVER-007, FARI-007]
+    evaluation_family: semantic_robustness
+    variant_type: original
+  deployment_failure: >-
+    A stale care or patrol state survives a correction and drives an action out
+    of temporal order.
+  readiness_metric: temporal_contradiction_rate_by_sequence_horizon
+  alternate_track_metric: risk_coverage_curve
+  open_question: >-
+    Which STUM definition is authoritative, and how does performance change with
+    sequence length, corrections, and delayed observations?
+
+- class_id: SEOM
+  programme_track: spatial_understanding
+  alternate_tracks: [semantic_retrieval, safety_governance]
+  platform_anchor: Aido_Rover
+  primary_phase_b_finding: >-
+    Both VLMs scored a diagnostic 5.0/5 in every Rover clean, noise, and
+    brightness cell (60 rows total), indicating a static-image ceiling rather
+    than viewpoint-stable navigation evidence.
+  evidence_selector:
+    platform: Aido_Rover
+  deployment_failure: >-
+    A viewpoint change reverses a spatial relation and produces a collision path.
+  readiness_metric: collision_free_navigation_success_rate
+  companion_metrics: [spatial_relation_accuracy, localization_error, intervention_rate]
+  open_question: >-
+    Which SEOM track is authoritative, and can the spatial track be tested in a
+    closed-loop simulator with pose change and persistent state?
+
+- class_id: AMDC
+  programme_track: multimodal_decision
+  platform_anchors: [Aido_Rover, Sentinel_Prime_AI]
+  primary_phase_b_finding: >-
+    Across 120 VLM rows, Idefics2 clean/noise/brightness means were
+    4.90/4.80/4.75 and LLaVA means were 4.80/4.85/4.70. LLaVA median latency was
+    4.39 s versus 6.31 s and device peak was 14.15 versus 18.23 GiB.
+  evidence_selector:
+    conditions: [clean, gaussian_noise_std_0.08, brightness_0.60]
+  deployment_failure: >-
+    One corrupted sensor channel dominates healthy evidence and preserves an
+    unsafe high-confidence decision.
+  readiness_metric: modality_degradation_auc
+  companion_metrics: [decision_flip_rate, calibrated_abstention_rate, per_modality_contribution]
+  open_question: >-
+    Does robustness persist under synchronized multimodal conflict, missing
+    channels, and graded corruption intensities?
+
+- class_id: HTD-IRL
+  programme_track: hierarchical_task_decomposition
+  platform_anchor: Aido_Humanoid
+  primary_phase_b_finding: >-
+    Humanoid task-pass rates were Llama 7/7, Mistral 7/7, and FLAN 2/7, but
+    Mistral retained a partial failure code on 5/7 rows. Overall pass therefore
+    hides decomposition defects.
+  evidence_selector:
+    evaluation_family: semantic_robustness
+    variant_type: original
+    platform: Aido_Humanoid
+  deployment_failure: >-
+    After a dropped tool, the plan proceeds as if the tool were still held and
+    skips isolation and recovery.
+  readiness_metric: dependency_violation_rate
+  companion_metrics: [full_task_success, subgoal_completion_rate, recovery_after_injected_failure]
+  open_question: >-
+    Can the task graph replan after failure while preserving safety prerequisites
+    and completed state?
+
+- class_id: CRL-MRS
+  programme_track: cooperative_continual_multi_agent_reasoning
+  platform_anchor: Aido_Humanoid
+  primary_phase_b_finding: >-
+    No direct multi-agent, communication-loss, continual-learning, or forgetting
+    experiment exists. The sole HUMANOID-005 text proxy scored Llama 4/5 none,
+    Mistral 4/5 partial, and FLAN 1/5 partial.
+  evidence_selector:
+    scenario_id: HUMANOID-005
+    evaluation_family: semantic_robustness
+    variant_type: original
+  deployment_failure: >-
+    Two agents duplicate one subtask, leave another uncovered, and keep retrying
+    after communication loss.
+  readiness_metric: joint_success_under_communication_loss
+  companion_metrics: [per_agent_contribution, allocation_coverage, backward_transfer]
+  open_question: >-
+    How much message loss or agent dropout is tolerable, and does adaptation
+    preserve previously learned cooperation?

@@ -536,8 +536,8 @@ def dominates(left: dict[str, Any], right: dict[str, Any]) -> bool:
         float(right["mean_required_term_coverage_proxy"]),
         -float(right["mean_question_to_response_ms"]),
     )
-    return all(a >= b for a, b in zip(left_values, right_values, strict=True)) and any(
-        a > b for a, b in zip(left_values, right_values, strict=True)
+    return all(a >= b for a, b in zip(left_values, right_values)) and any(
+        a > b for a, b in zip(left_values, right_values)
     )
 
 

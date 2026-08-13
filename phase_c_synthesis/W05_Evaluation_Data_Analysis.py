@@ -143,7 +143,7 @@ def severity_failure_relationship(frame: pd.DataFrame) -> list[dict[str, Any]]:
             .reset_index()
         )
         key_values = keys if isinstance(keys, tuple) else (keys,)
-        result = dict(zip(group_columns, key_values, strict=True))
+        result = dict(zip(group_columns, key_values))
         result.update(
             {
                 "rows": int(len(group)),

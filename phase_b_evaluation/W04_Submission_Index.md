@@ -7,6 +7,17 @@
 
 ## Primary deliverables
 
+### Corrective long-source RAG performance
+
+| Artifact | Purpose |
+|---|---|
+| `W04_RAG_Long_Performance_Report_v1.0.0.md` | Latest 40-question base/RAG warm-path latency report |
+| `W04_RAG_Long_Performance_Summary_v1.0.0.json`, `.csv` | Complete aggregate timing and resource metrics |
+| `W04_RAG_Long_Performance_Item_Results_v1.0.0.csv` | Public-safe 80-row performance evidence without questions, answers, or contexts |
+| `W04_Long_RAG_Performance_Sanitize.py` | Deterministic private-event to public-metric exporter |
+
+Only the RAG performance slice was rerun. Robustness, masked-input, multimodal, and other non-RAG results below remain current because they do not depend on the knowledge base.
+
 | Reference deliverable | Submission artifact | Purpose |
 |---|---|---|
 | Semantic perturbation and masked-input notebook | `W04_Robustness_Eval.ipynb` | Executed aggregate tables and curves for three text models. |

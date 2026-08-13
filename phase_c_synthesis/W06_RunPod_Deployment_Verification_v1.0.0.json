@@ -1,0 +1,13 @@
+{
+  "machine": "x86_64",
+  "matrix_sha256": "69981e57473363212aca63d4063616a4384a8705541f32e39cbd89159b118584",
+  "pipeline_version": "1.0.0",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+  "python_implementation": "CPython",
+  "python_version": "3.12.3",
+  "registered_source_count": 12,
+  "schema_version": "1.0.0",
+  "status": "passed",
+  "summary_sha256": "7754b84eb9f62c7e6d5d14854d14dff87e170115d0c8789fc46d52ad43db17b7",
+  "verify_only": true
+}

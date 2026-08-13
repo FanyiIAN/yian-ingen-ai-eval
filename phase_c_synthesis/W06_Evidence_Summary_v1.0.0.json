@@ -1,0 +1,330 @@
+{
+  "benchmark_design": {
+    "claim_boundary": "Product-context proxies; no deployed InGen system was measured.",
+    "data_origin": "synthetic_public_safe",
+    "platform_counts": {
+      "Aido_Humanoid": 7,
+      "Aido_Rover": 7,
+      "Fari": 7,
+      "Senpai": 7,
+      "Sentinel_Prime_AI": 7
+    },
+    "scenario_count": 35,
+    "severity_counts": {
+      "1": 10,
+      "3": 15,
+      "5": 10
+    },
+    "split_counts": {
+      "development": 28,
+      "held_out": 7
+    }
+  },
+  "cross_week_interpretation_boundary": "Week 2-4 evidence is accumulated but not pooled across unlike families. Week 2 scores failed calibration; Week 3 RAGAS and Week 4 rubric scores are diagnostic and uncalibrated. Correlation is not causality, and the mechanistic accounts are hypotheses grounded in row evidence.",
+  "pipeline_version": "1.0.0",
+  "random_seed": 42,
+  "registry_version": "1.0.0",
+  "replication_statement": {
+    "likely_replicable": [
+      "frozen input hashes and row counts",
+      "deterministic candidate outputs under pinned revisions and greedy decoding",
+      "registered matched contrasts and Pareto computation from the frozen rows"
+    ],
+    "not_yet_established": [
+      "exact AI-assisted rubric scores under a different Judge",
+      "validated model rankings",
+      "deployed-product safety, readiness, or causal mechanisms"
+    ]
+  },
+  "schema_version": "1.0.0",
+  "scoring_reliability": {
+    "calibration_gate_passed": false,
+    "evidence_status": "diagnostic_failed_calibration",
+    "frozen_human_label_calibration_task_alpha": 0.7551,
+    "interpretation": "Prompt-formulation agreement is not a substitute for agreement with independent human labels.",
+    "preregistered_calibration_threshold": 0.8,
+    "three_prompt_formulation_agreement": {
+      "contextual_grounding_alpha_ordinal": 0.7806020983248727,
+      "failure_mode_alpha_nominal": 0.5673091690984489,
+      "response_count": 70,
+      "task_accuracy_alpha_ordinal": 0.8772346376936696
+    }
+  },
+  "source_verification": {
+    "sources": [
+      {
+        "bytes": 53560,
+        "path": "phase_a_design/W02_Scenarios.yaml",
+        "role": "canonical benchmark scenarios",
+        "sha256": "acc34b81538598d679487acd9a46a9141634929d2d0c150894c9267df9e2a7e2"
+      },
+      {
+        "bytes": 6502,
+        "path": "phase_a_design/W02_Rubric.yaml",
+        "role": "canonical scoring rubric",
+        "sha256": "a26a79aa3f9468fa9cbb483b51e299c71a8351b30be9ad7d7fc7ccbb2fc663d3"
+      },
+      {
+        "bytes": 3918,
+        "path": "phase_a_design/W02_Baseline_Agreement.json",
+        "role": "three-formulation Judge agreement",
+        "sha256": "71d99fa63e8df59ec32e4de3f0101da605d15e6706a85e0dc155b672518096fa"
+      },
+      {
+        "bytes": 3794,
+        "path": "phase_a_design/W02_Baseline_Run_Manifest.json",
+        "role": "Week 2 artifact and source hashes",
+        "sha256": "c2537e2aab1d7f6680393d3bf33558737f3d781e0d9963b6640d34b374f082cf"
+      },
+      {
+        "bytes": 18803,
+        "path": "phase_a_design/W02_Final_Run_and_Judge_Findings.md",
+        "role": "Judge calibration gate result and interpretation",
+        "sha256": "c8a95f2ab1c084fcff652436bc3009b644c532688c44d9f2e45576ad57c034a8"
+      },
+      {
+        "bytes": 2387,
+        "path": "phase_a_design/W02_Unified_Run_Config_v1.0.0.yaml",
+        "role": "pinned Week 2 candidate and Judge revisions",
+        "sha256": "edb1984f4d830a6578e5c8ca440e9a1db2b5518a1d0e4eb1f9c2d84db8d54781"
+      },
+      {
+        "bytes": 16019,
+        "path": "phase_b_evaluation/W03_RAG_Long_Source_Summary_v1.0.0.json",
+        "role": "corrected long-source RAG quality summary",
+        "sha256": "70abbfc867eb4b7dec6c1345a54d21b14a5f9bfdd75d609b8ccdd14535c0821d"
+      },
+      {
+        "bytes": 8752,
+        "path": "phase_b_evaluation/W04_Robustness_Summary_v0.1.0.json",
+        "role": "text robustness diagnostic summary",
+        "sha256": "d6bead483f185fb31656e2158e6f6dabe1b9c43f78b67bf7053d4daec870a13a"
+      },
+      {
+        "bytes": 17204,
+        "path": "phase_b_evaluation/W04_Multimodal_Architecture_Comparison_v0.2.0.json",
+        "role": "matched two-VLM proxy comparison",
+        "sha256": "72e0e46af94cb907616319693c85a955f8f1c9750fc00c15716716b17e893568"
+      },
+      {
+        "bytes": 15840,
+        "path": "phase_b_evaluation/W04_RAG_Long_Performance_Summary_v1.0.0.json",
+        "role": "long-source RAG latency and resource summary",
+        "sha256": "58bd92ecc5239ee31076b90eb19d4dd30289cdd5df2ca153cba8d772b0d8c44f"
+      },
+      {
+        "bytes": 50471,
+        "path": "phase_c_synthesis/W05_RAG_Long_Source_Optimisation_Summary_v1.1.0.json",
+        "role": "18-cell full-factorial RAG optimisation",
+        "sha256": "752958d6b43b1c06ed8e3fe6e1a4281544b4b43cd757347ad1776a908dc24d56"
+      },
+      {
+        "bytes": 42367,
+        "path": "phase_c_synthesis/W05_Accumulated_Evidence_Analysis_v1.1.0.json",
+        "role": "stratified Week 2-4 evidence synthesis",
+        "sha256": "f3713853694907805c9539369f124d8c9e1759cdad340984aea352da373e15b2"
+      }
+    ],
+    "status": "passed",
+    "verified_source_count": 12
+  },
+  "temporal_validity": {
+    "automated_external_time_trigger_count": 0,
+    "automated_external_time_triggers": [],
+    "control": "prompt_closed_no_external_event_recall",
+    "manual_review": "passed_prompt_closed_scenarios",
+    "residual_confound": "The model cards do not provide complete training-corpus cutoff dates, so equal exposure to general background knowledge cannot be established."
+  },
+  "week3_long_source_rag": {
+    "evaluation_set_id": "w03_ingen_long_public",
+    "evidence_status": "diagnostic_uncalibrated",
+    "matched_rag_minus_base": {
+      "answer_relevance": {
+        "direction": "rag_minus_base",
+        "finite_n": 40,
+        "mean": 0.655667,
+        "negative": 1,
+        "p50": 0.768227,
+        "p95": 0.952463,
+        "positive": 34,
+        "zero": 5
+      },
+      "generation_latency_ms": {
+        "direction": "rag_minus_base",
+        "finite_n": 40,
+        "mean": 8030.48255,
+        "negative": 0,
+        "p50": 6258.813,
+        "p95": 16423.77255,
+        "positive": 40,
+        "zero": 0
+      },
+      "required_point_coverage": {
+        "direction": "rag_minus_base",
+        "finite_n": 40,
+        "mean": 0.522917,
+        "negative": 0,
+        "p50": 0.5,
+        "p95": 1.0,
+        "positive": 36,
+        "zero": 4
+      }
+    },
+    "official_rows": 80,
+    "platform_rag": {
+      "Fari": {
+        "answer_relevance_mean": 0.701547,
+        "faithfulness_mean": 0.879669,
+        "required_point_coverage_mean": 1.0
+      },
+      "Senpai": {
+        "answer_relevance_mean": 0.692548,
+        "faithfulness_mean": 0.905952,
+        "required_point_coverage_mean": 0.975
+      }
+    },
+    "question_count": 40,
+    "retrieval": {
+      "hit_at_k": 40,
+      "items": 40,
+      "mean_document_id_recall_at_k": 1.0,
+      "mean_evidence_fact_recall_at_k": 0.9,
+      "mean_reciprocal_rank": 0.975,
+      "mean_retrieval_latency_ms": 1026.076,
+      "metadata_filter_leakage": 0
+    }
+  },
+  "week4_multimodal": {
+    "evidence_status": "diagnostic_ai_assisted_not_calibrated",
+    "matched_request_count_per_model": 60,
+    "models": {
+      "idefics2_8b_chatty": {
+        "clean_mean_total_score": 4.9,
+        "mean_question_to_response_ms": 6001.316896599999,
+        "model_id": "HuggingFaceM4/idefics2-8b-chatty",
+        "model_revision": "8e65868b394317b973bd61db3b08e6478ebeedbf"
+      },
+      "llava_1_5_7b_hf": {
+        "clean_mean_total_score": 4.8,
+        "mean_question_to_response_ms": 4489.547593416666,
+        "model_id": "llava-hf/llava-1.5-7b-hf",
+        "model_revision": "b234b804b114d9e37bb655e11cbbb5f5e971b7a9"
+      }
+    },
+    "pairwise_clean_comparison": [
+      {
+        "baseline_model_key": "idefics2_8b_chatty",
+        "comparison_losses": 1,
+        "comparison_model_key": "llava_1_5_7b_hf",
+        "comparison_wins": 0,
+        "mean_total_score_delta": -0.1,
+        "shared_scenario_count": 20,
+        "ties": 19
+      }
+    ]
+  },
+  "week4_rag_performance": {
+    "base_mean_question_to_response_ms": 871.479983,
+    "interpretation_boundary": "Latency and resource results are hardware/configuration specific; non-RAG rows have no RAG latency value.",
+    "rag_mean_question_to_response_ms": 9980.350653,
+    "rag_mean_retrieval_total_ms": 975.509257,
+    "row_count": 80
+  },
+  "week4_robustness": {
+    "evidence_status": "diagnostic_ai_assisted_not_calibrated",
+    "interpretation": "Consistency can be high because a model fails consistently; robustness and correctness must be reported together.",
+    "row_count": 546,
+    "semantic_robustness": {
+      "flan_t5_base": {
+        "score": 0.9142857142857143,
+        "stable_fail": 25,
+        "stable_pass": 7
+      },
+      "llama31_8b_instruct": {
+        "score": 0.8571428571428571,
+        "stable_fail": 4,
+        "stable_pass": 26
+      },
+      "mistral_7b_instruct_v0_2": {
+        "score": 0.8571428571428571,
+        "stable_fail": 0,
+        "stable_pass": 30
+      }
+    }
+  },
+  "week5_rag_optimisation": {
+    "balanced_choice": {
+      "quality_harmonic_mean": 0.941125,
+      "selection_rule": "highest harmonic mean of diagnostic Faithfulness and Coverage within the Pareto set; then lower p50 latency",
+      "variant_id": "chunk-1024_topk-5_rerank-ce"
+    },
+    "contrast_factor_summary": [
+      {
+        "contrasts": 18,
+        "factor": "chunk_size_tokens",
+        "mean_delta_answer_relevance": -0.049651,
+        "mean_delta_faithfulness": -0.007177,
+        "mean_delta_question_to_response_ms": 1199.650711,
+        "mean_delta_required_point_coverage": -0.013745
+      },
+      {
+        "contrasts": 9,
+        "factor": "reranking",
+        "mean_delta_answer_relevance": 0.076557,
+        "mean_delta_faithfulness": 0.026297,
+        "mean_delta_question_to_response_ms": 772.853667,
+        "mean_delta_required_point_coverage": 0.066358
+      },
+      {
+        "contrasts": 18,
+        "factor": "top_k",
+        "mean_delta_answer_relevance": 0.106294,
+        "mean_delta_faithfulness": 0.062313,
+        "mean_delta_question_to_response_ms": 606.713672,
+        "mean_delta_required_point_coverage": 0.083125
+      }
+    ],
+    "evidence_status": "diagnostic_uncalibrated",
+    "experiment_id": "w05_senpai_long_source_rag_optimisation",
+    "experiment_version": "1.1.0",
+    "factorial_cell_count": 18,
+    "interpretation": "Pareto membership is conditional on this 20-item public-source subset, one A40 run, and uncalibrated local evaluator metrics. Matched contrasts support factor attribution within this registered design; they do not identify a universal production optimum.",
+    "metric_coverage": {
+      "answer_relevance": 1.0,
+      "faithfulness": 0.969444,
+      "latency": 1.0,
+      "required_point_coverage": 0.988889
+    },
+    "pareto_variant_ids": [
+      "chunk-1024_topk-3_rerank-ce",
+      "chunk-1024_topk-5_rerank-ce",
+      "chunk-512_topk-5_rerank-ce"
+    ],
+    "reranking_interaction_by_top_k": [
+      {
+        "contrasts": 3,
+        "fixed_top_k": 1,
+        "mean_delta_answer_relevance": 0.126168,
+        "mean_delta_faithfulness": 0.063427,
+        "mean_delta_question_to_response_ms": 141.7296,
+        "mean_delta_required_point_coverage": 0.133102
+      },
+      {
+        "contrasts": 3,
+        "fixed_top_k": 3,
+        "mean_delta_answer_relevance": 0.000144,
+        "mean_delta_faithfulness": -0.016298,
+        "mean_delta_question_to_response_ms": 1068.999117,
+        "mean_delta_required_point_coverage": 0.03125
+      },
+      {
+        "contrasts": 3,
+        "fixed_top_k": 5,
+        "mean_delta_answer_relevance": 0.103359,
+        "mean_delta_faithfulness": 0.031761,
+        "mean_delta_question_to_response_ms": 1107.832283,
+        "mean_delta_required_point_coverage": 0.034722
+      }
+    ]
+  }
+}

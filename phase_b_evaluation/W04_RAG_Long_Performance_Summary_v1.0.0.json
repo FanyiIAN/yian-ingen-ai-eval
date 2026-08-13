@@ -1,0 +1,583 @@
+{
+  "analyzer_version": "0.1.2",
+  "group_count": 2,
+  "groups": [
+    {
+      "candidate_model_key": "llama31_8b_instruct",
+      "condition_id": "base",
+      "error_count": 0,
+      "evaluation_family": "rag_performance",
+      "latency_ms": {
+        "context_assembly_ms": {
+          "count": 40,
+          "max": 0.037034,
+          "mean": 0.005058,
+          "p50": 0.00368,
+          "p90": 0.00747,
+          "p95": 0.009304,
+          "stdev": 0.005625
+        },
+        "decode_ms": {
+          "count": 40,
+          "max": 0.40496,
+          "mean": 0.137879,
+          "p50": 0.126118,
+          "p90": 0.182121,
+          "p95": 0.204257,
+          "stdev": 0.054797
+        },
+        "generation_ms": {
+          "count": 40,
+          "max": 10223.593068,
+          "mean": 869.413805,
+          "p50": 383.903797,
+          "p90": 1079.43125,
+          "p95": 1388.969093,
+          "stdev": 1781.536474
+        },
+        "image_perturb_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "input_load_ms": {
+          "count": 40,
+          "max": 0.021403,
+          "mean": 0.006818,
+          "p50": 0.006008,
+          "p90": 0.011698,
+          "p95": 0.017609,
+          "stdev": 0.004515
+        },
+        "metadata_filter_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "preprocess_ms": {
+          "count": 40,
+          "max": 3.20877,
+          "mean": 1.737512,
+          "p50": 1.538693,
+          "p90": 2.678719,
+          "p95": 2.85853,
+          "stdev": 0.580457
+        },
+        "prompt_build_ms": {
+          "count": 40,
+          "max": 0.031165,
+          "mean": 0.012274,
+          "p50": 0.009883,
+          "p90": 0.022378,
+          "p95": 0.024819,
+          "stdev": 0.006895
+        },
+        "query_embedding_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "question_to_response_ms": {
+          "count": 40,
+          "max": 10225.770077,
+          "mean": 871.479983,
+          "p50": 385.731716,
+          "p90": 1083.006257,
+          "p95": 1390.535711,
+          "stdev": 1781.495922
+        },
+        "rerank_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "retrieval_total_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "ttft_ms": {
+          "count": 40,
+          "max": 90.186866,
+          "mean": 51.669276,
+          "p50": 49.611699,
+          "p90": 62.464757,
+          "p95": 66.134757,
+          "stdev": 9.004595
+        },
+        "vector_search_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        }
+      },
+      "measurement_unavailability_reasons": {},
+      "output_tokens_per_generation_second": {
+        "count": 40,
+        "max": 30.198995,
+        "mean": 28.886181,
+        "p50": 29.038618,
+        "p90": 29.663986,
+        "p95": 29.839869,
+        "stdev": 0.952496
+      },
+      "rag_enabled_row_count": 0,
+      "rag_not_applicable_row_count": 40,
+      "resources": {
+        "gpu_device_memory_used_peak_mib": {
+          "count": 40,
+          "max": 22419.0,
+          "mean": 22201.75,
+          "p50": 22419.0,
+          "p90": 22419.0,
+          "p95": 22419.0,
+          "stdev": 382.682753
+        },
+        "gpu_power_mean_w": {
+          "count": 40,
+          "max": 256.943333,
+          "mean": 234.341108,
+          "p50": 233.61,
+          "p90": 240.998334,
+          "p95": 242.2505,
+          "stdev": 7.471435
+        },
+        "gpu_power_peak_w": {
+          "count": 40,
+          "max": 264.26,
+          "mean": 239.249,
+          "p50": 241.53,
+          "p90": 243.843,
+          "p95": 244.217,
+          "stdev": 7.362876
+        },
+        "gpu_utilization_mean_pct": {
+          "count": 40,
+          "max": 97.666667,
+          "mean": 88.656891,
+          "p50": 95.666667,
+          "p90": 96.666667,
+          "p95": 96.7,
+          "stdev": 13.952236
+        },
+        "gpu_utilization_peak_pct": {
+          "count": 40,
+          "max": 98.0,
+          "mean": 96.125,
+          "p50": 96.0,
+          "p90": 97.0,
+          "p95": 97.05,
+          "stdev": 0.96576
+        },
+        "process_rss_peak_mib": {
+          "count": 40,
+          "max": 2690.085938,
+          "mean": 2689.441211,
+          "p50": 2689.753906,
+          "p90": 2690.011719,
+          "p95": 2690.067187,
+          "stdev": 0.963819
+        },
+        "system_memory_used_peak_mib": {
+          "count": 40,
+          "max": 35070.09375,
+          "mean": 33630.83418,
+          "p50": 33494.644531,
+          "p90": 34756.039453,
+          "p95": 34880.227734,
+          "stdev": 668.981612
+        },
+        "torch_allocated_peak_mib": {
+          "count": 40,
+          "max": 19733.362305,
+          "mean": 19708.79834,
+          "p50": 19708.067871,
+          "p90": 19709.336426,
+          "p95": 19710.221557,
+          "stdev": 4.491898
+        },
+        "torch_reserved_peak_mib": {
+          "count": 40,
+          "max": 22062.0,
+          "mean": 21844.75,
+          "p50": 22062.0,
+          "p90": 22062.0,
+          "p95": 22062.0,
+          "stdev": 382.682753
+        }
+      },
+      "row_count": 40,
+      "tokens": {
+        "output_tokens": {
+          "count": 40,
+          "max": 305.0,
+          "mean": 25.625,
+          "p50": 11.0,
+          "p90": 31.2,
+          "p95": 41.7,
+          "stdev": 53.414532
+        },
+        "prompt_tokens": {
+          "count": 40,
+          "max": 120.0,
+          "mean": 112.075,
+          "p50": 112.0,
+          "p90": 117.1,
+          "p95": 118.0,
+          "stdev": 3.751154
+        },
+        "total_tokens": {
+          "count": 40,
+          "max": 414.0,
+          "mean": 137.7,
+          "p50": 125.0,
+          "p90": 149.1,
+          "p95": 161.3,
+          "stdev": 53.325897
+        }
+      },
+      "unattributed_end_to_end_overhead_ms": {
+        "count": 40,
+        "max": 0.349658,
+        "mean": 0.166637,
+        "p50": 0.154094,
+        "p90": 0.206784,
+        "p95": 0.233739,
+        "stdev": 0.042067
+      }
+    },
+    {
+      "candidate_model_key": "llama31_8b_instruct",
+      "condition_id": "rag",
+      "error_count": 0,
+      "evaluation_family": "rag_performance",
+      "latency_ms": {
+        "context_assembly_ms": {
+          "count": 40,
+          "max": 0.110148,
+          "mean": 0.080519,
+          "p50": 0.076228,
+          "p90": 0.094376,
+          "p95": 0.106761,
+          "stdev": 0.011101
+        },
+        "decode_ms": {
+          "count": 40,
+          "max": 1.684797,
+          "mean": 0.641615,
+          "p50": 0.489453,
+          "p90": 1.153076,
+          "p95": 1.298933,
+          "stdev": 0.390477
+        },
+        "generation_ms": {
+          "count": 40,
+          "max": 19120.757137,
+          "mean": 8992.421312,
+          "p50": 7262.961476,
+          "p90": 16261.337106,
+          "p95": 16913.216647,
+          "stdev": 4747.373304
+        },
+        "image_perturb_ms": {
+          "count": 0,
+          "max": null,
+          "mean": null,
+          "p50": null,
+          "p90": null,
+          "p95": null,
+          "stdev": null
+        },
+        "input_load_ms": {
+          "count": 40,
+          "max": 0.007552,
+          "mean": 0.002853,
+          "p50": 0.002392,
+          "p90": 0.004381,
+          "p95": 0.005264,
+          "stdev": 0.001351
+        },
+        "metadata_filter_ms": {
+          "count": 40,
+          "max": 0.01774,
+          "mean": 0.009153,
+          "p50": 0.008203,
+          "p90": 0.016032,
+          "p95": 0.016455,
+          "stdev": 0.003847
+        },
+        "preprocess_ms": {
+          "count": 40,
+          "max": 15.09568,
+          "mean": 10.822886,
+          "p50": 10.690978,
+          "p90": 12.963714,
+          "p95": 13.959053,
+          "stdev": 1.56981
+        },
+        "prompt_build_ms": {
+          "count": 40,
+          "max": 0.015202,
+          "mean": 0.008132,
+          "p50": 0.007708,
+          "p90": 0.010805,
+          "p95": 0.011586,
+          "stdev": 0.001843
+        },
+        "query_embedding_ms": {
+          "count": 40,
+          "max": 55.231935,
+          "mean": 29.371037,
+          "p50": 30.240915,
+          "p90": 41.199414,
+          "p95": 45.934569,
+          "stdev": 10.121619
+        },
+        "question_to_response_ms": {
+          "count": 40,
+          "max": 20161.862302,
+          "mean": 9980.350653,
+          "p50": 8286.01254,
+          "p90": 17213.664638,
+          "p95": 17896.887006,
+          "stdev": 4745.296128
+        },
+        "rerank_ms": {
+          "count": 40,
+          "max": 879.065435,
+          "mean": 854.705356,
+          "p50": 855.447116,
+          "p90": 871.876937,
+          "p95": 874.877086,
+          "stdev": 12.498436
+        },
+        "retrieval_total_ms": {
+          "count": 40,
+          "max": 1044.966188,
+          "mean": 975.509257,
+          "p50": 975.800751,
+          "p90": 1021.753588,
+          "p95": 1033.881582,
+          "stdev": 37.357714
+        },
+        "ttft_ms": {
+          "count": 40,
+          "max": 1736.515772,
+          "mean": 1645.012492,
+          "p50": 1652.386773,
+          "p90": 1684.663615,
+          "p95": 1700.984838,
+          "stdev": 38.659314
+        },
+        "vector_search_ms": {
+          "count": 40,
+          "max": 162.992061,
+          "mean": 115.476631,
+          "p50": 114.224548,
+          "p90": 152.488496,
+          "p95": 161.142166,
+          "stdev": 27.203086
+        }
+      },
+      "measurement_unavailability_reasons": {},
+      "output_tokens_per_generation_second": {
+        "count": 40,
+        "max": 26.881364,
+        "mean": 25.078447,
+        "p50": 25.540932,
+        "p90": 26.78328,
+        "p95": 26.823776,
+        "stdev": 2.624219
+      },
+      "rag_enabled_row_count": 40,
+      "rag_not_applicable_row_count": 0,
+      "resources": {
+        "gpu_device_memory_used_peak_mib": {
+          "count": 40,
+          "max": 22419.0,
+          "mean": 22235.725,
+          "p50": 22419.0,
+          "p90": 22419.0,
+          "p95": 22419.0,
+          "stdev": 348.659998
+        },
+        "gpu_power_mean_w": {
+          "count": 40,
+          "max": 248.465,
+          "mean": 242.697509,
+          "p50": 243.0345,
+          "p90": 246.39425,
+          "p95": 246.921857,
+          "stdev": 3.073043
+        },
+        "gpu_power_peak_w": {
+          "count": 40,
+          "max": 293.01,
+          "mean": 276.326,
+          "p50": 276.84,
+          "p90": 284.731,
+          "p95": 287.1435,
+          "stdev": 8.070577
+        },
+        "gpu_utilization_mean_pct": {
+          "count": 40,
+          "max": 97.285714,
+          "mean": 94.957795,
+          "p50": 96.115131,
+          "p90": 96.871429,
+          "p95": 97.0125,
+          "stdev": 3.579508
+        },
+        "gpu_utilization_peak_pct": {
+          "count": 40,
+          "max": 100.0,
+          "mean": 99.775,
+          "p50": 100.0,
+          "p90": 100.0,
+          "p95": 100.0,
+          "stdev": 0.697523
+        },
+        "process_rss_peak_mib": {
+          "count": 40,
+          "max": 2690.085938,
+          "mean": 2689.58457,
+          "p50": 2689.753906,
+          "p90": 2690.017188,
+          "p95": 2690.082226,
+          "stdev": 0.500231
+        },
+        "system_memory_used_peak_mib": {
+          "count": 40,
+          "max": 35187.839844,
+          "mean": 34143.812988,
+          "p50": 34139.953125,
+          "p90": 34846.736718,
+          "p95": 34971.826562,
+          "stdev": 577.793204
+        },
+        "torch_allocated_peak_mib": {
+          "count": 40,
+          "max": 20609.324707,
+          "mean": 20582.982959,
+          "p50": 20585.20752,
+          "p90": 20602.844531,
+          "p95": 20606.578858,
+          "stdev": 16.871802
+        },
+        "torch_reserved_peak_mib": {
+          "count": 40,
+          "max": 22062.0,
+          "mean": 21872.05,
+          "p50": 22062.0,
+          "p90": 22062.0,
+          "p95": 22062.0,
+          "stdev": 353.997099
+        }
+      },
+      "row_count": 40,
+      "tokens": {
+        "output_tokens": {
+          "count": 40,
+          "max": 512.0,
+          "mean": 233.375,
+          "p50": 185.5,
+          "p90": 436.0,
+          "p95": 453.7,
+          "stdev": 131.863505
+        },
+        "prompt_tokens": {
+          "count": 40,
+          "max": 3890.0,
+          "mean": 3776.75,
+          "p50": 3789.0,
+          "p90": 3859.4,
+          "p95": 3878.5,
+          "stdev": 68.294141
+        },
+        "total_tokens": {
+          "count": 40,
+          "max": 4370.0,
+          "mean": 4010.125,
+          "p50": 3995.0,
+          "p90": 4216.9,
+          "p95": 4257.7,
+          "stdev": 150.521859
+        }
+      },
+      "unattributed_end_to_end_overhead_ms": {
+        "count": 40,
+        "max": -917.99955,
+        "mean": -998.698098,
+        "p50": -1005.151022,
+        "p90": -938.33439,
+        "p95": -923.671153,
+        "stdev": 43.603612
+      }
+    }
+  ],
+  "interpretation_boundary": "Latency and resource results are hardware/configuration specific; non-RAG rows have no RAG latency value.",
+  "row_count": 80,
+  "run_static": [
+    {
+      "candidate_model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "candidate_model_key": "llama31_8b_instruct",
+      "candidate_model_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "checkpoint_bytes": 32132587458,
+      "cuda_runtime": "13.0",
+      "driver_version": null,
+      "driver_version_unavailability_reason": "environment_manifest_v0.1.0_did_not_capture_driver_version",
+      "gpu_memory_total_mib": 46068.0,
+      "gpu_name": "NVIDIA A40",
+      "host_ram_total_mib": 515598.378906,
+      "logical_cpu_count": 96,
+      "model_load_gpu_memory_peak_mib": 20063.0,
+      "model_load_gpu_power_peak_w": 96.96,
+      "model_load_gpu_utilization_peak_pct": 5.0,
+      "model_load_ms": 47391.234665,
+      "model_load_process_rss_peak_mib": 17639.167969,
+      "precision": "bfloat16",
+      "python_version": "3.12.3",
+      "source_file": "W04_RAG_Performance_Run_Manifest.json",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.15.0"
+    }
+  ],
+  "run_static_sources": [
+    {
+      "file": "W04_RAG_Performance_Run_Manifest.json",
+      "row_count": 1,
+      "sha256": "ceb0a2536d97b58a44202550576ca23ec2ea9cf5e3f8c30f328c3a9122a33b8b"
+    }
+  ],
+  "sources": [
+    {
+      "file": "W04_RAG_Performance_Events.jsonl",
+      "row_count": 80,
+      "sha256": "cf4490b9b2a248e3b1bc31365a66aafd29857ce0409d9c48ea90ef4f9a0a29a0"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "register_id": "w03_w05_rag_corrective_version_register",
+  "register_version": "1.1.0",
+  "status_as_of": "2026-08-12",
+  "latest_public_artifacts": {
+    "week_3": "../phase_b_evaluation/W03_RAG_Long_Source_Corrective_Report_v1.0.0.md",
+    "week_4": "../phase_b_evaluation/W04_RAG_Long_Performance_Report_v1.0.0.md",
+    "week_5": "W05_RAG_Long_Source_Optimisation_Report_v1.1.0.md",
+    "week_5_notebook": "W05_RAG_Optimisation.ipynb",
+    "accumulated_weeks_2_to_4": "W05_Accumulated_Evidence_Report_v1.1.0.md"
+  },
+  "superseded_families": [
+    {
+      "week": 3,
+      "patterns": [
+        "../phase_b_evaluation/W03_RAG_Expanded_*v0.6.*",
+        "../phase_b_evaluation/Phase_AB_W03_RAG_Item_Results.csv"
+      ],
+      "status": "superseded_not_latest_for_rag_knowledge_base_results",
+      "reason": "The atomic-section parent corpus did not make chunk size an operational long-document factor."
+    },
+    {
+      "week": 4,
+      "patterns": [
+        "../phase_b_evaluation/Phase_AB_W04_RAG_Performance_Item_Results.csv",
+        "../phase_b_evaluation/W04_System_Performance_Summary_v0.1.0.*",
+        "../phase_b_evaluation/W04_System_Performance_Summary_v0.2.0.*"
+      ],
+      "status": "rag_rows_superseded_non_rag_rows_remain_applicable",
+      "reason": "Only RAG performance depended on the corrected knowledge base; robustness and multimodal evidence did not."
+    },
+    {
+      "week": 5,
+      "patterns": [
+        "W05_RAG_Optimisation_Summary_v1.0.0.*",
+        "W05_RAG_Optimisation_Item_Results_v1.0.0.csv",
+        "W05_RAG_Optimisation_Report.md",
+        "W05_RAG_Optimisation_Atomic_Sections_v1.0.0.ipynb"
+      ],
+      "status": "superseded_not_latest",
+      "reason": "The earlier factorial run compared chunk labels over pre-segmented atomic sections rather than true long-document chunking."
+    },
+    {
+      "week": 5,
+      "patterns": [
+        "W05_Accumulated_Evidence_Analysis_v1.0.0.json",
+        "W05_Accumulated_Platform_Trends_v1.0.0.csv",
+        "W05_Accumulated_Evidence_Report.md"
+      ],
+      "status": "superseded_not_latest_for_accumulated_rag_evidence",
+      "reason": "The v1.0.0 accumulated analysis consumed the superseded Week 3 and Week 4 RAG inputs."
+    }
+  ],
+  "scope_note": "Supersession applies to RAG knowledge-base-dependent results only. It does not retroactively invalidate independent non-RAG experiments."
+}

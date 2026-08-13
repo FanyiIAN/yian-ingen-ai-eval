@@ -1,5 +1,7 @@
 # Week 3 Expanded RAG Benchmark Report
 
+> **Status: SUPERSEDED / NOT LATEST for RAG knowledge-base results.** This benchmark used pre-segmented atomic-section parents, so chunk size was not an operational long-document factor. Use `W03_RAG_Long_Source_Corrective_Report_v1.0.0.md` for the latest public RAG result.
+
 **Phase:** B — systematic evaluation and retrieval-augmented generation
 
 **Benchmark version:** `0.6.2`

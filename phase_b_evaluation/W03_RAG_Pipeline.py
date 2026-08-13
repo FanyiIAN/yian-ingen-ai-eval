@@ -29,7 +29,7 @@ REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_KB_PATH = SCRIPT_DIR / "W03_RAG_Knowledge_Base.yaml"
 DEFAULT_EVAL_PATH = SCRIPT_DIR / "W03_RAG_Eval_Set.yaml"
 DEFAULT_CONFIG_PATH = SCRIPT_DIR / "W03_RAG_Run_Config.yaml"
-PIPELINE_VERSION = "0.4.1"
+PIPELINE_VERSION = "1.0.0"
 
 
 class ProfiledEmbeddings:
@@ -150,6 +150,7 @@ def validate_assets(
             "pipeline_smoke_only",
             "official_public_rag_benchmark",
             "private_rag_smoke",
+            "private_rag_benchmark",
         },
         "evaluation set has an unsupported dataset_role",
         errors,
@@ -167,8 +168,8 @@ def validate_assets(
         )
     if data_origin == "internal_private_curated":
         _require(
-            dataset_role == "private_rag_smoke",
-            "private knowledge must use the private RAG smoke role",
+            dataset_role in {"private_rag_smoke", "private_rag_benchmark"},
+            "private knowledge must use a private RAG role",
             errors,
         )
         _require(
@@ -184,6 +185,10 @@ def validate_assets(
         "Fari",
         "Senpai",
         "Sentinel_Prime_AI",
+        "InGen",
+        "Origami_AI",
+        "Rover",
+        "Humanoid",
         "cross_product",
     }
     for document in documents:
@@ -214,8 +219,11 @@ def validate_assets(
             "internal_private_curated": "internal_document_snapshot",
             "synthetic_placeholder": "synthetic_placeholder",
         }[data_origin]
+        accepted_source_kinds = {expected_source_kind}
+        if data_origin == "official_public_curated":
+            accepted_source_kinds.add("official_public_pdf_snapshot")
         _require(
-            source.get("kind") == expected_source_kind,
+            source.get("kind") in accepted_source_kinds,
             f"{document_id}: unexpected source kind",
             errors,
         )
@@ -235,11 +243,12 @@ def validate_assets(
                 f"{document_id}: access_scope must be public",
                 errors,
             )
-            _require(
-                document.get("is_current") is True,
-                f"{document_id}: current official source must set is_current",
-                errors,
-            )
+            if source.get("kind") == "official_web_curated_snapshot":
+                _require(
+                    document.get("is_current") is True,
+                    f"{document_id}: current official page must set is_current",
+                    errors,
+                )
         if data_origin == "internal_private_curated":
             _require(
                 document.get("owner_type") == "internal",
@@ -329,7 +338,13 @@ def validate_assets(
             )
             if document_id in document_by_id:
                 _require(
-                    document_by_id[document_id].get("platform") == item.get("platform"),
+                    document_by_id[document_id].get("platform")
+                    in {
+                        item.get("platform"),
+                        "cross_product",
+                        "Origami_AI",
+                        "InGen",
+                    },
                     f"{eval_id}: reference-document platform mismatch",
                     errors,
                 )
@@ -376,7 +391,11 @@ def validate_assets(
         expected_review_status = (
             "approved_public_official_benchmark"
             if dataset_role == "official_public_rag_benchmark"
-            else "approved_for_pipeline_smoke_only"
+            else (
+                "approved_private_benchmark"
+                if dataset_role == "private_rag_benchmark"
+                else "approved_for_pipeline_smoke_only"
+            )
         )
         _require(
             authoring.get("review_status") == expected_review_status,
@@ -564,6 +583,7 @@ def build_source_documents(kb: dict[str, Any]) -> list[Any]:
                 facts_by_section.setdefault(section_id, []).append(fact["fact_id"])
             else:
                 unscoped_fact_ids.append(fact["fact_id"])
+        long_parent = not bool(record.get("sections"))
         for section in sections:
             content = section["content"].strip()
             section_id = section["section_id"]
@@ -596,6 +616,11 @@ def build_source_documents(kb: dict[str, Any]) -> list[Any]:
                     "claim_status",
                     record.get("claim_status", "synthetic_fixture"),
                 ),
+                "source_status": record.get("source_status", ""),
+                "status_scope": record.get("status_scope", ""),
+                "authority_tier": int(record.get("authority_tier", 0)),
+                "source_conflicted": bool(record.get("source_conflicted", False)),
+                "publication_date": record.get("publication_date", ""),
                 "canonical_priority": int(record.get("canonical_priority", 0)),
                 "conflict_group": record.get("conflict_group", ""),
                 "is_current": bool(record.get("is_current", True)),
@@ -614,6 +639,7 @@ def build_source_documents(kb: dict[str, Any]) -> list[Any]:
                 "document_content_sha256": document_sha256,
                 "parent_content_sha256": sha256_text(content),
                 "chunker_version": PIPELINE_VERSION,
+                "long_parent_document": long_parent,
             }
             documents.append(
                 Document(
@@ -670,6 +696,9 @@ def split_documents(kb: dict[str, Any], config: dict[str, Any]) -> list[Any]:
     else:
         raise ValueError(f"Unsupported text splitter strategy: {strategy}")
 
+    source_record_by_id = {
+        record["document_id"]: record for record in kb["documents"]
+    }
     split: list[Any] = []
     for source in build_source_documents(kb):
         chunks = splitter.split_documents([source])
@@ -680,9 +709,52 @@ def split_documents(kb: dict[str, Any], config: dict[str, Any]) -> list[Any]:
             )
             for index in range(len(chunks))
         ]
+        previous_resolved_start = -1
         for index, chunk in enumerate(chunks):
             chunk_id = chunk_ids[index]
             chunk.id = chunk_id
+            # LangChain's add_start_index may attach -1 when the parent contains
+            # repeated short table values or separator-normalised Unicode.  A
+            # -1 offset silently detaches evidence near the start of a long
+            # parent.  Resolve each exact chunk substring monotonically in the
+            # original parent and fail closed if it cannot be located.
+            search_from = 0 if previous_resolved_start < 0 else previous_resolved_start + 1
+            start_index = source.page_content.find(chunk.page_content, search_from)
+            if start_index < 0:
+                reported_start = int(chunk.metadata.get("start_index", -1))
+                if (
+                    reported_start >= 0
+                    and source.page_content[
+                        reported_start : reported_start + len(chunk.page_content)
+                    ]
+                    == chunk.page_content
+                ):
+                    start_index = reported_start
+            if start_index < 0:
+                raise ValueError(
+                    f"Unable to resolve exact chunk offset for {chunk_id}"
+                )
+            previous_resolved_start = start_index
+            end_index = start_index + len(chunk.page_content)
+            record = source_record_by_id[source.metadata["document_id"]]
+            if source.metadata.get("long_parent_document"):
+                overlapping_block_ids = [
+                    block["block_id"]
+                    for block in record.get("source_blocks") or []
+                    if int(block.get("end_char", 0)) > start_index
+                    and int(block.get("start_char", 0)) < end_index
+                ]
+                overlapping_fact_ids = [
+                    fact["fact_id"]
+                    for fact in record.get("supported_facts") or []
+                    if int(fact.get("end_char", 0)) > start_index
+                    and int(fact.get("start_char", 0)) < end_index
+                ]
+            else:
+                overlapping_block_ids = []
+                overlapping_fact_ids = json.loads(
+                    chunk.metadata.get("fact_ids_json", "[]")
+                )
             chunk.metadata.update(
                 {
                     "chunk_id": chunk_id,
@@ -699,6 +771,14 @@ def split_documents(kb: dict[str, Any], config: dict[str, Any]) -> list[Any]:
                     ),
                     "token_count": count_tokens(chunk.page_content),
                     "chunk_content_sha256": sha256_text(chunk.page_content),
+                    "start_index": start_index,
+                    "end_index": end_index,
+                    "source_block_ids_json": json.dumps(
+                        overlapping_block_ids, separators=(",", ":")
+                    ),
+                    "fact_ids_json": json.dumps(
+                        overlapping_fact_ids, separators=(",", ":")
+                    ),
                 }
             )
             split.append(chunk)
@@ -852,15 +932,18 @@ def metadata_filter_for_item(
             if retrieval["retriever"].get("platform_metadata_filter")
             else None
         )
-    conditions: list[dict[str, Any]] = [
-        {"owner_type": {"$eq": gate["owner_type"]}},
-        {"source_domain": {"$eq": gate["source_domain"]}},
-        {"access_scope": {"$eq": gate["access_scope"]}},
-        {"confidentiality": {"$eq": gate["confidentiality"]}},
-        {"is_current": {"$eq": bool(gate["is_current"])}},
-    ]
+    conditions: list[dict[str, Any]] = []
+    for field in ("owner_type", "source_domain", "access_scope", "confidentiality"):
+        if field in gate:
+            conditions.append({field: {"$eq": gate[field]}})
+    if "is_current" in gate:
+        conditions.append({"is_current": {"$eq": bool(gate["is_current"])}})
     if gate.get("enforce_platform_filter", True):
         conditions.append({"platform": {"$eq": item["platform"]}})
+    if not conditions:
+        return None
+    if len(conditions) == 1:
+        return conditions[0]
     return {"$and": conditions}
 
 
@@ -874,12 +957,12 @@ def document_passes_metadata_gate(
         return True
     metadata = document.metadata
     checks = [
-        metadata.get("owner_type") == gate["owner_type"],
-        metadata.get("source_domain") == gate["source_domain"],
-        metadata.get("access_scope") == gate["access_scope"],
-        metadata.get("confidentiality") == gate["confidentiality"],
-        metadata.get("is_current") == bool(gate["is_current"]),
+        metadata.get(field) == gate[field]
+        for field in ("owner_type", "source_domain", "access_scope", "confidentiality")
+        if field in gate
     ]
+    if "is_current" in gate:
+        checks.append(metadata.get("is_current") == bool(gate["is_current"]))
     if gate.get("enforce_platform_filter", True):
         checks.append(metadata.get("platform") == item["platform"])
     return all(checks)
@@ -1204,6 +1287,8 @@ def format_context(documents: list[Any]) -> str:
             f"[{metadata['chunk_id']} | {metadata['title']} | "
             f"{metadata.get('section_path', '')} | "
             f"claim={metadata.get('claim_status', '')} | "
+            f"status={metadata.get('source_status', '')} | "
+            f"status_scope={metadata.get('status_scope', '')} | "
             f"accessed={metadata.get('accessed_at', '')} | "
             f"{metadata.get('source_url', metadata.get('source_locator', ''))}]\n"
             f"{document.page_content}"

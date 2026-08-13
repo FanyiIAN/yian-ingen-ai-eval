@@ -1,5 +1,7 @@
 # Week 4 System Performance Summary
 
+> **RAG status: SUPERSEDED / NOT LATEST; non-RAG rows remain applicable.** Use `W04_RAG_Long_Performance_Report_v1.0.0.md` for the latest long-document RAG performance result.
+
 > Hardware/configuration-specific evidence. A missing measurement is not zero. 
 > RAG latency is not applicable when retrieval is disabled.
 

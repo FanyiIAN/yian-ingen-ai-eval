@@ -2,8 +2,8 @@
 
 > The Prometheus Judge failed its frozen calibration. Scores below are
 > diagnostic, coverage-sensitive evidence and are not a validated model
-> quality leaderboard. Human review remains required for all 105 rows and
-> every severity-5 response.
+> quality leaderboard. A separate 105-row human adjudication is not required
+> by the reference plan and is not scheduled.
 
 - Benchmark: `0.2.0` (35 synthetic scenarios)
 - Candidate prompt: `0.4.0` / `0bb0a6f2e298f286739080752540939454e2e5e52c0dca477e17196657cac71d`
@@ -31,7 +31,7 @@ coverage can reflect selection bias, so coverage is part of every cell.
 
 These deltas answer only what the failed-calibration diagnostic Judge
 reported under the frozen protocol. They do not establish that Llama is
-better until the rows receive model-blind human adjudication.
+better; no validated ranking is claimed.
 
 ## Per-platform diagnostic quality
 
@@ -56,5 +56,5 @@ better until the rows receive model-blind human adjudication.
   behaved differently; architecture size alone is not an explanation.
 - Deployment boundary: these are independent open models on synthetic
   text scenarios, not deployed InGen products or PIC runtime results.
-- Next validity gate: model-blind human adjudication, including all
-  severity-5 rows, followed by a freshly sealed held-out set.
+- Optional future validation: independently adjudicate a sample and use
+  a freshly sealed held-out set. This is outside the current reference scope.

@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "w03_w05_long_source_corrective_run",
+  "manifest_version": "1.1.0",
+  "completed_date": "2026-08-12",
+  "random_seed": 42,
+  "hardware": "NVIDIA A40 48GB",
+  "privacy_boundary": "Raw prompts, contexts, answers, Judge traces, internal-source evidence, local paths, logs, and environment snapshots remain private.",
+  "formal_row_counts": {
+    "week3_public_generation": 80,
+    "week3_public_ragas": 80,
+    "week3_public_coverage": 80,
+    "week3_private_generation": 40,
+    "week3_private_ragas": 40,
+    "week3_private_coverage": 40,
+    "week4_public_performance_measured": 80,
+    "week4_public_performance_excluded_warmup": 1,
+    "week5_public_generation": 360,
+    "week5_public_ragas": 360,
+    "week5_public_coverage": 360
+  },
+  "private_raw_evidence_sha256": {
+    "week3_public_retrieval_json": "16c6f64d126b44935c908ed8a1174fd3b3900e467d861d89e26290c5ed5dabdd",
+    "week3_public_generations_jsonl": "1b621a57e92e6cf161a3c52049f396f26ebd7144437cf90cbef7faff9985fb04",
+    "week3_public_ragas_jsonl": "eca8f7ea0a13955a97e22b725470402e82eae6ce1ec4b86b86a5af32af9c357e",
+    "week3_public_coverage_jsonl": "d42f6cc0c05547c2e148a2ea117b1c1f1b02caa5412fb4e81fa839ecaf2ce174",
+    "week3_private_retrieval_json": "be7cc47a56dca47745700ace29c2c368a8fb9e3f07b956919d54cfcf88b95fa5",
+    "week3_private_generations_jsonl": "aedb1fa3fc07a5fbdb78e374d2ac87a9a8c5334a0024536c49bc6935d4271520",
+    "week3_private_ragas_jsonl": "b3fc51064e0e8144dc9404361861bfebfa7784fab67106a510e50e57940011fe",
+    "week3_private_coverage_jsonl": "03ae62ea97b4506f76386f7043cc707b5fa8d13ff71f64a52920d848c4fc6199",
+    "week5_generations_jsonl": "b9589b2e606a935ce9384a91ecce3dba9f4d3762409b1aa59e91dcdddb91c995",
+    "week5_ragas_jsonl": "938b99fd71c6a49fcec2306e18243ee14fcd99368a67412fd2ad2945eb822289",
+    "week5_coverage_jsonl": "046677b46374a3f66577f8d256f87e356cb275048e3d5ddef0bfa9794d255d8a"
+  },
+  "public_artifact_sha256": {
+    "../phase_b_evaluation/W03_RAG_Long_Source_Summary_v1.0.0.json": "70abbfc867eb4b7dec6c1345a54d21b14a5f9bfdd75d609b8ccdd14535c0821d",
+    "../phase_b_evaluation/W03_RAG_Long_Source_Item_Results_v1.0.0.csv": "33246b867981714d0819f48bc3f97375a748020fcafb8f5d0e9ba8677dbaa098",
+    "../phase_b_evaluation/W03_RAG_Long_Source_Corrective_Report_v1.0.0.md": "30424905689bee1f32f3f1451c77cab125553963959b2f119dcb1c07c35a4d12",
+    "../phase_b_evaluation/W04_RAG_Long_Performance_Summary_v1.0.0.json": "58bd92ecc5239ee31076b90eb19d4dd30289cdd5df2ca153cba8d772b0d8c44f",
+    "../phase_b_evaluation/W04_RAG_Long_Performance_Item_Results_v1.0.0.csv": "73e64a209bf12dde5be221eb7a67e6af4bf881aa9677031753b6196acc484770",
+    "W05_RAG_Long_Source_Optimisation_Summary_v1.1.0.json": "752958d6b43b1c06ed8e3fe6e1a4281544b4b43cd757347ad1776a908dc24d56",
+    "W05_RAG_Long_Source_Optimisation_Summary_v1.1.0.csv": "5f8f2d748a1d040c30192336768ec9451f302d0c40eb81da6542745a11b1d21c",
+    "W05_RAG_Long_Source_Optimisation_Item_Results_v1.1.0.csv": "59eb02271952b9015965856e4689f20b04ba27b24ad35146c59549956ce7a215",
+    "W05_RAG_Long_Source_Optimisation_Report_v1.1.0.md": "be1f0b1c5615da6caf645318b4f6764b383982cbfde61369c22fb207984b4b6a",
+    "W05_RAG_Optimisation.ipynb": "ab71418435587e657835ba331155346e906ddee5dfbab1dfb6adf83ce8e1a9fc",
+    "W05_RAG_Optimisation_Atomic_Sections_v1.0.0.ipynb": "264285af6a321d53f32659f2c7721ae83afd0b972e94316b309e1bbf5e6a5f63"
+  },
+  "scoring_completeness": {
+    "week3_public_ragas_complete": 80,
+    "week3_public_coverage_finite": 80,
+    "week3_private_ragas_complete": 40,
+    "week3_private_coverage_finite": 39,
+    "week5_answer_relevance_finite": 360,
+    "week5_faithfulness_finite": 349,
+    "week5_coverage_finite": 356,
+    "week5_missing_values_imputed": 0
+  },
+  "judge_runtime_incident": {
+    "initial_service_max_model_len": 8192,
+    "observed_overflow": "6145 input tokens plus 2048 requested output tokens exceeded the service limit",
+    "failed_batch_rows_committed": 0,
+    "resumed_service_max_model_len": 16384,
+    "model_revision_changed": false,
+    "metric_definition_changed": false
+  },
+  "claim_boundary": "Diagnostic public-source component evaluation only; no deployment, safety certification, clinical validation, universal optimum, or PIC 2.0 production-readiness claim."
+}

@@ -1,0 +1,1762 @@
+{
+  "schema_version": "1.0.0",
+  "evaluation_set_id": "w03_ingen_long_public",
+  "evaluation_set_version": "1.0.0",
+  "created_date": "2026-08-12",
+  "language": "en",
+  "dataset_role": "official_public_rag_benchmark",
+  "item_count": 40,
+  "split": "corrective_long_document_benchmark",
+  "platforms": [
+    "Fari",
+    "Senpai"
+  ],
+  "random_seed": 42,
+  "question_design": {
+    "platform_balance": {
+      "Fari": 20,
+      "Senpai": 20
+    },
+    "question_type_counts": {
+      "epistemic_status": 2,
+      "local_detail": 1,
+      "coverage_list": 1,
+      "multi_section_safety": 1,
+      "privacy_synthesis": 2,
+      "governance_fact": 1,
+      "technical_safety": 1,
+      "table_multi_field": 2,
+      "ordered_multi_chunk_workflow": 1,
+      "interface_comparison": 2,
+      "specification_with_status": 2,
+      "architecture_synthesis": 2,
+      "ux_governance_synthesis": 1,
+      "long_range_synthesis": 1,
+      "privacy_boundary": 1,
+      "data_flow": 1,
+      "model_component_boundary": 2,
+      "edge_capability": 1,
+      "accessibility": 1,
+      "mechanism_status_distinction": 1,
+      "pedagogy_synthesis": 1,
+      "technical_multi_fact": 1,
+      "multi_fact_pedagogy": 1,
+      "inclusive_design": 1,
+      "safety_mechanism": 1,
+      "compliance_status": 1,
+      "v_model": 1,
+      "audience_coverage": 1,
+      "safety_rule_application": 1,
+      "screen_coverage": 1,
+      "context_separation": 1,
+      "versioned_terminology": 1,
+      "unanswerable_certification": 1
+    },
+    "difficulty_counts": {
+      "medium": 17,
+      "easy": 4,
+      "hard": 19
+    },
+    "principles": [
+      "questions frozen before candidate generation",
+      "exact source-block evidence spans separate from retrieval chunks",
+      "single-span, cross-section, table, multi-hop, status, conflict and unanswerable coverage",
+      "all numeric design targets retain readiness qualification"
+    ]
+  },
+  "claim_boundary": "Current public pages describe development-stage or design-target information; dated PDFs are background, not current specifications.",
+  "items": [
+    {
+      "eval_id": "W03-LONG-FARI-001",
+      "platform": "Fari",
+      "question_type": "epistemic_status",
+      "answerability": "not_established",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Does the current official Fari page establish that the product is deployed and its capabilities are clinically validated?",
+      "reference_answer": "No. The page describes features in active development and says the planned capabilities are design targets subject to change; it does not establish deployment or clinical validation.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-001",
+        "PUB-FARI-20260812::fact-002"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0015 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-001"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0019 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-002"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-002",
+      "platform": "Fari",
+      "question_type": "local_detail",
+      "answerability": "answerable",
+      "difficulty": "easy",
+      "severity": 3,
+      "question": "Which three eldercare dimensions is Fari being designed to address?",
+      "reference_answer": "Clinical health monitoring, emotional wellbeing, and physical safety.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-003"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0004 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-003"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-003",
+      "platform": "Fari",
+      "question_type": "coverage_list",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Which vital signs does the current Fari design target monitor continuously and non-invasively?",
+      "reference_answer": "Heart rate, SpO2, respiratory rate, skin temperature, and blood-pressure estimation.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-004"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0020 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-004"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-004",
+      "platform": "Fari",
+      "question_type": "multi_section_safety",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "For a missed medication dose, what escalation is designed, and may the interface present an autonomous clinical action as final?",
+      "reference_answer": "The planned escalation is gentle prompt, detailed instructions, then caregiver alert. The interface must distinguish AI recommendations from confirmed information and use 'Suggest', not 'Do'; it must not present autonomous clinical action as final.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-005",
+        "PUB-FARI-20260812::fact-006"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0025 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-005"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0109 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-006"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-005",
+      "platform": "Fari",
+      "question_type": "privacy_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How is Fari's current design intended to keep raw biometric data private across edge and cloud?",
+      "reference_answer": "The design runs edge AI locally on Jetson Orin NX, prohibits raw biometric cloud transmission, and says camera feeds are processed on-device and never stored.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-007",
+        "PUB-FARI-20260812::fact-008"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0061 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-007"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0108 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-008"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-006",
+      "platform": "Fari",
+      "question_type": "governance_fact",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "What does the official Fari page say about the 12 SEOM rules and whether other objectives may override them?",
+      "reference_answer": "It describes 12 immutable rules that cannot be overridden by another objective, even for improved performance.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-009"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0051 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-009"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-007",
+      "platform": "Fari",
+      "question_type": "technical_safety",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Which Fari rule gives emergency detection priority, and which alert channels are planned?",
+      "reference_answer": "SEOM Rule F03 gives emergency detection priority. Planned channels are on-device, dashboard, mobile push, and SMS.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-010"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0033 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-010"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-008",
+      "platform": "Fari",
+      "question_type": "table_multi_field",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "In Fari's formal requirements table, how are SYS-002 and SYS-008 specified and verified?",
+      "reference_answer": "SYS-002 is fall detection with target alert latency under 3.2 seconds, verified by lab and field test. SYS-008 is HL7 FHIR R4 EHR integration with target sync under five minutes, verified by integration test.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-011",
+        "PUB-FARI-20260812::fact-012"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0059 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-011"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0065 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-012"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-009",
+      "platform": "Fari",
+      "question_type": "ordered_multi_chunk_workflow",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Distinguish Fari's three planned alert tiers by event type and delivery treatment.",
+      "reference_answer": "Emergency events such as falls or cardiac/unresponsive events use multi-channel immediate alerts; vital deviations, missed medication, or unusual activity use dashboard plus caregiver notification; wellbeing and environmental updates are logged and batched for handover.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-013",
+        "PUB-FARI-20260812::fact-014",
+        "PUB-FARI-20260812::fact-015"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0089 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-013"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0090 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-014"
+          ]
+        },
+        {
+          "point_id": "P3",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0091 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-015"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-010",
+      "platform": "Fari",
+      "question_type": "interface_comparison",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "How should the same Fari data be presented differently to residents, caregivers, and families?",
+      "reference_answer": "Residents receive simple large-type reassurance, caregivers data-rich dashboards, and families curated wellbeing digests: the same data through three audience-specific interfaces.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-016",
+        "PUB-FARI-20260812::fact-017"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0107 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-016"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0113 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-017"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-011",
+      "platform": "Fari",
+      "question_type": "specification_with_status",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Compare Fari's planned fall-alert and EHR-sync latency figures without presenting either as a measured production result.",
+      "reference_answer": "The design targets under 3.2 seconds from fall detection to caregiver notification and under five minutes for HL7 FHIR R4 EHR synchronisation. Both are targets, not measured production results.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-018",
+        "PUB-FARI-20260812::fact-019"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0031 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-018"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0024 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-019"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-012",
+      "platform": "Fari",
+      "question_type": "architecture_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Which sensing and compute elements support Fari's privacy-first edge architecture?",
+      "reference_answer": "The page lists a multi-modal sensor array including radar, cameras, LiDAR, ultrasonics, IMU and PPG, paired with Jetson Orin NX edge compute running inference on-device without raw biometric cloud transfer.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-020",
+        "PUB-FARI-20260812::fact-021"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0081 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-020"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0082 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-021"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-013",
+      "platform": "Fari",
+      "question_type": "ux_governance_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How should Fari phrase an observed health anomaly and display an AI recommendation?",
+      "reference_answer": "Use observation framing rather than diagnosis, for example 'Fari observed elevated heart rate'; visually distinguish AI recommendations, show confidence, and label the action 'Suggest' rather than 'Do'.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-022",
+        "PUB-FARI-20260812::fact-006"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0105 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-022"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0109 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-006"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-014",
+      "platform": "Fari",
+      "question_type": "long_range_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How do Fari's seven parallel development tracks coordinate, and what cross-track artifact does integration own?",
+      "reference_answer": "Tracks deliver independently but synchronise at gate reviews with SEOM clearance. Integration owns the Interface Control Document for 15 inter-subsystem interfaces plus end-to-end verification and audits.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-023",
+        "PUB-FARI-20260812::fact-024"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0093 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-023"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0100 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-024"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-015",
+      "platform": "Fari",
+      "question_type": "privacy_boundary",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "May Fari's resident display show raw biometric data or store camera feeds according to the official UX description?",
+      "reference_answer": "No. Camera feeds are described as processed on-device and never stored, and the resident display is not designed to show raw biometric data.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-008"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0108 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-008"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-016",
+      "platform": "Fari",
+      "question_type": "data_flow",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "What protocol and security treatment are planned for Fari's EHR data flow?",
+      "reference_answer": "A bi-directional HL7 FHIR R4 API client with target sync under five minutes and mTLS-encrypted transport.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-025"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0086 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-025"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-017",
+      "platform": "Fari",
+      "question_type": "model_component_boundary",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Differentiate the planned roles of AMDC and HTD-IRL in Fari.",
+      "reference_answer": "AMDC assesses emotional wellbeing from facial, vocal, and activity signals and reports observations rather than diagnoses. HTD-IRL models movement and gait to predict fall risk and pre-fall signatures.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-026",
+        "PUB-FARI-20260812::fact-027"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0047 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-026"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0048 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-027"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-018",
+      "platform": "Fari",
+      "question_type": "edge_capability",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Where are Fari's six named AI models planned to run?",
+      "reference_answer": "They are planned to be orchestrated on the Jetson edge, with all inference on that edge platform.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-028"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0083 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-028"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-019",
+      "platform": "Fari",
+      "question_type": "accessibility",
+      "answerability": "answerable",
+      "difficulty": "easy",
+      "severity": 3,
+      "question": "Which accessibility standard is Fari being designed to meet across its interfaces?",
+      "reference_answer": "WCAG 2.1 AA, with accommodations for sensory, motor, and cognitive challenges common among elderly residents.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-029"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0116 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-029"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-FARI-020",
+      "platform": "Fari",
+      "question_type": "mechanism_status_distinction",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "What wording on the Fari page prevents target accuracy and latency values from being interpreted as causal evidence of real-world benefit?",
+      "reference_answer": "The page labels capabilities as design targets subject to change and says showcased features are in active development. Therefore target accuracy or latency is a specification, not causal evidence of deployed benefit.",
+      "reference_document_ids": [
+        "PUB-FARI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-FARI-20260812::fact-001",
+        "PUB-FARI-20260812::fact-002"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0015 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-001"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-FARI-20260812::block-0019 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-FARI-20260812::fact-002"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-001",
+      "platform": "Senpai",
+      "question_type": "epistemic_status",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "What is the readiness status of the Senpai features and specifications described on the current official page?",
+      "reference_answer": "Senpai is in active development. The page presents current design intent and roadmap; specifications are subject to change and require engineering validation.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-001",
+        "PUB-SENPAI-20260812::fact-002"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0001 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-001"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0051 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-002"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-002",
+      "platform": "Senpai",
+      "question_type": "pedagogy_synthesis",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Which four learning-science methods does Senpai's pedagogical framework draw on?",
+      "reference_answer": "Retrieval practice, spaced repetition, elaborative interrogation, and multimodal encoding.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-003"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0023 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-003"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-003",
+      "platform": "Senpai",
+      "question_type": "technical_multi_fact",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "What are the planned projector resolution path, image size/distance, and interaction tracking rate for Senpai?",
+      "reference_answer": "The projector is planned at 720p with an upgrade path to 1080p, up to 100 inches from 1.5 metres, with depth-camera finger tracking up to 60 fps.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-004",
+        "PUB-SENPAI-20260812::fact-005"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0025 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-004"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0026 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-005"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-004",
+      "platform": "Senpai",
+      "question_type": "interface_comparison",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How does Senpai separate session data for student, teacher, parent, and administrator contexts?",
+      "reference_answer": "The design gives the student a learning adventure, the teacher teaching intelligence, the parent plain-language transparency, and the administrator governance; these contexts are not mixed on one screen.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-006",
+        "PUB-SENPAI-20260812::fact-007"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0029 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-006"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0102 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-007"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-005",
+      "platform": "Senpai",
+      "question_type": "multi_fact_pedagogy",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How is Senpai's language-learning approach designed, including pronunciation feedback and EAL progression?",
+      "reference_answer": "It prioritises early conversation, uses spectral analysis for specific and kind pronunciation feedback, and in EAL gradually increases English while initially supporting curriculum in the home language.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-008",
+        "PUB-SENPAI-20260812::fact-009",
+        "PUB-SENPAI-20260812::fact-010"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0033 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-008"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0034 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-009"
+          ]
+        },
+        {
+          "point_id": "P3",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0035 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-010"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-006",
+      "platform": "Senpai",
+      "question_type": "inclusive_design",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Is SEND described as an add-on, and how may multiple adaptation modes be activated?",
+      "reference_answer": "No. SEND is described as a primary design constraint. Adaptation modes are comprehensive interaction designs and may be activated individually or in combination.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-011",
+        "PUB-SENPAI-20260812::fact-012"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0037 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-011"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0042 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-012"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-007",
+      "platform": "Senpai",
+      "question_type": "safety_mechanism",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "How is Senpai's SEOM safety approach intended to differ from post-generation filtering?",
+      "reference_answer": "The 12 rules are intended to be embedded at the training-objective level so unsafe interaction patterns are not learned, rather than relying only on post-generation filters.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-013"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0044 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-013"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-008",
+      "platform": "Senpai",
+      "question_type": "compliance_status",
+      "answerability": "not_established",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Does the official page claim completed global compliance certification for Senpai?",
+      "reference_answer": "No. It describes an intent to satisfy demanding frameworks and says compliance validation will occur through certification bodies during development.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-014"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0046 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-014"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-009",
+      "platform": "Senpai",
+      "question_type": "architecture_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "What are Senpai's three architecture tiers, and which tier keeps core learning available without cloud connectivity?",
+      "reference_answer": "Edge compute on the robot supports real-time interaction, a local classroom server handles coordination and MIS integration, and cloud handles fleet management/model training. Core learning is designed to run at the edge with cloud optional.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-015"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0053 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-015"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-010",
+      "platform": "Senpai",
+      "question_type": "table_multi_field",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "How do Senpai's eye-gaze, noise, and CO2 sensors support SEND or classroom adaptations?",
+      "reference_answer": "Eye gaze provides navigation for physical-disability mode and attention/reading signals; noise monitoring triggers ASC sensory handling and classroom alerts; CO2 above the planned threshold supports ventilation/attention alerts, including ADHD support.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-016",
+        "PUB-SENPAI-20260812::fact-017",
+        "PUB-SENPAI-20260812::fact-018"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0059 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-016"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0062 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-017"
+          ]
+        },
+        {
+          "point_id": "P3",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0065 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-018"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-011",
+      "platform": "Senpai",
+      "question_type": "model_component_boundary",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Compare the planned deployment and target inference of GRPO, SEOM, and STUM in Senpai's model table.",
+      "reference_answer": "GRPO is edge INT8 with target under 15 ms; SEOM is on the edge critical path with target under 5 ms; STUM is lightweight edge deployment with target under 10 ms. These are planned targets.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-019",
+        "PUB-SENPAI-20260812::fact-020",
+        "PUB-SENPAI-20260812::fact-021"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0072 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-019"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0073 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-020"
+          ]
+        },
+        {
+          "point_id": "P3",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0074 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-021"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-012",
+      "platform": "Senpai",
+      "question_type": "privacy_synthesis",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Summarise Senpai's planned treatment of PII, raw audio/video, biometric data, and parent-initiated deletion.",
+      "reference_answer": "The design excludes PII from logs, retains no raw audio/video, processes gaze/expression on-device without persistent biometric profiles, and provides parent-initiated deletion within 24 hours.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-022",
+        "PUB-SENPAI-20260812::fact-023",
+        "PUB-SENPAI-20260812::fact-024",
+        "PUB-SENPAI-20260812::fact-025"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0079 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-022"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0084 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-023"
+          ]
+        },
+        {
+          "point_id": "P3",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0086 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-024"
+          ]
+        },
+        {
+          "point_id": "P4",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0087 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-025"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-013",
+      "platform": "Senpai",
+      "question_type": "v_model",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "How does Senpai's V-Model move from requirements to acceptance?",
+      "reference_answer": "Requirements decompose down the left side into nine subsystems, implementation sits at the bottom, and verification/validation rises on the right while parallel tracks run concurrently.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-026"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0089 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-026"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-014",
+      "platform": "Senpai",
+      "question_type": "audience_coverage",
+      "answerability": "answerable",
+      "difficulty": "easy",
+      "severity": 3,
+      "question": "Which four audiences does Senpai's UX design serve?",
+      "reference_answer": "Student, teacher, parent, and SENCO.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-027"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0093 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-027"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-015",
+      "platform": "Senpai",
+      "question_type": "safety_rule_application",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Why are Senpai animations capped at 3 Hz, and what enforces the cap?",
+      "reference_answer": "They are capped at no more than 3 Hz to prevent photosensitive responses, enforced by SEOM E01 at the animation-system level.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-028"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0097 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-028"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-016",
+      "platform": "Senpai",
+      "question_type": "screen_coverage",
+      "answerability": "answerable",
+      "difficulty": "easy",
+      "severity": 3,
+      "question": "What surfaces do Senpai's 13 planned screen layouts span?",
+      "reference_answer": "The student robot display, teacher desktop dashboard, student learning adventure, parent mobile app, and admin interface.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-029"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0099 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-029"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-017",
+      "platform": "Senpai",
+      "question_type": "context_separation",
+      "answerability": "answerable",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "What does 'one data source, four designed views' mean for Senpai?",
+      "reference_answer": "The same session data is transformed into teacher intelligence, student adventure, parent transparency, and admin governance, with strict separation between contexts.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-007"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0102 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-007"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-018",
+      "platform": "Senpai",
+      "question_type": "specification_with_status",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "Report Senpai's planned projector specification while preserving its development status.",
+      "reference_answer": "The design specifies a 720p projector with an engineering path to 1080p, up to 100 inches at 1.5 metres, autofocus and auto-keystone; all are current design intent subject to change and validation.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-004",
+        "PUB-SENPAI-20260812::fact-002"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0025 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-004"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0051 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-002"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-019",
+      "platform": "Senpai",
+      "question_type": "versioned_terminology",
+      "answerability": "answerable",
+      "difficulty": "hard",
+      "severity": 4,
+      "question": "The Senpai page expands SEOM in two ways. What are they, and how should a report manage the discrepancy?",
+      "reference_answer": "One section calls SEOM the Safety and Ethics Operations Model; the model table calls it the Safety & Ethics Oversight Model. A report should preserve the source/section version instead of silently selecting one universal expansion.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-013",
+        "PUB-SENPAI-20260812::fact-020"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0044 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-013"
+          ]
+        },
+        {
+          "point_id": "P2",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0073 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-020"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a deployed, validated, certified, or measured fact not supported by the cited source."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    },
+    {
+      "eval_id": "W03-LONG-SENPAI-020",
+      "platform": "Senpai",
+      "question_type": "unanswerable_certification",
+      "answerability": "not_established",
+      "difficulty": "medium",
+      "severity": 3,
+      "question": "Which certification body has already certified the current Senpai design, and on what date?",
+      "reference_answer": "The page does not provide a completed certifier or certification date. It says validation will be conducted through appropriate bodies during development.",
+      "reference_document_ids": [
+        "PUB-SENPAI-20260812"
+      ],
+      "evidence_fact_ids": [
+        "PUB-SENPAI-20260812::fact-014"
+      ],
+      "required_points": [
+        {
+          "point_id": "P1",
+          "weight": 1,
+          "criterion": "Covers the supported evidence from PUB-SENPAI-20260812::block-0046 without dropping its status qualification.",
+          "evidence_fact_ids": [
+            "PUB-SENPAI-20260812::fact-014"
+          ]
+        }
+      ],
+      "forbidden_points": [
+        {
+          "point_id": "X1",
+          "criterion": "Invents a certification body, approval, or date."
+        }
+      ],
+      "authoring": {
+        "method": "human_authored_from_long_source_blocks",
+        "review_status": "approved_public_official_benchmark"
+      }
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Week 4 Robustness, Multimodal, and System-Cost Evaluation
 
+> **RAG status: PARTLY SUPERSEDED / NOT LATEST.** The robustness and multimodal findings remain applicable, but the RAG performance subsection used the earlier atomic-section knowledge base. Use `W04_RAG_Long_Performance_Report_v1.0.0.md` for the latest RAG latency evidence.
+
 **Phase:** B — systematic evaluation, RAG, and multimodal assessment  
 **Evaluation dates:** 2026-08-04 to 2026-08-08
 **Random seed:** 42  

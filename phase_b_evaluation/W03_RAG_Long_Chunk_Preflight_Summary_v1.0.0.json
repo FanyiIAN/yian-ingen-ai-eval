@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "knowledge_base": "W03_RAG_Long_Public_Knowledge_Base_v1.0.0.json",
+  "config": "W03_RAG_Long_Public_Run_Config_v1.0.0.json",
+  "parent_documents": 21,
+  "parent_policy": "one_long_parent_per_source_no_atomic_prechunking",
+  "variants": [
+    {
+      "chunk_size_tokens": 256,
+      "chunks": 406,
+      "unique_chunk_hashes": 406,
+      "documents_with_chunks": 21,
+      "token_count": {"min": 33, "median": 212.0, "p95": 254.75, "max": 256},
+      "expected_facts": 58,
+      "facts_attached_to_at_least_one_chunk": 58,
+      "missing_fact_ids": []
+    },
+    {
+      "chunk_size_tokens": 512,
+      "chunks": 185,
+      "unique_chunk_hashes": 185,
+      "documents_with_chunks": 21,
+      "token_count": {"min": 151, "median": 459, "p95": 506.0, "max": 511},
+      "expected_facts": 58,
+      "facts_attached_to_at_least_one_chunk": 58,
+      "missing_fact_ids": []
+    },
+    {
+      "chunk_size_tokens": 1024,
+      "chunks": 94,
+      "unique_chunk_hashes": 94,
+      "documents_with_chunks": 21,
+      "token_count": {"min": 107, "median": 967.0, "p95": 1017.7, "max": 1024},
+      "expected_facts": 58,
+      "facts_attached_to_at_least_one_chunk": 58,
+      "missing_fact_ids": []
+    }
+  ],
+  "pairwise_hash_diagnostics": [
+    {"left": 256, "right": 512, "identical_hash_sets": false, "hash_jaccard": 0.001695},
+    {"left": 256, "right": 1024, "identical_hash_sets": false, "hash_jaccard": 0.002004},
+    {"left": 512, "right": 1024, "identical_hash_sets": false, "hash_jaccard": 0.02952}
+  ],
+  "errors": []
+}

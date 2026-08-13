@@ -1,0 +1,131 @@
+{
+  "registry_version": "1.0.0",
+  "phase": "Phase C / Week 6",
+  "random_seed": 42,
+  "purpose": "Freeze the public Week 1-5 evidence inputs and their interpretation boundaries before Week 6 synthesis.",
+  "evidence_policy": {
+    "validated_result": "A result whose scoring instrument passed its preregistered calibration gate and whose test protocol supports the stated population claim.",
+    "diagnostic_failed_calibration": "A measured result from an instrument that failed calibration; it may diagnose the pipeline or prompt sensitivity but cannot support a validated model ranking.",
+    "diagnostic_uncalibrated": "A measured proxy result produced by an AI-assisted or local evaluator without independent human calibration.",
+    "deterministic_audit": "A directly reproducible structural fact such as row count, hash, exact-match retrieval, or registered factor level.",
+    "claim_rule": "Never pool unlike evaluation families, never infer deployment readiness from proxy scenarios, and never convert correlation or a matched within-design contrast into a universal causal mechanism."
+  },
+  "sources": [
+    {
+      "path": "phase_a_design/W02_Scenarios.yaml",
+      "sha256": "acc34b81538598d679487acd9a46a9141634929d2d0c150894c9267df9e2a7e2",
+      "role": "canonical benchmark scenarios"
+    },
+    {
+      "path": "phase_a_design/W02_Rubric.yaml",
+      "sha256": "a26a79aa3f9468fa9cbb483b51e299c71a8351b30be9ad7d7fc7ccbb2fc663d3",
+      "role": "canonical scoring rubric"
+    },
+    {
+      "path": "phase_a_design/W02_Baseline_Agreement.json",
+      "sha256": "71d99fa63e8df59ec32e4de3f0101da605d15e6706a85e0dc155b672518096fa",
+      "role": "three-formulation Judge agreement"
+    },
+    {
+      "path": "phase_a_design/W02_Baseline_Run_Manifest.json",
+      "sha256": "c2537e2aab1d7f6680393d3bf33558737f3d781e0d9963b6640d34b374f082cf",
+      "role": "Week 2 artifact and source hashes"
+    },
+    {
+      "path": "phase_a_design/W02_Final_Run_and_Judge_Findings.md",
+      "sha256": "c8a95f2ab1c084fcff652436bc3009b644c532688c44d9f2e45576ad57c034a8",
+      "role": "Judge calibration gate result and interpretation"
+    },
+    {
+      "path": "phase_a_design/W02_Unified_Run_Config_v1.0.0.yaml",
+      "sha256": "edb1984f4d830a6578e5c8ca440e9a1db2b5518a1d0e4eb1f9c2d84db8d54781",
+      "role": "pinned Week 2 candidate and Judge revisions"
+    },
+    {
+      "path": "phase_b_evaluation/W03_RAG_Long_Source_Summary_v1.0.0.json",
+      "sha256": "70abbfc867eb4b7dec6c1345a54d21b14a5f9bfdd75d609b8ccdd14535c0821d",
+      "role": "corrected long-source RAG quality summary"
+    },
+    {
+      "path": "phase_b_evaluation/W04_Robustness_Summary_v0.1.0.json",
+      "sha256": "d6bead483f185fb31656e2158e6f6dabe1b9c43f78b67bf7053d4daec870a13a",
+      "role": "text robustness diagnostic summary"
+    },
+    {
+      "path": "phase_b_evaluation/W04_Multimodal_Architecture_Comparison_v0.2.0.json",
+      "sha256": "72e0e46af94cb907616319693c85a955f8f1c9750fc00c15716716b17e893568",
+      "role": "matched two-VLM proxy comparison"
+    },
+    {
+      "path": "phase_b_evaluation/W04_RAG_Long_Performance_Summary_v1.0.0.json",
+      "sha256": "58bd92ecc5239ee31076b90eb19d4dd30289cdd5df2ca153cba8d772b0d8c44f",
+      "role": "long-source RAG latency and resource summary"
+    },
+    {
+      "path": "phase_c_synthesis/W05_RAG_Long_Source_Optimisation_Summary_v1.1.0.json",
+      "sha256": "752958d6b43b1c06ed8e3fe6e1a4281544b4b43cd757347ad1776a908dc24d56",
+      "role": "18-cell full-factorial RAG optimisation"
+    },
+    {
+      "path": "phase_c_synthesis/W05_Accumulated_Evidence_Analysis_v1.1.0.json",
+      "sha256": "f3713853694907805c9539369f124d8c9e1759cdad340984aea352da373e15b2",
+      "role": "stratified Week 2-4 evidence synthesis"
+    }
+  ],
+  "temporal_validity_audit": {
+    "policy": "Scenarios must not require recall of external events or facts that postdate an evaluated model's undocumented training cutoff.",
+    "automated_trigger_patterns": [
+      "latest news",
+      "current president",
+      "current prime minister",
+      "today's date",
+      "this year's",
+      "recent election",
+      "as of 20"
+    ],
+    "manual_review": "passed_prompt_closed_scenarios",
+    "residual_confound": "The model cards do not provide complete training-corpus cutoff dates, so equal exposure to general background knowledge cannot be established."
+  },
+  "literature": [
+    {
+      "key": "liang2023helm",
+      "title": "Holistic Evaluation of Language Models",
+      "url": "https://arxiv.org/abs/2211.09110"
+    },
+    {
+      "key": "es2024ragas",
+      "title": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
+      "url": "https://aclanthology.org/2024.eacl-demo.16/"
+    },
+    {
+      "key": "zhu2024promptrobust",
+      "title": "PromptRobust: Towards Evaluating the Robustness of Large Language Models on Adversarial Prompts",
+      "url": "https://arxiv.org/abs/2306.04528"
+    },
+    {
+      "key": "yue2024mmmu",
+      "title": "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+      "url": "https://arxiv.org/abs/2311.16502"
+    },
+    {
+      "key": "chu2024timebench",
+      "title": "TimeBench: A Comprehensive Evaluation of Temporal Reasoning Abilities in Large Language Models",
+      "url": "https://aclanthology.org/2024.acl-long.66/"
+    },
+    {
+      "key": "mees2022calvin",
+      "title": "CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation Tasks",
+      "url": "https://arxiv.org/abs/2112.03227"
+    },
+    {
+      "key": "shridhar2020alfred",
+      "title": "ALFRED: A Benchmark for Interpreting Grounded Instructions for Everyday Tasks",
+      "url": "https://arxiv.org/abs/1912.01734"
+    },
+    {
+      "key": "zheng2023llmjudge",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "url": "https://arxiv.org/abs/2306.05685"
+    }
+  ]
+}

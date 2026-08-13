@@ -1,0 +1,149 @@
+schema_version: 1.0.0
+experiment_id: w05_senpai_rag_optimisation
+experiment_version: 1.0.0
+status: frozen_for_formal_execution
+random_seed: 42
+
+objective: >-
+  Run the registered Week 5 controlled ablation on the frozen 20-item Senpai
+  subset. Compare chunk size, retrieval breadth, and cross-encoder reranking
+  while holding the Week 3 knowledge, candidate, prompt, decoding, evaluator,
+  source-governance, and hardware boundaries fixed.
+
+source_inputs:
+  knowledge_base:
+    path: ../phase_b_evaluation/W03_RAG_Expanded_Knowledge_Base_v0.6.0.yaml
+    id: w03_ingen_official_fari_senpai_expanded
+    version: 0.6.0
+    sha256: 2913c2c2b500088e6afb9ff6045afb20cc067b56023eb51c699c5a185d6017aa
+  evaluation_set:
+    path: ../phase_b_evaluation/W03_RAG_Expanded_Eval_Set_v0.6.0.yaml
+    source_id: w03_ingen_official_fari_senpai_expanded
+    source_version: 0.6.0
+    sha256: 56975aaa697b801b96ec5dcea9d85b183cc9fbbe3ede3465533cb03d0e723189
+    derived_subset_id: w05_senpai_from_w03_expanded
+    derived_subset_version: 1.0.0
+    platform: Senpai
+    item_count: 20
+    item_ids:
+    - W03-EXP-SENPAI-001
+    - W03-EXP-SENPAI-002
+    - W03-EXP-SENPAI-003
+    - W03-EXP-SENPAI-004
+    - W03-EXP-SENPAI-005
+    - W03-EXP-SENPAI-006
+    - W03-EXP-SENPAI-007
+    - W03-EXP-SENPAI-008
+    - W03-EXP-SENPAI-009
+    - W03-EXP-SENPAI-010
+    - W03-EXP-SENPAI-011
+    - W03-EXP-SENPAI-012
+    - W03-EXP-SENPAI-013
+    - W03-EXP-SENPAI-014
+    - W03-EXP-SENPAI-015
+    - W03-EXP-SENPAI-016
+    - W03-EXP-SENPAI-017
+    - W03-EXP-SENPAI-018
+    - W03-EXP-SENPAI-019
+    - W03-EXP-SENPAI-020
+  week3_run_config:
+    path: ../phase_b_evaluation/W03_RAG_Expanded_MultiModel_Run_Config_v0.6.2.yaml
+    version: 0.6.2
+    sha256: 13d845fd6aefd2f2a729b9ee70992daed191fe07669a63b67d2901e9250986ee
+
+factorial_design:
+  chunk_size_tokens: [256, 512, 1024]
+  top_k: [1, 3, 5]
+  reranking: [none, cross_encoder]
+  expected_configurations: 18
+  expected_rows: 360
+  full_factorial: true
+  matched_single_factor_contrasts: true
+  execution_order: seed_42_randomized_variant_blocks
+  item_order_within_block: frozen_ascending_eval_id
+  repetitions_per_item: 1
+
+fixed_variables:
+  chunk_overlap_tokens: 32
+  dense_fetch_k: 32
+  relevance_score_threshold: 0.20
+  auto_merge_min_children: 2
+  candidate_model_and_revision: true
+  semantic_prompt_version: 0.6.2
+  deterministic_decoding: true
+  eligible_source_collection_and_metadata_gate: true
+  evaluation_items_and_references: true
+  evaluator_models_and_prompts: true
+  hardware_within_run: true
+
+runtime_controls:
+  target: RunPod_A40_48GB
+  embedding_device: cuda
+  cold_model_loads_recorded_separately: true
+  warmup_requests_per_loaded_runtime: 1
+  warmup_outputs_excluded: true
+  warm_request_latency_only_in_pareto: true
+  append_only_resume: true
+
+models:
+  generator:
+    model_id: meta-llama/Llama-3.1-8B-Instruct
+    model_revision: 0e9e39f249a16976918f6564b8830bc894c89659
+    local_model_directory: /workspace/models/llama_3_1_8b_instruct
+    precision: bfloat16
+  embedding:
+    model_id: BAAI/bge-m3
+    model_revision: 5617a9f61b028005a4858fdac845db406aefb181
+    local_model_directory: /workspace/models/bge_m3
+  reranker:
+    model_id: BAAI/bge-reranker-v2-m3
+    model_revision: b5160aeac3c6c8fe7beaaaf04c9e0142826b58d1
+    local_model_directory: /workspace/models/bge_reranker_v2_m3
+    architecture: cross_encoder
+  evaluator:
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
+    model_revision: 63a8b081895390a26e140280378bc85ec8bce07a
+    local_model_directory: /workspace/models/mistral_7b_instruct_v0_2
+    endpoint: http://127.0.0.1:8000/v1
+    calibration_status: diagnostic_not_human_validated
+
+metrics:
+  faithfulness:
+    implementation: ragas.collections.Faithfulness
+    status: automated_diagnostic_uncalibrated_local_judge
+  relevance:
+    implementation: ragas.collections.AnswerRelevancy
+    embedding_model: BAAI/bge-m3
+    status: automated_diagnostic_uncalibrated_local_judge
+  coverage:
+    definition: weighted_fraction_of_frozen_required_points_present
+    per_point_values: [0, 0.5, 1]
+    implementation: local_mistral_structured_point_judge
+    status: automated_diagnostic_uncalibrated_local_judge
+  latency:
+    pareto_field: question_to_response_ms
+    aggregation: median
+    cold_load_excluded: true
+  retrieval_sanity:
+    metric: evidence_fact_recall_at_k
+
+pareto:
+  maximize: [mean_faithfulness, mean_required_point_coverage]
+  minimize: [p50_question_to_response_ms]
+  missing_item_metric_policy: >-
+    Exclude only the unavailable item-metric from its aggregate, never impute it,
+    and report the finite fraction for every variant and metric.
+  missing_variant_objective_policy: >-
+    Exclude a variant from Pareto analysis when an aggregate objective is not
+    finite; retain it in the complete factorial results table.
+  dominance_rule: >-
+    A variant dominates another when it is no worse on all three objectives and
+    strictly better on at least one. Report the full non-dominated set; use the
+    highest harmonic mean of Faithfulness and Coverage, then lower latency, only
+    as a transparent balanced tie-break recommendation within that set.
+
+claim_boundary: >-
+  Public-source component evaluation of one frozen Llama RAG stack on 20 Senpai
+  questions. The local Mistral evaluator is not human-calibrated, one repetition
+  does not estimate run-to-run variance, and the study is not evidence of
+  deployed Senpai, PIC 2.0, safety, or production readiness.
