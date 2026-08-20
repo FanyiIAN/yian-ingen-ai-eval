@@ -9,6 +9,9 @@ private/
 internal/
 *.confidential.pdf
 
+# Personal internship administration (kept locally, never published)
+phase_d_capstone/W08_实习反馈表*.docx
+
 # Auxiliary Markdown and working byproducts
 **/notes/
 **/drafts/

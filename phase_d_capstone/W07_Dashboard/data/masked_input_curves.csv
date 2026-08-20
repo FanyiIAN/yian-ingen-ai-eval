@@ -1,0 +1,13 @@
+model,model_key,mask_ratio,mean_task_accuracy,severity_weighted_mean_task_accuracy,pass_rate,task_accuracy_degradation_from_complete,row_count,evidence_status,seed
+FLAN-T5 Base,flan_t5_base,0.0,3.642857142857143,4.119047619047619,0.42857142857142855,0.0,14,diagnostic_ai_assisted_not_calibrated,42
+FLAN-T5 Base,flan_t5_base,0.2,3.5,3.9761904761904763,0.42857142857142855,0.1428571428571428,14,diagnostic_ai_assisted_not_calibrated,42
+FLAN-T5 Base,flan_t5_base,0.4,3.2857142857142856,3.761904761904762,0.2857142857142857,0.3571428571428572,14,diagnostic_ai_assisted_not_calibrated,42
+FLAN-T5 Base,flan_t5_base,0.6,3.2857142857142856,3.761904761904762,0.2857142857142857,0.3571428571428572,14,diagnostic_ai_assisted_not_calibrated,42
+Llama 3.1 8B Instruct,llama31_8b_instruct,0.0,4.642857142857143,4.880952380952381,0.9285714285714286,0.0,14,diagnostic_ai_assisted_not_calibrated,42
+Llama 3.1 8B Instruct,llama31_8b_instruct,0.2,4.5,4.690476190476191,0.7857142857142857,0.14285714285714324,14,diagnostic_ai_assisted_not_calibrated,42
+Llama 3.1 8B Instruct,llama31_8b_instruct,0.4,4.571428571428571,4.761904761904762,0.7857142857142857,0.07142857142857206,14,diagnostic_ai_assisted_not_calibrated,42
+Llama 3.1 8B Instruct,llama31_8b_instruct,0.6,4.357142857142857,4.642857142857143,0.7142857142857143,0.2857142857142865,14,diagnostic_ai_assisted_not_calibrated,42
+Mistral 7B Instruct v0.2,mistral_7b_instruct_v0_2,0.0,4.071428571428571,4.214285714285714,0.9285714285714286,0.0,14,diagnostic_ai_assisted_not_calibrated,42
+Mistral 7B Instruct v0.2,mistral_7b_instruct_v0_2,0.2,4.071428571428571,4.166666666666667,0.9285714285714286,0.0,14,diagnostic_ai_assisted_not_calibrated,42
+Mistral 7B Instruct v0.2,mistral_7b_instruct_v0_2,0.4,3.9285714285714284,4.023809523809524,0.9285714285714286,0.1428571428571428,14,diagnostic_ai_assisted_not_calibrated,42
+Mistral 7B Instruct v0.2,mistral_7b_instruct_v0_2,0.6,4.071428571428571,4.214285714285714,0.9285714285714286,0.0,14,diagnostic_ai_assisted_not_calibrated,42

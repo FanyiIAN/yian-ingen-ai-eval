@@ -1,0 +1,19 @@
+platform,model,model_id,model_revision,scenario_n,task_severity_weighted_1_to_5,grounding_severity_weighted_1_to_5,severity_weighted_composite_1_to_5,diagnostic_readiness_proxy_0_to_100,minimum_dimension_coverage,mean_latency_ms,unsafe_count,evidence_status,benchmark_version,seed
+Portfolio,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,35,3.1268,3.3766,3.2517,65.0,0.6,492.49,6,diagnostic_failed_calibration,0.2.0,42
+Aido Humanoid,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,7,3.95,3.8,3.875,77.5,0.7143,578.29,2,diagnostic_failed_calibration,0.2.0,42
+Aido Rover,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,7,4.8,5.0,4.9,98.0,0.7143,769.78,1,diagnostic_failed_calibration,0.2.0,42
+Fari,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,7,1.0,2.0,1.5,30.0,0.2857,190.95,1,diagnostic_failed_calibration,0.2.0,42
+Senpai,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,7,1.0,1.0,1.0,20.0,0.2857,233.76,1,diagnostic_failed_calibration,0.2.0,42
+Sentinel Prime AI,FLAN-T5 Base,google/flan-t5-base,7bcac572ce56db69c1ea7c8af255c5d7c9672fc2,7,2.0667,4.2143,3.1405,62.8,0.5714,689.68,1,diagnostic_failed_calibration,0.2.0,42
+Portfolio,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,35,3.9697,4.0495,4.0096,80.2,0.9429,1819.54,1,diagnostic_failed_calibration,0.2.0,42
+Aido Humanoid,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,7,4.5714,4.381,4.4762,89.5,1.0,1913.43,0,diagnostic_failed_calibration,0.2.0,42
+Aido Rover,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,7,4.8571,4.2381,4.5476,91.0,1.0,1549.17,0,diagnostic_failed_calibration,0.2.0,42
+Fari,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,7,3.0435,3.8261,3.4348,68.7,1.0,2646.83,1,diagnostic_failed_calibration,0.2.0,42
+Senpai,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,7,3.6923,3.7333,3.7128,74.3,0.7143,1480.7,0,diagnostic_failed_calibration,0.2.0,42
+Sentinel Prime AI,Llama 3.1 8B Instruct,meta-llama/Llama-3.1-8B-Instruct,0e9e39f249a16976918f6564b8830bc894c89659,7,3.6667,4.0,3.8334,76.7,1.0,1507.55,0,diagnostic_failed_calibration,0.2.0,42
+Portfolio,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,35,4.08,4.5,4.29,85.8,0.9714,2542.04,0,diagnostic_failed_calibration,0.2.0,42
+Aido Humanoid,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,7,4.5,4.619,4.5595,91.2,0.8571,2764.33,0,diagnostic_failed_calibration,0.2.0,42
+Aido Rover,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,7,4.1905,4.5714,4.381,87.6,1.0,1830.38,0,diagnostic_failed_calibration,0.2.0,42
+Fari,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,7,4.0,4.3913,4.1957,83.9,1.0,2984.05,0,diagnostic_failed_calibration,0.2.0,42
+Senpai,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,7,4.0526,4.5,4.2763,85.5,0.8571,3203.12,0,diagnostic_failed_calibration,0.2.0,42
+Sentinel Prime AI,Mistral 7B Instruct v0.2,mistralai/Mistral-7B-Instruct-v0.2,63a8b081895390a26e140280378bc85ec8bce07a,7,3.7619,4.4286,4.0953,81.9,1.0,1928.32,0,diagnostic_failed_calibration,0.2.0,42

@@ -258,6 +258,72 @@ calibration and uncalibrated RAG quality scores are carried forward as diagnosti
 evidence; deterministic hashes, counts, factor levels, and Pareto membership are
 audit evidence. No product-deployment or causal claim is introduced.
 
+### Phase D - Dashboard and capstone
+
+Week 7 packages the frozen Weeks 2–6 evidence into a Streamlit stakeholder
+dashboard. The app reads eleven committed presentation CSVs and performs no model
+inference, retrieval, scoring, or raw aggregation at launch.
+
+- `phase_d_capstone/W07_Submission_Index.md`: Week 7 artifact map and claim
+  boundary.
+- `phase_d_capstone/W07_Dashboard/`: Streamlit app, deterministic CSV builder,
+  eleven precomputed metric CSVs, source/data and Streamlit runtime tests, screenshots, requirements,
+  cross-platform launch scripts, and launch README.
+- `phase_d_capstone/W07_Dashboard_Design_Doc.md`: three-persona rationale,
+  required-view design, annotated screenshots, data contract, launch guide, and
+  self-check evidence.
+- `weekly/Wk-07-EvalLog.md`: implementation decisions, problems, verification,
+  and the boundary between automated interface checks and independent usability.
+
+The dashboard retains the reference-required readiness interface but labels it
+as a diagnostic proxy because the Judge calibration gate failed. A clean-copy
+Windows verification created a new `.venv`, installed the pinned dependencies,
+and returned a healthy Streamlit endpoint. Version 1.2 then passed 18/18 contracts,
+three refreshed persona screenshots, and a headless contrast scan with zero
+white-on-white candidates. The launch uses one command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File phase_d_capstone/W07_Dashboard/run_dashboard.ps1
+```
+
+Week 8 closes the programme with a traceable capstone package:
+
+- `phase_d_capstone/W08_Submission_Index.md`: final artifact map, verification
+  commands, interpretation boundary, and external completion items.
+- `phase_d_capstone/W08_Capstone_Report.docx`: nineteen-page English report with
+  all ten required sections, section-level target-versus-achieved tables, figures,
+  recommendations, traceability, and limitations.
+- `phase_d_capstone/W08_Capstone_Deck.pptx` and
+  `W08_Capstone_Deck_Speaker_Script.md`: twelve-slide, approximately 30-minute
+  finding-led readout plus evidence-bounded speaker notes.
+- `phase_d_capstone/W08_Retrospective.md`: one-page reflection and 12-week
+  extension plan.
+- `phase_d_capstone/W08_Claim_Evidence_Matrix_v1.0.0.csv` and
+  `W08_Evidence_Registry_v1.0.0.json`: claim-level model/evaluation-set/seed
+  traceability and SHA-256 source registry.
+- `phase_d_capstone/W08_Final_Readout_QA.md`: defence notes for the benchmark,
+  RAGAS-style dimensions, masking, severity weights, and causal boundaries.
+- `phase_d_capstone/W08_Final_Evaluation_Rubric.md`: completed intern
+  self-assessment; supervisor scoring, feedback, and signatures remain blank for
+  the joint review.
+- `weekly/Wk-08-Final-EvalLog.md`: final evaluation decision record.
+
+Final deterministic checks:
+
+```powershell
+python phase_d_capstone/W08_Finalise_Evidence.py
+python -m unittest phase_d_capstone.W08_Capstone_Contract_Tests -v
+python -m unittest phase_d_capstone.W07_Dashboard.test_dashboard_contract -v
+phase_d_capstone/W07_Dashboard/.venv/Scripts/python.exe -m unittest phase_d_capstone.W07_Dashboard.test_dashboard_app -v
+python phase_c_synthesis/W06_Evidence_Synthesis.py
+python -m unittest phase_c_synthesis.W06_Evidence_Synthesis_Tests -v
+```
+
+The report and deck were also rendered from the saved DOCX/PPTX files and checked
+page-by-page/slide-by-slide. These controls establish reproducibility and artifact
+quality; they do not repair the failed Judge calibration or substitute for product-
+representative closed-loop validation.
+
 ## Reproduce the Week 1 environment check
 
 ```powershell

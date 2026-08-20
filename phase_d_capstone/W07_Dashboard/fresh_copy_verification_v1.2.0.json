@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "dashboard_version": "1.2.0",
+  "record_status": "current",
+  "verified_at": "2026-08-19T21:14:48.2799558-04:00",
+  "platform": "Windows",
+  "verification_method": "Launched the committed v1.2.0 package with its isolated .venv, ran all source/data and Streamlit AppTest contracts, then visited every persona with a headless Microsoft Edge browser and refreshed the three current screenshots.",
+  "dependency_portability_evidence": "fresh_copy_verification_v1.1.0.json",
+  "fresh_dependency_install_repeated_for_v1_2": false,
+  "fresh_dependency_install_note": "The earlier clean-copy v1.1 verification remains the installation-portability test because requirements and launchers did not change. This record verifies the v1.2 UI/data contracts and rendered browser state, not a second dependency installation.",
+  "launcher": "phase_d_capstone/W07_Dashboard/.venv/Scripts/python.exe -m streamlit run phase_d_capstone/W07_Dashboard/app.py --server.headless true --server.port 8521 --browser.gatherUsageStats false",
+  "health_endpoint": "ok",
+  "source_and_data_contract_tests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "streamlit_app_tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "total_automated_tests": {
+    "passed": 18,
+    "failed": 0
+  },
+  "browser_visual_checks": {
+    "personas_visited": 3,
+    "engineer_tabs_visited": 4,
+    "white_on_white_text_candidates": 0,
+    "product_manager_top_concerns_exposed_seconds": "under 3 automated seconds",
+    "independent_human_comprehension_test": "not performed"
+  },
+  "screenshots": {
+    "executive_view.png": "37191ae46565d92c803806a1f91114a57c430cc18c80e6173c1b8a21bfb3124b",
+    "product_manager_view.png": "733a08e9ace0914cee88fc73cfbd83c2ac5a3c19089419be02644c0c87120f0a",
+    "engineer_view.png": "910712bb3c993ea80d4f9041e2fedaf2c6dbac164faf0ee1786d23cc3d68aaf9"
+  },
+  "model_inference_at_launch": 0,
+  "retrieval_calls_at_launch": 0,
+  "judge_calls_at_launch": 0,
+  "result": "passed",
+  "boundary": "This verifies v1.2 deterministic data contracts, Streamlit interactions, and rendered role/contrast behavior. It is not an independent human usability study or validation of the underlying evaluation metrics."
+}

@@ -1,0 +1,7 @@
+model,model_key,model_id,model_revision,condition,parsed_rows,mean_total_score_0_to_5,acceptable_decision_rate,forbidden_claim_rate,latency_p50_ms,gpu_peak_mib,evidence_status,seed
+Idefics2 8B Chatty,idefics2_8b_chatty,HuggingFaceM4/idefics2-8b-chatty,8e65868b394317b973bd61db3b08e6478ebeedbf,clean,20,4.9,0.95,0.0,6305.443754,18670.0,diagnostic_ai_assisted_not_calibrated,42
+Idefics2 8B Chatty,idefics2_8b_chatty,HuggingFaceM4/idefics2-8b-chatty,8e65868b394317b973bd61db3b08e6478ebeedbf,gaussian_noise_std_0.08,20,4.8,0.9,0.05,6305.443754,18670.0,diagnostic_ai_assisted_not_calibrated,42
+Idefics2 8B Chatty,idefics2_8b_chatty,HuggingFaceM4/idefics2-8b-chatty,8e65868b394317b973bd61db3b08e6478ebeedbf,brightness_0.60,20,4.75,0.9,0.0,6305.443754,18670.0,diagnostic_ai_assisted_not_calibrated,42
+LLaVA 1.5 7B,llava_1_5_7b_hf,llava-hf/llava-1.5-7b-hf,b234b804b114d9e37bb655e11cbbb5f5e971b7a9,clean,20,4.8,0.9,0.0,4386.536797,14493.0,diagnostic_ai_assisted_not_calibrated,42
+LLaVA 1.5 7B,llava_1_5_7b_hf,llava-hf/llava-1.5-7b-hf,b234b804b114d9e37bb655e11cbbb5f5e971b7a9,gaussian_noise_std_0.08,20,4.85,0.95,0.0,4386.536797,14493.0,diagnostic_ai_assisted_not_calibrated,42
+LLaVA 1.5 7B,llava_1_5_7b_hf,llava-hf/llava-1.5-7b-hf,b234b804b114d9e37bb655e11cbbb5f5e971b7a9,brightness_0.60,20,4.7,0.9,0.0,4386.536797,14493.0,diagnostic_ai_assisted_not_calibrated,42

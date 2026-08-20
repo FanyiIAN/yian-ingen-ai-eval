@@ -28,7 +28,7 @@ REPO_ROOT = ROOT.parent
 DEFAULT_MODEL_DIR = Path(
     os.environ.get(
         "INGEN_FLAN_MODEL_DIR",
-        r"D:\newIntern\private\model_runtime\flan_t5_base\model",
+        str(REPO_ROOT / "models" / "flan_t5_base" / "model"),
     )
 )
 DEFAULT_RUNTIME_ROOT = DEFAULT_MODEL_DIR.parent

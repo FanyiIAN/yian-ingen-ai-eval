@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "dashboard_version": "1.1.0",
+  "record_status": "superseded_by_dashboard_v1.2.0_ui_correction",
+  "verified_at": "2026-08-19T18:38:14.4179335-04:00",
+  "platform": "Windows",
+  "verification_method": "Copied the launch package and committed CSV layer to a clean directory without the repository .venv, then ran the documented PowerShell launcher.",
+  "launcher": "powershell -ExecutionPolicy Bypass -File W07_Dashboard/run_dashboard.ps1 --server.headless true --server.port 8517 --browser.gatherUsageStats false",
+  "existing_virtual_environment_reused": false,
+  "dependency_installation": "passed",
+  "python_version": "3.9.13",
+  "streamlit_version": "1.50.0",
+  "plotly_version": "6.9.0",
+  "pandas_version": "2.3.3",
+  "health_endpoint": "ok",
+  "model_inference_at_launch": 0,
+  "retrieval_calls_at_launch": 0,
+  "judge_calls_at_launch": 0,
+  "result": "passed",
+  "boundary": "This verifies clean-copy installation and local launch portability. It is not a second-machine usability study or a validation of the underlying evaluation metrics."
+}

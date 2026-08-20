@@ -1,0 +1,110 @@
+{
+  "registry_version": "1.0.0",
+  "generated_date": "2026-08-19",
+  "source_count": 16,
+  "evidence_boundary": "Public/synthetic diagnostic evidence only; no deployed InGen product, proprietary PIC runtime, customer data, or confidential source material.",
+  "latest_only_controls": {
+    "rag_knowledge_base": "W03 long-source v1.0.0",
+    "rag_optimisation": "W05 long-source v1.1.0",
+    "dashboard": "v1.2.0",
+    "superseded_atomic_section_results_used_for_current_claims": false
+  },
+  "sources": [
+    {
+      "path": "phase_a_design/W02_Scenarios.yaml",
+      "role": "35-scenario benchmark",
+      "bytes": 53560,
+      "sha256": "acc34b81538598d679487acd9a46a9141634929d2d0c150894c9267df9e2a7e2"
+    },
+    {
+      "path": "phase_a_design/W02_Baseline_Eval_Results.csv",
+      "role": "70-row baseline evidence",
+      "bytes": 1562822,
+      "sha256": "906f567d3a032b22fd40606021eabd30ec5e3e4b317b659fa8f61ce55e96500d"
+    },
+    {
+      "path": "phase_a_design/W02_Baseline_Agreement.json",
+      "role": "Judge prompt agreement",
+      "bytes": 3918,
+      "sha256": "71d99fa63e8df59ec32e4de3f0101da605d15e6706a85e0dc155b672518096fa"
+    },
+    {
+      "path": "phase_b_evaluation/W03_Three_Model_Diagnostic_Summary.json",
+      "role": "105-row three-model summary",
+      "bytes": 25715,
+      "sha256": "6525fb046c4342857bf7f54cfbb9cf7628721e22cab69095267378206a6c6837"
+    },
+    {
+      "path": "phase_b_evaluation/W03_RAG_Long_Source_Summary_v1.0.0.json",
+      "role": "corrected long-source RAG summary",
+      "bytes": 16019,
+      "sha256": "70abbfc867eb4b7dec6c1345a54d21b14a5f9bfdd75d609b8ccdd14535c0821d"
+    },
+    {
+      "path": "phase_b_evaluation/W04_Robustness_Summary_v0.1.0.json",
+      "role": "semantic and masked-input robustness",
+      "bytes": 8752,
+      "sha256": "d6bead483f185fb31656e2158e6f6dabe1b9c43f78b67bf7053d4daec870a13a"
+    },
+    {
+      "path": "phase_b_evaluation/W04_Multimodal_Architecture_Comparison_v0.2.0.json",
+      "role": "two-VLM comparison",
+      "bytes": 17204,
+      "sha256": "72e0e46af94cb907616319693c85a955f8f1c9750fc00c15716716b17e893568"
+    },
+    {
+      "path": "phase_b_evaluation/W04_System_Performance_Summary_v0.2.0.json",
+      "role": "latency and resource evidence",
+      "bytes": 106118,
+      "sha256": "181b324a7d3a831a98eb5f4ecfa3bc6258b9f0fbb2488d3c0f0faa35212c9191"
+    },
+    {
+      "path": "phase_c_synthesis/W05_RAG_Long_Source_Optimisation_Summary_v1.1.0.json",
+      "role": "18-cell RAG factorial",
+      "bytes": 50471,
+      "sha256": "752958d6b43b1c06ed8e3fe6e1a4281544b4b43cd757347ad1776a908dc24d56"
+    },
+    {
+      "path": "phase_c_synthesis/W05_PIC20_Model_Analysis.md",
+      "role": "six-class PIC analysis",
+      "bytes": 9564,
+      "sha256": "08c6d5584e0b7d6b5ea4b9e61a6d544a86441c89a664dc9d07f57f23bd987589"
+    },
+    {
+      "path": "phase_c_synthesis/W06_Claim_Evidence_Matrix_v1.0.0.csv",
+      "role": "Week 6 claim controls",
+      "bytes": 2717,
+      "sha256": "69981e57473363212aca63d4063616a4384a8705541f32e39cbd89159b118584"
+    },
+    {
+      "path": "phase_c_synthesis/W06_Evidence_Registry_v1.0.0.json",
+      "role": "Week 6 frozen source registry",
+      "bytes": 5936,
+      "sha256": "533584bbd5d393a4658809498713117f2c34280cfa5423ce3d94ae505e714d81"
+    },
+    {
+      "path": "phase_d_capstone/W07_Dashboard/data/data_manifest.csv",
+      "role": "dashboard source hashes",
+      "bytes": 1144,
+      "sha256": "780bb933a3cd2496fc1de8c2564e68fb7876ef8c3ed856565ef0733cb91502cd"
+    },
+    {
+      "path": "phase_d_capstone/W07_Dashboard/data/dashboard_metadata.csv",
+      "role": "dashboard version and gates",
+      "bytes": 724,
+      "sha256": "47c61376a9d30ff9226c81d82ba34a8cba2d39b40582ad2f409f57e3604d6765"
+    },
+    {
+      "path": "phase_d_capstone/W08_Claim_Evidence_Matrix_v1.0.0.csv",
+      "role": "capstone claim matrix",
+      "bytes": 4430,
+      "sha256": "fcd2cf7373a13cc7bf1695ee15afdfe0a4c63fbb29d9dc2a4673f04a54b4ce71"
+    },
+    {
+      "path": "phase_d_capstone/W08_Capstone_Report_Source.md",
+      "role": "capstone narrative source",
+      "bytes": 37291,
+      "sha256": "9ce4a6bff0737a8ef631bbdcdbbe36fc71a97cc6a8df586baeb6fb299743fb97"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+platform,condition,questions,answer_relevance,faithfulness,required_point_coverage,document_recall_at_k,evidence_fact_recall_at_k,generation_latency_p50_ms,diagnostic_quality_proxy_0_to_100,quality_component_count,deployment_readiness,evidence_status,evaluation_set_version,model_revision,seed
+Fari,BASE,20,0.08276,,0.470833,,,372.75,27.7,2,Not established - independent calibration and deployment tests required,diagnostic_uncalibrated,1.0.0,0e9e39f249a16976918f6564b8830bc894c89659,42
+Fari,RAG,20,0.701547,0.879669,1.0,1.0,0.8,8853.32,86.0,3,Not established - independent calibration and deployment tests required,diagnostic_uncalibrated,1.0.0,0e9e39f249a16976918f6564b8830bc894c89659,42
+Senpai,BASE,20,0.0,,0.458333,,,377.15,22.9,2,Not established - independent calibration and deployment tests required,diagnostic_uncalibrated,1.0.0,0e9e39f249a16976918f6564b8830bc894c89659,42
+Senpai,RAG,20,0.692548,0.905952,0.975,1.0,1.0,6583.67,85.8,3,Not established - independent calibration and deployment tests required,diagnostic_uncalibrated,1.0.0,0e9e39f249a16976918f6564b8830bc894c89659,42

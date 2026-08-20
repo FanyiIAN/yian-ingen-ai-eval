@@ -1,0 +1,4 @@
+model,model_key,semantic_consistency,stable_pass_scenarios,stable_fail_scenarios,eligible_scenarios,mandatory_review_count,evidence_status,seed
+FLAN-T5 Base,flan_t5_base,0.9142857142857143,7,25,35,5,diagnostic_ai_assisted_not_calibrated,42
+Llama 3.1 8B Instruct,llama31_8b_instruct,0.8571428571428571,26,4,35,12,diagnostic_ai_assisted_not_calibrated,42
+Mistral 7B Instruct v0.2,mistral_7b_instruct_v0_2,0.8571428571428571,30,0,35,9,diagnostic_ai_assisted_not_calibrated,42

@@ -1,0 +1,4 @@
+metric_key,label,value,unit,detail,evidence_status
+portfolio_diagnostic_readiness,Portfolio diagnostic readiness proxy,85.8,/100,Highest five-platform proxy: Mistral 7B Instruct v0.2; unvalidated Judge,diagnostic_failed_calibration
+observed_unsafe_outputs,Observed unsafe outputs,7,responses,Across 105 frozen text responses; mandatory review signal,diagnostic_failed_calibration
+minimum_independent_reviewers,Recommended minimum reviewers,2,reviewers,Calibrate model-blind severity-stratified ratings before selection,registered_follow_up_action

@@ -13,13 +13,13 @@ and judge prompts are supplied directly from versioned local artifacts.
 
 ## Fixed local resources
 
-- Python: `D:\Anaconda\envs\inGen\python.exe`
-- Model: `D:\newIntern\private\model_runtime\flan_t5_base\model`
+- Python: `python` from the activated project environment
+- Model: `$env:INGEN_FLAN_MODEL_DIR`, falling back to ignored repository-local `models/flan_t5_base/model`
 - Model ID: `google/flan-t5-base`
 - Revision: `7bcac572ce56db69c1ea7c8af255c5d7c9672fc2`
 - Device and precision: CPU, float32
 - Seed and decoding: 42, deterministic greedy decoding
-- Model and runtime caches: private D: drive paths only
+- Model and runtime caches: the configured model directory's parent; caches remain ignored and uncommitted
 
 ## Pipeline stages
 
@@ -38,15 +38,13 @@ and judge prompts are supplied directly from versioned local artifacts.
 
 ## Commands
 
-From `D:\newIntern\yian-ingen-ai-eval`:
+From the repository root:
 
 ```powershell
-& 'D:\Anaconda\envs\inGen\python.exe' `
-  'D:\newIntern\yian-ingen-ai-eval\phase_a_design\W02_validate_benchmark.py'
+python phase_a_design/W02_validate_benchmark.py
 
 $env:PYTHONIOENCODING = 'utf-8'
-& 'D:\Anaconda\envs\inGen\python.exe' `
-  'D:\newIntern\yian-ingen-ai-eval\phase_a_design\W02_Eval_Runner.py' `
+python phase_a_design/W02_Eval_Runner.py `
   --mode full `
   --run-id local-flan-full-v0.3.0
 ```

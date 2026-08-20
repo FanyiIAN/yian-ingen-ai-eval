@@ -314,7 +314,7 @@ Observed on 2026-07-21:
 - 15.25 GB total RAM, approximately 6 GB available during inspection;
 - integrated AMD Radeon graphics;
 - no NVIDIA CUDA runtime available to PyTorch;
-- `inGen` environment at `D:\Anaconda\envs\inGen`, Python 3.11.15;
+- activated `inGen` project environment, Python 3.11.15;
 - CPU-only PyTorch; Transformers, Accelerate, SentencePiece, RAGAS, and Krippendorff packages import successfully;
 - D: has sufficient working space; C: is nearly full and should not hold model caches.
 

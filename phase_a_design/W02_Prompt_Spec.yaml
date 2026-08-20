@@ -7,7 +7,7 @@ candidate_conditions:
   - model_id: google/flan-t5-base
     model_revision: 7bcac572ce56db69c1ea7c8af255c5d7c9672fc2
     role: candidate_model
-    local_model_directory: D:/newIntern/private/model_runtime/flan_t5_base/model
+    local_model_directory: models/flan_t5_base/model
     device: cpu
     precision: float32
   - model_id: mistralai/Mistral-7B-Instruct-v0.2
