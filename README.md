@@ -296,6 +296,10 @@ Week 8 closes the programme with a traceable capstone package:
 - `phase_d_capstone/W08_Capstone_Deck.pptx` and
   `W08_Capstone_Deck_Speaker_Script.md`: twelve-slide, approximately 30-minute
   finding-led readout plus evidence-bounded speaker notes.
+- `phase_d_capstone/W08_Final_15min_Week7_8_Project_Review_Deck_EN.pptx` and
+  `W08_Final_15min_Week7_8_Project_Review_Script_EN.md`: supplemental
+  fifteen-slide, fifteen-minute English review focused on the Week 7 dashboard
+  and Week 8 capstone, with a concise Weeks 1-6 synthesis.
 - `phase_d_capstone/W08_Retrospective.md`: one-page reflection and 12-week
   extension plan.
 - `phase_d_capstone/W08_Claim_Evidence_Matrix_v1.0.0.csv` and

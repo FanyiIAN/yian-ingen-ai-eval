@@ -15,3 +15,7 @@ The recurring mechanism is measurement-boundary mismatch. A reproducible pipelin
 ## Questioned / next action
 
 The remaining external actions are the joint supervisor rubric scores and signatures, the formal 30-minute readout plus 15-minute Q&A, and approval to publish/tag the repository. The first technical follow-up should be model-blind domain-expert calibration on a new sealed set; the first product-level follow-up should be closed-loop sensor dropout and safe-recovery testing.
+
+## Final wrap-up — 2026-08-20
+
+I prepared a supplemental fifteen-slide, fifteen-minute English project review for a shorter stakeholder session. Slides 1-7 summarise the Weeks 1-6 evidence chain; Slides 8-15 focus on the Week 7 three-persona dashboard, the v1.2 role/contrast corrections, and the Week 8 claim-evidence package and deployment gates. The matching script contains fifteen timed sections totalling 900 seconds. The saved deck was rendered and visually inspected across all slides, passed the presentation overflow check, and carries repository-relative source blocks in all fifteen speaker-notes pages. This adaptation does not replace the reference-required twelve-slide, thirty-minute readout.

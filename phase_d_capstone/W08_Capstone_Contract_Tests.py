@@ -18,6 +18,8 @@ class Week8CapstoneContractTests(unittest.TestCase):
         required = [
             PHASE / "W08_Capstone_Report.docx",
             PHASE / "W08_Capstone_Deck.pptx",
+            PHASE / "W08_Final_15min_Week7_8_Project_Review_Deck_EN.pptx",
+            PHASE / "W08_Final_15min_Week7_8_Project_Review_Script_EN.md",
             PHASE / "W08_Retrospective.md",
             PHASE / "W08_Final_Evaluation_Rubric.md",
             PHASE / "W08_Claim_Evidence_Matrix_v1.0.0.csv",
@@ -52,6 +54,38 @@ class Week8CapstoneContractTests(unittest.TestCase):
                 text = " ".join(node.text or "" for node in root.findall(".//a:t", ns))
                 self.assertRegex(text, r"\d", slide_name)
 
+    def test_supplemental_fifteen_minute_review_contract(self) -> None:
+        deck_path = PHASE / "W08_Final_15min_Week7_8_Project_Review_Deck_EN.pptx"
+        with zipfile.ZipFile(deck_path) as archive:
+            slide_names = [
+                name
+                for name in archive.namelist()
+                if re.fullmatch(r"ppt/slides/slide\d+\.xml", name)
+            ]
+            note_names = [
+                name
+                for name in archive.namelist()
+                if re.fullmatch(r"ppt/notesSlides/notesSlide\d+\.xml", name)
+            ]
+            self.assertEqual(15, len(slide_names))
+            self.assertEqual(15, len(note_names))
+            for note_name in note_names:
+                note_xml = archive.read(note_name).decode("utf-8")
+                self.assertIn("[Sources]", note_xml, note_name)
+
+        script = (
+            PHASE / "W08_Final_15min_Week7_8_Project_Review_Script_EN.md"
+        ).read_text(encoding="utf-8")
+        headings = re.findall(
+            r"^## Slide (\d+).*?\((\d+):(\d{2})\)$",
+            script,
+            flags=re.MULTILINE,
+        )
+        self.assertEqual([str(i) for i in range(1, 16)], [row[0] for row in headings])
+        total_seconds = sum(int(minutes) * 60 + int(seconds) for _, minutes, seconds in headings)
+        self.assertEqual(900, total_seconds)
+        self.assertIn("Planned presentation time: **15.0 minutes**.", script)
+
     def test_claim_matrix_and_registry_are_complete(self) -> None:
         with (PHASE / "W08_Claim_Evidence_Matrix_v1.0.0.csv").open(
             encoding="utf-8", newline=""
@@ -77,6 +111,8 @@ class Week8CapstoneContractTests(unittest.TestCase):
             PHASE / "W08_Capstone_Report_Source.md",
             PHASE / "W08_Retrospective.md",
             PHASE / "W08_Final_Readout_QA.md",
+            PHASE / "W08_Submission_Index.md",
+            PHASE / "W08_Final_15min_Week7_8_Project_Review_Script_EN.md",
             ROOT / "weekly" / "Wk-08-Final-EvalLog.md",
         ]
         forbidden = (
